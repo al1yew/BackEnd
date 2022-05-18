@@ -1,0 +1,658 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="./assets/styles/style.css">
+    <!-- <link rel="stylesheet" href="./assets/bootstrap-5.0.2-dist/css/bootstrap.css"> -->
+
+    <title>Pasha Bank | About Us</title>
+</head>
+<style>
+
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    /* font-family: Font, sans-serif; */
+}
+html, body{
+    scroll-behavior: smooth;
+    background-image: url(../images/shutterstock_527339023_copy_17.png);
+    background-attachment: fixed;
+    height: auto;
+    background-position: center;
+    background-size: cover;
+    height: 1223px;
+}
+.container{
+    padding: 1rem 3rem;
+}
+.container1{
+    padding: 1rem 6rem;
+}
+/* scroll */
+
+.logo{
+    width: 160px;
+    height: 60px;
+}
+header{
+    font-family: Font;
+    position: fixed;
+    width: 100%;
+    background-color: #66666616;
+    box-shadow: 0px 0px 5px 5px #777777 ;
+}
+.header_all{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header_left{
+    width: 14%;
+}
+.header_middle{
+    width: 75%;
+    line-height: 30px;
+}
+.middle_top_right{
+    display: flex;
+    align-items: center;
+}
+.corporate_img{
+    margin-right: 15px;
+}
+.middle_top{
+    display: flex;
+    align-items: center;
+}
+.middle_top_left{
+    display: flex;
+    align-items: center;
+}
+.middle_top_rigth{
+    display: flex;
+    align-items: center;
+}
+.header_right{
+    display: flex;
+    align-items: center;
+}
+header a{
+    text-decoration: none;
+    color: #007A5B;
+    margin-right: 15px;
+    font-size: 18px;
+    transition: 0.4s;
+}
+.contacts_border{
+    border-right: 1px solid #007A5B;
+    padding-right: 15px;
+}
+.az{
+    padding: 5px 3px;
+    color: #007A5B;
+    border: 1px solid #007A5B;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+.about_us{
+    position: relative;
+}
+.about_us::before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    top: 20px;
+    background-color: #007A5B;
+    height: 3px;
+}
+
+/*
+.header_middle a:hover{
+    transform: scale(1.1);
+}
+.middle_bottom a:hover{
+    transform: scale(1.1);
+} */
+
+
+
+/* section first */
+
+#First{
+    background-color: transparent;
+    padding: 12rem 19rem;
+    text-align: center;
+
+}
+.first_h1{
+    font-size: 95px;
+    color: #007A5B;
+    font-family: Font1;
+}
+
+
+/* second section */
+
+.second_all{
+    background-color: white;
+    padding: 80px;
+    font-family: Font1;
+    border-radius: 15px;
+}
+.main_text_head{
+    font-size: 45px;
+    color: black;
+    margin-bottom: 50px;
+}
+.main_text_middle1{
+    font-size: 20px;
+    color: rgba(0,0,0,0.7);
+    margin: 0 0 20px 0;
+}
+.box_middle{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 100px;
+    border-bottom: 1px solid #777777a1;
+    padding-bottom: 50px;
+}
+.box_middle_left_and_right{
+    width: 46%;
+    text-align: center;
+    letter-spacing: 2px;
+    margin-bottom: 45px;
+}
+.middle_price{
+    font-size: 45px;
+    margin-bottom: 10px;
+}
+
+.boxes_bottom{
+    margin-top: 30px;
+    display: grid;
+    width: 100%;
+    grid-row: auto;
+    grid-column: auto;
+    row-gap: 20px;
+    column-gap: 20px;
+    grid-template-areas:
+    "box_bottom box_bottom box_bottom box_bottom"
+    "box_bottom box_bottom box_bottom box_bottom"
+    "box_bottom box_bottom box_bottom box_bottom";
+}
+
+.box_bottom a{
+    text-align: center;
+}
+.box_bottom1 a{
+    text-align: center;
+}
+.img_grid{
+    opacity: 0.5;
+    transition: 0.3s;
+}
+.box_bottom:hover img{
+    transform: scale(1.2);
+    opacity: 1;
+}
+
+.box_bottom{
+    cursor: pointer;
+    border: 1px solid #66666691;
+    border-radius: 8px;
+    padding: 80px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.box_bottom1{
+    cursor: pointer;
+    border: 1px solid #66666691;
+    border-radius: 8px;
+    padding: 50px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.change_box{
+    cursor: pointer;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: center;
+    transition: 0.3s;
+    opacity: 0;
+}
+
+.box_bottom1:hover .change_box_pasha{
+    opacity: 0;
+}
+
+.box_bottom1:hover .change_box{
+    opacity: 1;
+    z-index: 1;
+}
+
+
+
+.change_box_element{
+    cursor: pointer;
+    padding-bottom: 10px;
+    text-decoration: none;
+    color: black;
+    position: relative;
+    font-weight: bolder;
+    position: relative;
+}
+
+
+
+.change_box_element::before{
+    content: '';
+    width: 0%;
+    position: absolute;
+    bottom: 5px;
+    left: 0px;
+    background-color: #573838;
+    height: 1px;
+    transition: 0.5s;
+}
+.change_box_element:hover::before{
+    width: 100%;
+}
+
+
+/* footer */
+
+.footer_all{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 2rem 4rem;
+    color: #007A5B;
+}
+.footer_left_right{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.footer_all a{
+    text-decoration: none;
+    color: #007A5B;
+    margin-left: 7px;
+}
+.footer_left{
+    width: 22%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer_right{
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.footer_right a{
+    transition: 0.3s;
+}
+.footer_right a:hover{
+    transform: scale(1.2);
+    opacity: 0.7;
+}
+</style>
+
+
+<body>
+    <!-- background-image:url(/site/assets/files/1033/shutterstock_527339023_copy_17.png); -->
+
+
+    <header id="header">
+        <div class="container">
+            <div class="header_all">
+                <div class="header_left">
+                    <a href="index.html">
+                        <img class="logo" src="https://www.pasha-holding.az/site/templates/style/img/logo_c.png">
+                    </a>
+                </div>
+
+                <div class="header_middle">
+                    <div class="middle_top">
+                        <div class="middle_top_left">
+                            <a class="" href="index.html">
+                                News
+                            </a>
+                            <a class="" href="index.html">
+                                Career
+                            </a>
+                            <a class="contacts_border" href="index.html">
+                                Contacts
+                            </a>
+
+                        </div>
+                        <div class="middle_top_right">
+                            <img class="corporate_img" src="./assets/images/corporate_green_icon.svg">
+                            <a class=" text-decoration-none" href="">Corporate Social Responsibility</a>
+                        </div>
+                    </div>
+
+                    <div class="middle_bottom">
+                        <a class="about_us" href="">About Us</a>
+                        <a class="" href="">Banking</a>
+                        <a class="" href="">Insurance</a>
+                        <a class="" href="">Investment and Brokerage</a>
+                        <a class="" href="">Construction</a>
+                        <a class="" href="">Travel and Tourism</a>
+                        <a class="" href="">Technology</a>
+                        <a class="" href="">Ecosystem</a>
+                    </div>
+                </div>
+
+                <div class="header_right">
+                    <span class="az">AZ</span>
+
+                    <a class="" href="">
+                        <svg width="23px" height="23px" viewBox="0 0 21 21" version="1.1"
+                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <g id="web" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="home_page" transform="translate(-1369.000000, -58.000000)" fill="#007A5B">
+                                    <path d="M1389.81836,77.9288749 L1384.71393,72.8256213 C1386.08313,71.251848 1386.91208,69.1983004 1386.91208,66.9540772 C1386.91208,62.0137943 1382.89286,58 1377.95604,58 C1373.01467,58 1369,62.0183342 1369,66.9540772 C1369,71.8898202 1373.01921,75.9081544 1377.95604,75.9081544 C1380.20075,75.9081544 1382.25475,75.07939 1383.82887,73.7104942 L1388.93324,78.8138059 C1389.05445,78.9347535 1389.21751,79 1389.3758,79 C1389.53409,79 1389.69716,78.9395262 1389.81836,78.8138059 C1390.06055,78.5716198 1390.06055,78.1710611 1389.81836,77.9288749 Z M1370.2,66.8976134 C1370.2,62.6505318 1373.65632,59.2 1377.90012,59.2 C1382.14822,59.2 1385.6,62.6553051 1385.6,66.8976134 C1385.6,71.1399217 1382.14822,74.6 1377.90012,74.6 C1373.65632,74.6 1370.2,71.1446949 1370.2,66.8976134 Z"
+                                          id="magnifying-glass"></path>
+                                </g>
+                            </g>
+                        </svg>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <section id="First">
+        <div class="container">
+            <h1 class="first_h1">PASHA Group In Brief</h1>
+        </div>
+    </section>
+
+    <section id="Second">
+        <div class="container1">
+            <div class="second_all">
+                <div class="box_head">
+                    <p class="main_text_head">
+                        “PASHA Holding” Limited Liability Company (PASHA Holding or PASHA Holding LLC) through its
+                        subsidiaries, invests in banking, insurance, construction, information technology, the property
+                        development and tourism sectors.
+                    </p>
+
+                    <p class="main_text_middle1">
+                        Established in 2006, the Holding builds its business on the basis of effective management,
+                        corporate governance and well-thought-out investment decisions.
+                    </p>
+
+                    <p class="main_text_middle1">
+                        The Holding has two types of investment assets portfolios: Controlling stakes in PASHA Holding
+                        and its subsidiaries (PASHA Group) and minority private equity investments.
+                    </p>
+                </div>
+
+                <div class="box_middle">
+                    <div class="box_middle_left_and_right">
+                        <h1 class="middle_price">AZN 11.9 Bn</h1>
+                        <p class="middle_price_text">
+                            Total Assets as of December 31, 2019
+                        </p>
+                    </div>
+                    <div class="box_middle_left_and_right">
+                        <h1 class="middle_price">AZN 13.2 Bn</h1>
+                        <p class="middle_price_text">
+                            Total Assets as of December 31, 2019
+                        </p>
+                    </div>
+                    <div class="box_middle_left_and_right">
+                        <h1 class="middle_price">AZN 2.6 Bn</h1>
+                        <p class="middle_price_text">
+                            Total Assets as of December 31, 2019
+                        </p>
+                    </div>
+                    <div class="box_middle_left_and_right">
+                        <h1 class="middle_price">AZN 2.6 Bnn</h1>
+                        <p class="middle_price_text">
+                            Total Assets as of December 31, 2019
+                        </p>
+                    </div>
+                    <div class="box_middle_left_and_right">
+                        <h1 class="middle_price">AZN 1.5 Bn</h1>
+                        <p class="middle_price_text">
+                            Total Assets as of December 31, 2019
+                        </p>
+                    </div>
+                    <div class="box_middle_left_and_right">
+                        <h1 class="middle_price">AZN 1.6 Bn</h1>
+                        <p class="middle_price_text">
+                            Total Assets as of December 31, 2019
+                        </p>
+                    </div>
+                    <div class="box_middle_left_and_right">
+                        <h1 class="middle_price">27.6%</h1>
+                        <p class="middle_price_text">
+                            Market Share by assets in Azerbaijan banking sector as of December 31, 2019
+                        </p>
+                    </div>
+                    <div class="box_middle_left_and_right">
+                        <h1 class="middle_price">33%</h1>
+                        <p class="middle_price_text">
+                            Market Share by assets in Azerbaijan banking sector as of December 31, 2020
+                        </p>
+                    </div>
+                    <div class="box_middle_left_and_right">
+                        <h1 class="middle_price">8.500+</h1>
+                        <p class="middle_price_text">
+                            Employed within the Group as of December 31, 2019
+                        </p>
+                    </div>
+                    <div class="box_middle_left_and_right">
+                        <h1 class="middle_price">9.500+</h1>
+                        <p class="middle_price_text">
+                            Employed within the Group as of December 31, 2020
+                        </p>
+                    </div>
+                </div>
+                <!-- nado budet sdelat pasha bankovskiy grid box shto b tam bil dispplay none ili opacity 0 birdene hemin 3 yazili box, tipa hover eliyende nadpis shto b ushla i na eyo mesto prishel te tri sayta pasha banka -->
+                <div class="boxes_bottom">
+
+
+
+
+
+
+                    <div class="box_bottom1">
+
+                        <div class="change_box">
+
+                            <a class="change_box_element" href="">
+                                <img style="width: 12px;"
+                                     src="https://www.pasha-holding.az/site/assets/files/1212/azerbaijan.svg" alt="">
+                                PASHA Bank Azerbaijan
+                            </a>
+
+                            <a class="change_box_element" href="">
+                                <img style="width: 12px;"
+                                     src="https://www.pasha-holding.az/site/assets/files/1211/georgia.svg" alt="">
+                                PASHA Bank Georgia
+                            </a>
+
+                            <a class="change_box_element" href="">
+                                <img style="width: 12px;"
+                                     src="https://www.pasha-holding.az/site/assets/files/1213/turkey.svg" alt="">
+                                PASHA Bank Turkey
+                            </a>
+
+                        </div>
+
+                        <a class="change_box_pasha" href="">
+                            <img style="width: 65%;" class="img_grid"
+                                 src="https://www.pasha-holding.az/site/assets/files/1176/group_12.svg" alt="">
+                        </a>
+
+                    </div>
+
+                    <div class="box_bottom">
+                        <a href="">
+                            <img style="width: 65%;" class="img_grid"
+                                 src="https://www.pasha-holding.az/site/assets/files/1155/20.svg" alt="">
+                        </a>
+                    </div>
+                    <div class="box_bottom">
+                        <a href="">
+                            <img style="width: 65%;" class="img_grid"
+                                 src="https://www.pasha-holding.az/site/assets/files/1150/6.svg" alt="">
+                        </a>
+                    </div>
+                    <div class="box_bottom">
+                        <a href="">
+                            <img style="width: 65%;" class="img_grid"
+                                 src="https://www.pasha-holding.az/site/assets/files/1153/15.svg" alt="">
+                        </a>
+                    </div>
+                    <div class="box_bottom">
+                        <a href="">
+                            <img style="width: 65%;" class="img_grid"
+                                 src="https://www.pasha-holding.az/site/assets/files/1154/13.svg" alt="">
+                        </a>
+                    </div>
+                    <div class="box_bottom">
+                        <a href="">
+                            <img style="width: 65%;" class="img_grid"
+                                 src="https://www.pasha-holding.az/site/assets/files/1151/19.svg" alt="">
+                        </a>
+                    </div>
+                    <div class="box_bottom">
+                        <a href="">
+                            <img style="width: 65%;" class="img_grid"
+                                 src="https://www.pasha-holding.az/site/assets/files/1152/17.svg" alt="">
+                        </a>
+                    </div>
+                    <div class="box_bottom">
+                        <a href="">
+                            <img style="width: 65%;" class="img_grid"
+                                 src="https://www.pasha-holding.az/site/assets/files/1109/pasha_kapital_en.png" alt="">
+                        </a>
+                    </div>
+                    <div class="box_bottom">
+                        <a href="">
+                            <img style="width: 65%;" class="img_grid"
+                                 src="https://www.pasha-holding.az/site/assets/files/1175/10.svg" alt="">
+                        </a>
+                    </div>
+                    <div class="box_bottom">
+                        <a href="">
+                            <img style="width: 65%;" class="img_grid"
+                                 src="https://www.pasha-holding.az/site/assets/files/1223/2.svg" alt="">
+                        </a>
+                    </div>
+                    <div class="box_bottom">
+                        <a href="">
+                            <img style="width: 65%;" class="img_grid"
+                                 src="https://www.pasha-holding.az/site/assets/files/1227/group_10.svg" alt="">
+                        </a>
+                    </div>
+                    <div class="box_bottom">
+                        <a href="">
+                            <img style="width: 65%;" class="img_grid"
+                                 src="https://www.pasha-holding.az/site/assets/files/1524/competo.svg" alt="">
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer_all">
+
+            <div class="footer_left">
+
+                <div class="footer_left_left">
+                    <p>© 2022 PASHA Holding</p>
+                </div>
+
+                <div class="footer_left_right">
+                    Site by <a href="">
+                        <img style="width: 20px;" src="https://www.pasha-holding.az/site/templates/style/img/jis_d.svg"
+                             alt="">
+                        JIS
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer_right">
+                Follow us
+                <a href="www.facebook.com">
+                    <img src="https://www.pasha-holding.az/site/templates/style/img/f_d.svg" alt="">
+                </a>
+                <a href="www.twitter.com">
+                    <img src="https://www.pasha-holding.az/site/templates/style/img/t_d.svg"
+                         alt="">
+                </a>
+                <a href="www.linkedin.com">
+                    <img src="https://www.pasha-holding.az/site/templates/style/img/in_d.svg"
+                         alt="">
+                </a>
+            </div>
+
+        </div>
+    </footer>
+
+</body>
+
+</html>
+
+
+
+
+
+
+@*<!DOCTYPE html>
+    <html>
+
+    <body>
+
+        <h1 style="font-size: 100px">
+            Salam
+        </h1>
+        <ul>
+            <li>123</li>
+            <li>3214</li>
+            <li>2432f</li>
+            <li>tgref</li>
+            <li>wsgf</li>
+        </ul>
+
+
+
+    </body>
+
+
+    </html>*@
