@@ -35,6 +35,10 @@ namespace Trial_May_18
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}"
                     );
+                //burda ozumuz de yaza bilerik deyishe bilerik. evvel page acilanda bu acilir, ? demekdir ki id gele de biler,
+                //gelmiyede biler. Adresde chrome-da ozum deyishib controlleri yazib onun istediyim metodu yazaa bilerem.
+                //Mutleq controller miras almalidi, o da using olunmalidi. Controllerde view da dirnag icinde view adi olmalidi.
+                //burda ise static yaziram ezber
             });
         }
     }
