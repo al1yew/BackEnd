@@ -1,6 +1,15 @@
-﻿
+﻿@model List<Brand>
 
-
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>
+            <a href=@("http://localhost:13453/Car/Index/"+item.Id)>
+                @(item.Id + " - " + item.Name)
+            </a>
+        </li>
+    }
+</ul>
 
 @* ya prislal sebe models i zasunul ego v array, razlojil po li. zapomnit sintaksis a hrefa *@
 @* teper moy brand gotov, ya idu v car ved mne nujno bilo snachala sdelat Brand ved iz brand ya perexoju v car, a ne iz car v brand *@

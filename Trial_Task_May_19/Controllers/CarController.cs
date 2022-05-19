@@ -53,9 +53,24 @@ namespace Trial_Task_May_19.Controllers
             //mene axi id gelecek branda basanda, on prineset mne id i ya suda vstavlu ego, i vernu emu hemin id-de duran elementleri
             //pcm vopros? ptm shto mojet pridti, a mojet i net
             //eto tot je id kotoriy v startape
-            return View(_cars);
+
+            ///////////////////return View(_cars);
             //estesna vernet mne view i idu v ego view
             //ya otpravlayu tuda v index v car v view svoy list _cars
+            //delo v tom shto on toqda ves list mne vozvrashayet
+
+            return View(_cars.FindAll(z => z.BrandId == id));
+            //find all bir dene yox coxlu data gaytarir
+            //niye brand id ile axtariram? ptmshto carslarin id-si ile axtarsam, bir dene getirecek, cunki car idleri hamsi
+            //uniquedir, mene ise lazimdi ki mashin markasinin idsine == olan mashinlara mehsus brend id-leri getirsin
+        }
+
+        //indi isteyirik ki cara basanda detallari gelsin
+
+        public IActionResult Detail(int? id) {
+
+            return View(_cars.Find(x => x.Id == id));
+
         }
     }
 }
