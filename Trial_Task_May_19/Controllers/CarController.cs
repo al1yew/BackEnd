@@ -59,15 +59,33 @@ namespace Trial_Task_May_19.Controllers
             //ya otpravlayu tuda v index v car v view svoy list _cars
             //delo v tom shto on toqda ves list mne vozvrashayet
 
-            return View(_cars.FindAll(z => z.BrandId == id));
+            //////////////////////////return View(_cars.FindAll(z => z.BrandId == id)); bunun niye komente aldim cunki biz bashqa Route 
+            ///yazdiq startapda, ve mene indi teze metod lazimdi ki hemin route normal ishlenilsin
+            ///
             //find all bir dene yox coxlu data gaytarir
             //niye brand id ile axtariram? ptmshto carslarin id-si ile axtarsam, bir dene getirecek, cunki car idleri hamsi
             //uniquedir, mene ise lazimdi ki mashin markasinin idsine == olan mashinlara mehsus brend id-leri getirsin
+
+            List<Car> findingList = null;
+
+            if (id != null)
+            {
+                findingList = _cars.FindAll(z => z.BrandId == id);
+            }
+            else
+            {
+                findingList = _cars;
+            }
+            //burda dedimki, hansisa id gelirde v adresnoy stroke, onda hemin mashini ve detallarini gostersin, amma gelmese,
+            ////butun mashin siyahisini getirsin. yada carlist yazsam startapda yazdigim kimi mashinlarin hamsini getirecek
+            return View(findingList);
+            //uje viewada findinglisti atiram
         }
 
         //indi isteyirik ki cara basanda detallari gelsin
 
-        public IActionResult Detail(int? id) {
+        public IActionResult Detail(int? id)
+        {
 
             return View(_cars.Find(x => x.Id == id));
 

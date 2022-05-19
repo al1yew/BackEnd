@@ -45,6 +45,16 @@ namespace Trial_Task_May_19
 
             app.UseEndpoints(endpoints =>
             {
+
+                endpoints.MapControllerRoute(
+                    name: "cars",
+                    pattern: "carlist",
+                    defaults: new { controller = "Car", action = "Index"}
+                    );
+                //eto ya sozdal steanicku shto b esli xochu, /carlist yazmagnan butun mashinlari gosterecek, bununcun controllerde
+                //funsiya yazilib mende 
+
+
                 endpoints.MapControllerRoute(
                         name: "default",
                         pattern: "{controller=Brand}/{action=Index}/{id?}"
