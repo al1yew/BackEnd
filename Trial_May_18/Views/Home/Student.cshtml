@@ -1,0 +1,17 @@
+﻿@using Trial_May_18.Models;
+@model List<Student>
+
+
+
+
+    <ul>
+        @foreach (Student student in Model)
+        {
+            <li>
+                @student.Id @student.Name @student.SurName @student.GroupId
+            </li>
+        }
+    </ul>
+
+    @*  ishledi*@
+

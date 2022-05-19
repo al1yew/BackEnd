@@ -1,5 +1,7 @@
 ﻿@using Trial_May_18.Models;
-@model List<Student>
+@*@model List<Student>
+    //bir viewda bir dene model yaziriq*@
+@model List<Group>
 @* using edirik, mutleq de gelen obyekt modelin tipini geyd edirik, deyirem student tipinnen list gelir, indi foreach da
     ViewBag.Students yerine Model yaziriq *@
 
@@ -14,14 +16,14 @@
         Salam
     </h1>
     <ul>
-        <li>123</li>
-        <li>3214</li>
-        <li>2432f</li>
-        <li>tgref</li>
-        <li>@ViewBag.Name</li>
-        <li>@ViewBag.Name</li>
-        <li>@ViewBag.Name</li>
-        <li>@ViewData["SurName"]</li>
+        @*<li>123</li>
+            <li>3214</li>
+            <li>2432f</li>
+            <li>tgref</li>
+            <li>@ViewBag.Name</li>
+            <li>@ViewBag.Name</li>
+            <li>@ViewBag.Name</li>
+            <li>@ViewData["SurName"]</li>*@
 
         @* bular hec lazim deyil, view(bunun icine yaziram) *@
         <li>wsgf</li>
@@ -32,26 +34,38 @@
 
     <ul>
         @*@foreach (var item in ViewBag.Students)
-        {
-            <li>
-                @item.Name, @item.SurName, @item.Grade
-            </li>
-        }*@
+            {
+                <li>
+                    @item.Name, @item.SurName, @item.Grade
+                </li>
+            }*@
     </ul>
-    
+
     @* GESHEEEEEENGGGGG *@
 
 
     <ul>
-        @foreach (Student student in Model)
-        {
-        <li>
-            @student.Name, @student.SurName, @student.Grade, @student.Id
-        </li>
-        }
+        @*@foreach (Student student in Model)
+            {
+            <li>
+                @student.Name, @student.SurName, @student.Grade, @student.Id
+            </li>
+            }*@
     </ul>
 
     @* buda eyni shey prosto Model yazdiq *@
+
+
+    <ul>
+        @foreach (Group group in Model)
+        {
+            <li>
+                <a href=@("http://localhost:11690/Home/Student/" + group.Id)>
+                    @group.Name
+                </a>
+            </li>
+        }
+    </ul>
 
 </body>
 
