@@ -1,1 +1,10 @@
-﻿
+﻿@model List<Brand>
+
+<ul>
+    @foreach (Brand brand in Model)
+    {
+        <li>
+            @(brand.Id + " - " + @brand.Name)
+        </li>
+    }
+</ul>
