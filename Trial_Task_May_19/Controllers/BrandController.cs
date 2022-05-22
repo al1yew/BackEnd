@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,26 +16,24 @@ namespace Trial_Task_May_19.Controllers
 
         public BrandController(AppDbContext context)
         {
-
             _context = context;
-
-
-            //_brands = new List<Brand> {
-            //    new Brand {Id = 1, Name = "Mercedes" },
-            //    new Brand {Id = 2, Name = "Opel" },
-            //    new Brand {Id = 3, Name = "BMW" },
-            //    new Brand {Id = 4, Name = "Kia" },
-            //    new Brand {Id = 5, Name = "Hyundai" },
-            //    new Brand {Id = 6, Name = "Jaguar" },
-            //    new Brand {Id = 7, Name = "Land Rover" },
-            //};
         }
 
         public IActionResult Index()
         {
-            List<Brand> brands = _context.Brands.ToList();
+            //List<Brand> brands = _context.Brands.ToList();
+            //u nas est INCLUDE. on pomogayet nam rabotat bez foreach, toest mi po odnimu vse brandi krutit i ix modeli sobirat ne budem
+            //mi include sdelayem tot kotkriy nujen
+            //snizu pishu to je samoe shto sverhu, no uje inkludom
 
-            return View(brands);
+            List<Brand> brands = _context.Brands.Include(b=> b.Cars).ToList();
+
+            //toest idi prinesi mne brendi iz databazi, i her birinin icine include ele onun Cars listini, Ve hamsini yig brend listine
+
+            Car car = _context.Cars.Include(c => c.Brand).FirstOrDefault(t => t.Id == 2);
+
+            return View(car);
+            //ctrl f5 nese ishlemedi amma neyse
 
         }
     }
