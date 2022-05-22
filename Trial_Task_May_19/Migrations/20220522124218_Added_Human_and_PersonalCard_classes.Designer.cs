@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Trial_Task_May_19.DAL;
 
 namespace Trial_Task_May_19.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220522124218_Added_Human_and_PersonalCard_classes")]
+    partial class Added_Human_and_PersonalCard_classes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,55 +64,11 @@ namespace Trial_Task_May_19.Migrations
                     b.ToTable("Cars");
                 });
 
-            modelBuilder.Entity("Trial_Task_May_19.Models.Human", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PersonalCardId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PersonalCardId");
-
-                    b.ToTable("Humen");
-                });
-
-            modelBuilder.Entity("Trial_Task_May_19.Models.PersonalCard", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("PIN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PersonalCards");
-                });
-
             modelBuilder.Entity("Trial_Task_May_19.Models.Car", b =>
                 {
                     b.HasOne("Trial_Task_May_19.Models.Brand", "Brand")
                         .WithMany("Cars")
                         .HasForeignKey("BrandId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Trial_Task_May_19.Models.Human", b =>
-                {
-                    b.HasOne("Trial_Task_May_19.Models.PersonalCard", "PersonalCard")
-                        .WithMany()
-                        .HasForeignKey("PersonalCardId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

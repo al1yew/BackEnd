@@ -14,7 +14,9 @@ namespace Trial_Task_May_19.DAL
 
         }
         public DbSet<Brand> Brands { get; set; }
-
         public DbSet<Car> Cars { get; set; }
+        public DbSet<Human> Humen { get; set; }
+        public DbSet<PersonalCard> PersonalCards { get; set; }
+
     }
 }
