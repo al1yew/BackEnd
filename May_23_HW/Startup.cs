@@ -28,7 +28,7 @@ namespace May_23_HW
             }
 
             app.UseRouting();
-
+             
             app.UseStaticFiles();
 
             app.UseEndpoints(endpoints =>
