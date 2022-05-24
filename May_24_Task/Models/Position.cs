@@ -11,5 +11,6 @@ namespace May_24_Task.Models
         public string PositionName { get; set; }
         public List<Trainer> Trainers { get; set; }
 
+
     }
 }
