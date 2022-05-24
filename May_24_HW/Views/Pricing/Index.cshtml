@@ -21,6 +21,7 @@
                             <span class="@(pricing.IsAdvanced ? "advanced" : "")">@(pricing.IsAdvanced ? "Advanced" : "")</span>
                             <h3>@pricing.Type </h3>
                             <h4><sup>$</sup>@pricing.Price<span> / month</span></h4>
+
                             <ul>
                                 @foreach (var item in pricing.PricingPlans)
                                 {
@@ -28,6 +29,7 @@
                                         @item.Plan.Name
                                     </li>
                                 }
+
                             </ul>
                             <div class="btn-wrap">
                                 <a href="#" class="btn-buy">Buy Now</a>
