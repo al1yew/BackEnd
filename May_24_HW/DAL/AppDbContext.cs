@@ -13,7 +13,11 @@ namespace May_24_HW.DAL
         {
 
         }
-
         public DbSet<Trainer> Trainers { get; set; }
+        public DbSet<Event> Events { get; set; }
+        //public DbSet<Pricing> Pricings { get; set; }
+        //public DbSet<Cource> Cources { get; set; }
+
+
     }
 }
