@@ -19,7 +19,7 @@ namespace May_24_HW.Controllers
 
         public IActionResult Index()
         {
-            return View(_context.Pricings.Include(p => p.PricingPlans).ThenInclude(pi => pi.Plan));
+            return View(_context.Pricings.Include(p => p.PricingPlans).ThenInclude(pi => pi.Plan).ToList());
         }
     }
 }
