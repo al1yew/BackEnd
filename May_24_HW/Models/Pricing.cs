@@ -10,7 +10,7 @@ namespace May_24_HW.Models
         public int Id { get; set; }
         public string Type { get; set; }
         public double Price { get; set; }
-        public bool IsPopular { get; set; }
+        public bool IsFeatured { get; set; }
         public bool IsAdvanced { get; set; }
         List<PricingPlan> PricingPlans { get; set; }
     }
