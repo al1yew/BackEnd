@@ -20,6 +20,7 @@ namespace May_24_HW.DAL
         public DbSet<Pricing> Pricings { get; set; }
         public DbSet<Plan> Plans { get; set; }
         public DbSet<PricingPlan> PricingPlans { get; set; }
-        
+        public DbSet<Cource> Cources { get; set; }
+
     }
 }
