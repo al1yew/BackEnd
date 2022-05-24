@@ -1,5 +1,6 @@
 ﻿using May_24_HW.DAL;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,8 @@ namespace May_24_HW.Controllers
 
         public IActionResult Index()
         {
-            return View(_context.Trainers.ToList());
+            //include delayem ptm shto bez nego on prinosit ix id, a nam nado ix imena. teper mi vkluchili v nash list positioni, i oni pridut v nash view.
+            return View(_context.Trainers.Include(t=>t.Position).ToList());
         }
     }
 }

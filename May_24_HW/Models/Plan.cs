@@ -5,13 +5,11 @@ using System.Threading.Tasks;
 
 namespace May_24_HW.Models
 {
-    public class Pricing
+    public class Plan
     {
         public int Id { get; set; }
-        public string Type { get; set; }
-        public double Price { get; set; }
-        public bool IsPopular { get; set; }
-        public bool IsAdvanced { get; set; }
+        public string Name { get; set; }
         List<PricingPlan> PricingPlans { get; set; }
+
     }
 }
