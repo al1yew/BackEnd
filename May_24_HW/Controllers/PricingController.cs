@@ -1,5 +1,6 @@
 ﻿using May_24_HW.DAL;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +19,7 @@ namespace May_24_HW.Controllers
 
         public IActionResult Index()
         {
-
-            return View();
+            return View(_context.Pricings.Include(p => p.PricingPlans).ThenInclude(pi => pi.Plan));
         }
     }
 }

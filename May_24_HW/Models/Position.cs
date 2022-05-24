@@ -9,6 +9,6 @@ namespace May_24_HW.Models
     {
         public int Id { get; set; }
         public string PositionName { get; set; }
-        List<Trainer> Trainers { get; set; }
+        public List<Trainer> Trainers { get; set; }
     }
 }

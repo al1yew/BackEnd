@@ -7,6 +7,12 @@
   <ItemGroup>
     <Compile Remove="Migrations\20220524175024_AddedPositionTable.cs" />
     <Compile Remove="Migrations\20220524175024_AddedPositionTable.Designer.cs" />
+    <Compile Remove="Migrations\20220524191252_UpdatedPricing.cs" />
+    <Compile Remove="Migrations\20220524191252_UpdatedPricing.Designer.cs" />
+    <Compile Remove="Migrations\20220524191616_Updated_Plan_and_Pricing.cs" />
+    <Compile Remove="Migrations\20220524191616_Updated_Plan_and_Pricing.Designer.cs" />
+    <Compile Remove="Migrations\20220524195853_UpdatedPositionTable.cs" />
+    <Compile Remove="Migrations\20220524195853_UpdatedPositionTable.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
