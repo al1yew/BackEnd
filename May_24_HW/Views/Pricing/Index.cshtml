@@ -1,4 +1,4 @@
-﻿@model List<PricingViewModel>
+﻿@model PricingViewModel
 
 <main id="main">
 
@@ -23,7 +23,21 @@
                             <h4><sup>$</sup>@pricing.Price<span> / month</span></h4>
 
                             <ul>
-
+                                @for (int i = 0; i < Model.Plans.Count; i++)
+                                {
+                                    if (pricing.PricingPlans.Exists(a => a.PlanId == Model.Plans[i].Id))
+                                    {
+                                        <li >
+                                            @Model.Plans[i].Name
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="na">
+                                            @Model.Plans[i].Name
+                                        </li>
+                                    }
+                                }
                             </ul>
                             <div class="btn-wrap">
                                 <a href="#" class="btn-buy">Buy Now</a>

@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using May_24_HW.PricingViewModels;
+using May_24_HW.ViewModels.PricingViewModel;
 
 namespace May_24_HW.Controllers
 {
