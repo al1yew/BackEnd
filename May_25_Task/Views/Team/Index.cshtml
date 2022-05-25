@@ -1,0 +1,41 @@
+﻿@model List<Team>
+
+<!-- ======= Team Section ======= -->
+<section id="team" class="team">
+    <div class="container">
+
+        <div class="section-title">
+            <span>Team</span>
+            <h2>Team</h2>
+            <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit alias</p>
+        </div>
+
+        <div class="row">
+
+            @foreach (Team team in Model)
+            {
+
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in">
+                    <div class="member">
+                        <img src="~/assets/img/team/@team.Image" alt="">
+                        <h4>@team.Name</h4>
+                        <span>@team.Position.PositionName</span>
+                        <p>
+                            @team.TextContent
+                        </p>
+                        <div class="social">
+                            <a href="@team.TwitterUrl"><i class="bi bi-twitter"></i></a>
+                            <a href="@team.TwitterUrl"><i class="bi bi-facebook"></i></a>
+                            <a href="@team.TwitterUrl"><i class="bi bi-instagram"></i></a>
+                            <a href="@team.TwitterUrl"><i class="bi bi-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+
+        </div>
+
+    </div>
+</section><!-- End Team Section -->
