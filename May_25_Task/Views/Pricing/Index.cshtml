@@ -1,4 +1,5 @@
-﻿<!-- ======= Pricing Section ======= -->
+﻿@model PricingViewModel
+<!-- ======= Pricing Section ======= -->
 <section id="pricing" class="pricing">
     <div class="container">
 
@@ -10,56 +11,37 @@
 
         <div class="row">
 
-            <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="150">
-                <div class="box">
-                    <h3>Free</h3>
-                    <h4><sup>$</sup>0<span> / month</span></h4>
-                    <ul>
-                        <li>Aida dere</li>
-                        <li>Nec feugiat nisl</li>
-                        <li>Nulla at volutpat dola</li>
-                        <li class="na">Pharetra massa</li>
-                        <li class="na">Massa ultricies mi</li>
-                    </ul>
-                    <div class="btn-wrap">
-                        <a href="#" class="btn-buy">Buy Now</a>
-                    </div>
-                </div>
-            </div>
 
-            <div class="col-lg-4 col-md-6 mt-4 mt-md-0" data-aos="zoom-in">
-                <div class="box featured">
-                    <h3>Business</h3>
-                    <h4><sup>$</sup>19<span> / month</span></h4>
-                    <ul>
-                        <li>Aida dere</li>
-                        <li>Nec feugiat nisl</li>
-                        <li>Nulla at volutpat dola</li>
-                        <li>Pharetra massa</li>
-                        <li class="na">Massa ultricies mi</li>
-                    </ul>
-                    <div class="btn-wrap">
-                        <a href="#" class="btn-buy">Buy Now</a>
+            @foreach (Pricing pricing in Model.Pricings)
+            {
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="150">
+                    <div class="box @(pricing.IsFeatured ? "featured" : "")">
+                        <h3>@pricing.Type</h3>
+                        <h4><sup>$</sup>@pricing.Price<span> / month</span></h4>
+                        <ul>
+                            @for (int i = 0; i < Model.Plans.Count; i++)
+                            {
+                                if (pricing.PricingPlans.Exists(a => a.PlanId == Model.Plans[i].Id))
+                                {
+                                    <li>
+                                        @Model.Plans[i].PlanType
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="na">
+                                        @Model.Plans[i].PlanType
+                                    </li>
+                                }
+                            }
+                        </ul>
+                        <div class="btn-wrap">
+                            <a href="#" class="btn-buy">Buy Now</a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-lg-4 col-md-6 mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="150">
-                <div class="box">
-                    <h3>Developer</h3>
-                    <h4><sup>$</sup>29<span> / month</span></h4>
-                    <ul>
-                        <li>Aida dere</li>
-                        <li>Nec feugiat nisl</li>
-                        <li>Nulla at volutpat dola</li>
-                        <li>Pharetra massa</li>
-                        <li>Massa ultricies mi</li>
-                    </ul>
-                    <div class="btn-wrap">
-                        <a href="#" class="btn-buy">Buy Now</a>
-                    </div>
-                </div>
-            </div>
+            }
 
         </div>
 

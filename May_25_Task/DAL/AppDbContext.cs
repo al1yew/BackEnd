@@ -21,5 +21,6 @@ namespace May_25_Task.DAL
         public DbSet<Plan> Plans { get; set; }
         public DbSet<Pricing> Pricings { get; set; }
         public DbSet<PricingPlan> PricingPlans { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
     }
 }

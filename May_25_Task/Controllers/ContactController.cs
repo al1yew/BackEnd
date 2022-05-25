@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using May_25_Task.DAL;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,17 @@ namespace May_25_Task.Controllers
 {
     public class ContactController : Controller
     {
+        private readonly AppDbContext _context;
+
+        public ContactController(AppDbContext context
+            )
+        {
+            _context = context;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            return View(_context.Contacts.ToList());
         }
     }
 }
