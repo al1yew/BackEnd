@@ -14,6 +14,5 @@ namespace May_24_HW.Models
         public bool IsAdvanced { get; set; }
         public bool IsLined { get; set; }
         public List<PricingPlan> PricingPlans { get; set; }
-
     }
 }
