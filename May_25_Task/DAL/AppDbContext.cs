@@ -1,4 +1,5 @@
 ﻿using May_25_Task.Models;
+using May_25_Task.ViewModels.PricingViewModel;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,8 @@ namespace May_25_Task.DAL
         public DbSet<Position> Positions { get; set; }
         public DbSet<Icon> Icons { get; set; }
         public DbSet<Service> Services { get; set; }
-
+        public DbSet<Plan> Plans { get; set; }
+        public DbSet<Pricing> Pricings { get; set; }
+        public DbSet<PricingPlan> PricingPlans { get; set; }
     }
 }
