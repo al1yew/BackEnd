@@ -15,6 +15,8 @@ namespace May_25_Task.DAL
         }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Position> Positions { get; set; }
+        public DbSet<Icon> Icons { get; set; }
+        public DbSet<Service> Services { get; set; }
 
     }
 }
