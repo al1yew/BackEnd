@@ -158,8 +158,6 @@ exec usp_UpdateAuthor'Isi', 'Isiyev', 3
 --Authors-larin Id,FullName,BooksCount,MaxPageCount seklinde qaytaran view yaradirsiniz Id-author id-si, FullName - Name ve Surname birlesmesi, BooksCount 
 --Hemin authorun elaqeli oldugu kitablarin sayi, MaxPageCount - hemin authorun elaqeli oldugu kitablarin icerisindeki max pagecount deyeri
 --bismillah edek yazaq
-
-
 Create View usv_GetAuthorsAndBooks
 AS
 Select 
