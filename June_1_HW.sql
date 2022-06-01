@@ -159,6 +159,7 @@ exec usp_UpdateAuthor'Isi', 'Isiyev', 3
 --Hemin authorun elaqeli oldugu kitablarin sayi, MaxPageCount - hemin authorun elaqeli oldugu kitablarin icerisindeki max pagecount deyeri
 --bismillah edek yazaq
 
+
 Create View usv_GetAuthorsAndBooks
 AS
 Select 
