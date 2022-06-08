@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20220608180430_AddedTagTable.cs" />
+    <Compile Remove="Migrations\20220608180430_AddedTagTable.Designer.cs" />
+    <Compile Remove="Migrations\20220608180822_UpdatedTagTable.cs" />
+    <Compile Remove="Migrations\20220608180822_UpdatedTagTable.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.25" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.25" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.25">
