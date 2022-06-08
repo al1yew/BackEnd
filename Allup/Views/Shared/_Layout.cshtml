@@ -83,8 +83,8 @@
                                         <button type="button" id="currency" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">USD $ <i class="icon ion-chevron-down"></i></button>
 
                                         <ul class="dropdown-menu" aria-labelledby="currency">
-                                            <li><a href="#">EUR €</a></li>
-                                            <li><a href="#">USD $</a></li>
+                                            <li><a >EUR €</a></li>
+                                            <li><a >USD $</a></li>
                                         </ul>
                                     </div>
                                 </li>
@@ -93,8 +93,8 @@
                                         <button type="button" id="langue" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="~/assets/images/flag/1.jpg" alt=""> English <i class="icon ion-chevron-down"></i></button>
 
                                         <ul class="dropdown-menu" aria-labelledby="langue">
-                                            <li><a href="#"><img src="~/assets/images/flag/1.jpg" alt=""> English</a></li>
-                                            <li><a href="#"><img src="~/assets/images/flag/2.jpg" alt=""> Français</a></li>
+                                            <li><a ><img src="~/assets/images/flag/1.jpg" alt=""> English</a></li>
+                                            <li><a ><img src="~/assets/images/flag/2.jpg" alt=""> Français</a></li>
                                         </ul>
                                     </div>
                                 </li>
@@ -239,7 +239,7 @@
                                 </div>
                                 <div class="header-cart">
                                     <div class="cart-btn">
-                                        <a href="#">
+                                        <a >
                                             <i class="icon ion-bag"></i>
                                             <span class="text">Cart :</span>
                                             <span class="total">$0.00</span>
@@ -251,28 +251,28 @@
                                             <li>
                                                 <div class="single-cart-item d-flex">
                                                     <div class="cart-item-thumb">
-                                                        <a href="single-product.html"><img src="~/assets/images/product-cart/cart-1.jpg" alt="product"></a>
+                                                        <a asp-controller="Product" asp-action="Index"><img src="~/assets/images/product-cart/cart-1.jpg" alt="product"></a>
                                                         <span class="product-quantity">1x</span>
                                                     </div>
                                                     <div class="cart-item-content media-body">
-                                                        <h5 class="product-name"><a href="single-product.html">New Balance Fresh Foam LAZR</a></h5>
+                                                        <h5 class="product-name"><a asp-controller="Product" asp-action="Index">New Balance Fresh Foam LAZR</a></h5>
                                                         <span class="product-price">€18.90</span>
                                                         <span class="product-color"><strong>Color:</strong> White</span>
-                                                        <a href="#" class="product-close"><i class="fal fa-times"></i></a>
+                                                        <a  class="product-close"><i class="fal fa-times"></i></a>
                                                     </div>
                                                 </div>
                                             </li>
                                             <li>
                                                 <div class="single-cart-item d-flex">
                                                     <div class="cart-item-thumb">
-                                                        <a href="single-product.html"><img src="~/assets/images/product-cart/cart-2.jpg" alt="product"></a>
+                                                        <a asp-controller="Product" asp-action="Index"><img src="~/assets/images/product-cart/cart-2.jpg" alt="product"></a>
                                                         <span class="product-quantity">3x</span>
                                                     </div>
                                                     <div class="cart-item-content media-body">
-                                                        <h5 class="product-name"><a href="single-product.html">New Balance Fresh Foam LAZR</a></h5>
+                                                        <h5 class="product-name"><a asp-controller="Product" asp-action="Index">New Balance Fresh Foam LAZR</a></h5>
                                                         <span class="product-price">€18.90</span>
                                                         <span class="product-color"><strong>Color:</strong> White</span>
-                                                        <a href="#" class="product-close"><i class="fal fa-times"></i></a>
+                                                        <a  class="product-close"><i class="fal fa-times"></i></a>
                                                     </div>
                                                 </div>
                                             </li>
@@ -319,26 +319,26 @@
                                 </h4>
                                 <ul class="menu-content menu-expand">
                                     <li class="menu-item">
-                                        <a href="#">Laptop <i class="fal fa-chevron-right"></i></a>
+                                        <a >Laptop <i class="fal fa-chevron-right"></i></a>
                                         <ul class="sub-menu flex-wrap">
                                             <li>
-                                                <a href="#"><span>Hot Categories</span></a>
+                                                <a ><span>Hot Categories</span></a>
                                                 <ul class="submenu-item ">
-                                                    <li><a asp-controller="Shop" asp-action="Index">Dresses</a></li>
-                                                    <li><a asp-controller="Shop" asp-action="Index">Jackets & Coats</a></li>
-                                                    <li><a asp-controller="Shop" asp-action="Index">Sweaters</a></li>
-                                                    <li><a asp-controller="Shop" asp-action="Index">Jeans</a></li>
-                                                    <li><a asp-controller="Shop" asp-action="Index">Blouses & Shirts</a></li>
+                                                    <li><a asp-controller="Product" asp-action="Index">Dresses</a></li>
+                                                    <li><a asp-controller="Product" asp-action="Index">Jackets & Coats</a></li>
+                                                    <li><a asp-controller="Product" asp-action="Index">Sweaters</a></li>
+                                                    <li><a asp-controller="Product" asp-action="Index">Jeans</a></li>
+                                                    <li><a asp-controller="Product" asp-action="Index">Blouses & Shirts</a></li>
                                                 </ul>
                                             </li>
                                             <li>
-                                                <a href="#"><span>Outerwear & Jackets</span></a>
+                                                <a ><span>Outerwear & Jackets</span></a>
                                                 <ul class="submenu-item ">
-                                                    <li><a asp-controller="Shop" asp-action="Index">Basic Jackets</a></li>
-                                                    <li><a asp-controller="Shop" asp-action="Index">Real Fur</a></li>
-                                                    <li><a asp-controller="Shop" asp-action="Index">Down Coats</a></li>
-                                                    <li><a asp-controller="Shop" asp-action="Index">Blazers</a></li>
-                                                    <li><a asp-controller="Shop" asp-action="Index">Trench Coats </a></li>
+                                                    <li><a asp-controller="Product" asp-action="Index">Basic Jackets</a></li>
+                                                    <li><a asp-controller="Product" asp-action="Index">Real Fur</a></li>
+                                                    <li><a asp-controller="Product" asp-action="Index">Down Coats</a></li>
+                                                    <li><a asp-controller="Product" asp-action="Index">Blazers</a></li>
+                                                    <li><a asp-controller="Product" asp-action="Index">Trench Coats </a></li>
                                                 </ul>
                                             </li>
                                             <li>
@@ -347,51 +347,51 @@
                                         </ul> <!-- sub menu -->
                                     </li>
                                     <li class="menu-item">
-                                        <a href="#">Computer <i class="fal fa-chevron-right"></i></a>
+                                        <a >Computer <i class="fal fa-chevron-right"></i></a>
                                         <ul class="sub-menu flex-wrap">
                                             <li>
-                                                <a href="#"><span>Accessories & Parts</span></a>
+                                                <a ><span>Accessories & Parts</span></a>
                                                 <ul class="submenu-item ">
-                                                    <li><a asp-controller="Shop" asp-action="Index">Cables & Adapters</a></li>
-                                                    <li><a asp-controller="Shop" asp-action="Index">Batteries</a></li>
-                                                    <li><a asp-controller="Shop" asp-action="Index">Chargers</a></li>
-                                                    <li><a asp-controller="Shop" asp-action="Index">Bags & Cases</a></li>
-                                                    <li><a asp-controller="Shop" asp-action="Index">Electronic Cigarettes</a></li>
+                                                    <li><a asp-controller="Product" asp-action="Index">Cables & Adapters</a></li>
+                                                    <li><a asp-controller="Product" asp-action="Index">Batteries</a></li>
+                                                    <li><a asp-controller="Product" asp-action="Index">Chargers</a></li>
+                                                    <li><a asp-controller="Product" asp-action="Index">Bags & Cases</a></li>
+                                                    <li><a asp-controller="Product" asp-action="Index">Electronic Cigarettes</a></li>
                                                 </ul>
                                             </li>
                                             <li>
-                                                <a href="#"><span>Audio & Video</span></a>
+                                                <a ><span>Audio & Video</span></a>
                                                 <ul class="submenu-item ">
-                                                    <li><a asp-controller="Shop" asp-action="Index">Televisions</a></li>
-                                                    <li><a asp-controller="Shop" asp-action="Index">TV Receivers</a></li>
-                                                    <li><a asp-controller="Shop" asp-action="Index">Projectors</a></li>
-                                                    <li><a asp-controller="Shop" asp-action="Index">Audio Amplifier Boards</a></li>
-                                                    <li><a asp-controller="Shop" asp-action="Index">TV Sticks </a></li>
+                                                    <li><a asp-controller="Product" asp-action="Index">Televisions</a></li>
+                                                    <li><a asp-controller="Product" asp-action="Index">TV Receivers</a></li>
+                                                    <li><a asp-controller="Product" asp-action="Index">Projectors</a></li>
+                                                    <li><a asp-controller="Product" asp-action="Index">Audio Amplifier Boards</a></li>
+                                                    <li><a asp-controller="Product" asp-action="Index">TV Sticks </a></li>
                                                 </ul>
                                             </li>
                                             <li>
-                                                <a href="#"><span>Camera & Photo</span></a>
+                                                <a ><span>Camera & Photo</span></a>
                                                 <ul class="submenu-item ">
-                                                    <li><a asp-controller="Shop" asp-action="Index">Digital Cameras</a></li>
-                                                    <li><a asp-controller="Shop" asp-action="Index">Camcorders</a></li>
-                                                    <li><a asp-controller="Shop" asp-action="Index">Camera Drones</a></li>
-                                                    <li><a asp-controller="Shop" asp-action="Index">Action Cameras</a></li>
-                                                    <li><a asp-controller="Shop" asp-action="Index">Photo Studio Supplies </a></li>
+                                                    <li><a asp-controller="Product" asp-action="Index">Digital Cameras</a></li>
+                                                    <li><a asp-controller="Product" asp-action="Index">Camcorders</a></li>
+                                                    <li><a asp-controller="Product" asp-action="Index">Camera Drones</a></li>
+                                                    <li><a asp-controller="Product" asp-action="Index">Action Cameras</a></li>
+                                                    <li><a asp-controller="Product" asp-action="Index">Photo Studio Supplies </a></li>
                                                 </ul>
                                             </li>
                                         </ul> <!-- sub menu -->
                                     </li>
-                                    <li class="menu-item"><a asp-controller="Shop" asp-action="Index">Smartphone</a></li>
-                                    <li class="menu-item"><a asp-controller="Shop" asp-action="Index">Game Consoles</a></li>
-                                    <li class="menu-item"><a asp-controller="Shop" asp-action="Index">Mp3 & headphone</a></li>
-                                    <li class="menu-item"><a asp-controller="Shop" asp-action="Index">Tv & Video</a></li>
-                                    <li class="menu-item"><a asp-controller="Shop" asp-action="Index">Watches</a></li>
-                                    <li class="menu-item"><a asp-controller="Shop" asp-action="Index">Watches</a></li>
-                                    <li class="menu-item"><a asp-controller="Shop" asp-action="Index">Washing Machine</a></li>
-                                    <li class="menu-item"><a asp-controller="Shop" asp-action="Index">Camera</a></li>
-                                    <li class="menu-item"><a asp-controller="Shop" asp-action="Index">Audio & Theater</a></li>
-                                    <li class="menu-item"><a asp-controller="Shop" asp-action="Index">Accessories</a></li>
-                                    <li class="menu-item"><a asp-controller="Shop" asp-action="Index">Games & Consoles</a></li>
+                                    <li class="menu-item"><a asp-controller="Product" asp-action="Index">Smartphone</a></li>
+                                    <li class="menu-item"><a asp-controller="Product" asp-action="Index">Game Consoles</a></li>
+                                    <li class="menu-item"><a asp-controller="Product" asp-action="Index">Mp3 & headphone</a></li>
+                                    <li class="menu-item"><a asp-controller="Product" asp-action="Index">Tv & Video</a></li>
+                                    <li class="menu-item"><a asp-controller="Product" asp-action="Index">Watches</a></li>
+                                    <li class="menu-item"><a asp-controller="Product" asp-action="Index">Watches</a></li>
+                                    <li class="menu-item"><a asp-controller="Product" asp-action="Index">Washing Machine</a></li>
+                                    <li class="menu-item"><a asp-controller="Product" asp-action="Index">Camera</a></li>
+                                    <li class="menu-item"><a asp-controller="Product" asp-action="Index">Audio & Theater</a></li>
+                                    <li class="menu-item"><a asp-controller="Product" asp-action="Index">Accessories</a></li>
+                                    <li class="menu-item"><a asp-controller="Product" asp-action="Index">Games & Consoles</a></li>
                                 </ul> <!-- menu content -->
                             </div> <!-- header menu vertical -->
                         </div>
@@ -403,9 +403,9 @@
                                         <a asp-controller="Home" asp-action="Index">Home </a>
 
                                     </li>
-                                    <li><a href="about.html">About</a></li>
+                                    <li><a asp-controller="About" asp-action="Index">About</a></li>
                                     <li>
-                                        <a href="#">Pages <i class="fal fa-chevron-down"></i></a>
+                                        <a >Pages <i class="fal fa-chevron-down"></i></a>
                                         <ul class="sub-menu">
                                             <li><a asp-controller="About" asp-action="Index">About</a></li>
                                             <li><a href="cart.html">cart</a></li>
@@ -418,7 +418,7 @@
                                         </ul>
                                     </li>
                                     <li class="position-static">
-                                        <a asp-controller="Shop" asp-action="Index">Shop</a>
+                                        <a asp-controller="Product" asp-action="Index">Shop</a>
                                     </li>
                                     <li class="position-static">
                                         <ul class="mega-sub-menu">
@@ -444,7 +444,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="custom-banner">
-                                                    <a asp-controller="Shop" asp-action="Index"><img src="~/assets/images/custom_banner.jpg" alt="" class="img-responsive"></a>
+                                                    <a asp-controller="Product" asp-action="Index"><img src="~/assets/images/custom_banner.jpg" alt="" class="img-responsive"></a>
                                                 </div>
                                             </li>
                                         </ul> <!--  mega sub menu -->
@@ -485,14 +485,14 @@
                                             <button type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fal fa-user"></i></button>
 
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <li><a href="#">My account</a></li>
-                                                <li><a href="#">Checkout</a></li>
-                                                <li><a href="#">Sign in</a></li>
+                                                <li><a >My account</a></li>
+                                                <li><a >Checkout</a></li>
+                                                <li><a >Sign in</a></li>
                                             </ul>
                                         </div>
                                     </li>
                                     <li class="header-cart">
-                                        <a href="#">
+                                        <a >
                                             <i class="fal fa-shopping-cart"></i>
                                             <span>0</span>
                                         </a>
@@ -501,28 +501,28 @@
                                                 <li>
                                                     <div class="single-cart-item d-flex">
                                                         <div class="cart-item-thumb">
-                                                            <a href="single-product.html"><img src="~/assets/images/product-cart/cart-1.jpg" alt="product"></a>
+                                                            <a asp-controller="Product" asp-action="Index"><img src="~/assets/images/product-cart/cart-1.jpg" alt="product"></a>
                                                             <span class="product-quantity">1x</span>
                                                         </div>
                                                         <div class="cart-item-content media-body">
-                                                            <h5 class="product-name"><a href="single-product.html">New Balance Fresh Foam LAZR</a></h5>
+                                                            <h5 class="product-name"><a asp-controller="Product" asp-action="Index">New Balance Fresh Foam LAZR</a></h5>
                                                             <span class="product-price">€18.90</span>
                                                             <span class="product-color"><strong>Color:</strong> White</span>
-                                                            <a href="#" class="product-close"><i class="fal fa-times"></i></a>
+                                                            <a  class="product-close"><i class="fal fa-times"></i></a>
                                                         </div>
                                                     </div>
                                                 </li>
                                                 <li>
                                                     <div class="single-cart-item d-flex">
                                                         <div class="cart-item-thumb">
-                                                            <a href="single-product.html"><img src="~/assets/images/product-cart/cart-2.jpg" alt="product"></a>
+                                                            <a asp-controller="Product" asp-action="Index"><img src="~/assets/images/product-cart/cart-2.jpg" alt="product"></a>
                                                             <span class="product-quantity">3x</span>
                                                         </div>
                                                         <div class="cart-item-content media-body">
-                                                            <h5 class="product-name"><a href="single-product.html">New Balance Fresh Foam LAZR</a></h5>
+                                                            <h5 class="product-name"><a asp-controller="Product" asp-action="Index">New Balance Fresh Foam LAZR</a></h5>
                                                             <span class="product-price">€18.90</span>
                                                             <span class="product-color"><strong>Color:</strong> White</span>
-                                                            <a href="#" class="product-close"><i class="fal fa-times"></i></a>
+                                                            <a  class="product-close"><i class="fal fa-times"></i></a>
                                                         </div>
                                                     </div>
                                                 </li>
@@ -684,8 +684,8 @@
                                 <button class="dm-toggle" type="button">USD $ <i class="icon ion-chevron-down"></i></button>
 
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">EUR €</a></li>
-                                    <li><a href="#">USD $</a></li>
+                                    <li><a >EUR €</a></li>
+                                    <li><a >USD $</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -694,8 +694,8 @@
                                 <button class="dm-toggle" type="button"><img src="~/assets/images/flag/1.jpg" alt=""> English <i class="icon ion-chevron-down"></i></button>
 
                                 <ul class="dropdown-menu">
-                                    <li><a href="#"><img src="~/assets/images/flag/1.jpg" alt=""> English</a></li>
-                                    <li><a href="#"><img src="~/assets/images/flag/2.jpg" alt=""> Français</a></li>
+                                    <li><a ><img src="~/assets/images/flag/1.jpg" alt=""> English</a></li>
+                                    <li><a ><img src="~/assets/images/flag/2.jpg" alt=""> Français</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -711,9 +711,9 @@
                         <li class="menu-item-has-children active">
                             <a asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li><a href="about.html">About</a></li>
+                        <li><a asp-controller="About" asp-action="Index">About</a></li>
                         <li class="menu-item-has-children">
-                            <a href="#">Pages <i class="fal fa-chevron-down"></i></a>
+                            <a >Pages <i class="fal fa-chevron-down"></i></a>
                             <ul class="sub-menu">
                                 <li><a asp-controller="About" asp-action="Index">About</a></li>
                                 <li><a href="cart.html">cart</a></li>
@@ -726,7 +726,7 @@
                             </ul>
                         </li>
                         <li class="menu-item-has-children">
-                            <a asp-controller="Shop" asp-action="Index">Shop</a>
+                            <a asp-controller="Product" asp-action="Index">Shop</a>
                         </li>
                         <li class="menu-item-has-children">
                             <ul class="mega-sub-menu">
@@ -752,7 +752,7 @@
                                         </div>
                                     </div>
                                     <div class="custom-banner">
-                                        <a asp-controller="Shop" asp-action="Index"><img src="~/assets/images/custom_banner.jpg" alt="" class="img-responsive"></a>
+                                        <a asp-controller="Product" asp-action="Index"><img src="~/assets/images/custom_banner.jpg" alt="" class="img-responsive"></a>
                                     </div>
                                 </li>
                             </ul> <!--  mega sub menu -->
@@ -765,26 +765,26 @@
 
                     <ul class="menu-content">
                         <li class="menu-item-has-children">
-                            <a href="#">Laptop <i class="fal fa-chevron-right"></i></a>
+                            <a >Laptop <i class="fal fa-chevron-right"></i></a>
                             <ul class="sub-menu">
                                 <li class="menu-item-has-children">
-                                    <a href="#"><span>Hot Categories</span></a>
+                                    <a ><span>Hot Categories</span></a>
                                     <ul class="submenu-item ">
-                                        <li><a asp-controller="Shop" asp-action="Index">Dresses</a></li>
-                                        <li><a asp-controller="Shop" asp-action="Index">Jackets & Coats</a></li>
-                                        <li><a asp-controller="Shop" asp-action="Index">Sweaters</a></li>
-                                        <li><a asp-controller="Shop" asp-action="Index">Jeans</a></li>
-                                        <li><a asp-controller="Shop" asp-action="Index">Blouses & Shirts</a></li>
+                                        <li><a asp-controller="Product" asp-action="Index">Dresses</a></li>
+                                        <li><a asp-controller="Product" asp-action="Index">Jackets & Coats</a></li>
+                                        <li><a asp-controller="Product" asp-action="Index">Sweaters</a></li>
+                                        <li><a asp-controller="Product" asp-action="Index">Jeans</a></li>
+                                        <li><a asp-controller="Product" asp-action="Index">Blouses & Shirts</a></li>
                                     </ul>
                                 </li>
                                 <li class="menu-item-has-children">
-                                    <a href="#"><span>Outerwear & Jackets</span></a>
+                                    <a ><span>Outerwear & Jackets</span></a>
                                     <ul class="submenu-item ">
-                                        <li><a asp-controller="Shop" asp-action="Index">Basic Jackets</a></li>
-                                        <li><a asp-controller="Shop" asp-action="Index">Real Fur</a></li>
-                                        <li><a asp-controller="Shop" asp-action="Index">Down Coats</a></li>
-                                        <li><a asp-controller="Shop" asp-action="Index">Blazers</a></li>
-                                        <li><a asp-controller="Shop" asp-action="Index">Trench Coats </a></li>
+                                        <li><a asp-controller="Product" asp-action="Index">Basic Jackets</a></li>
+                                        <li><a asp-controller="Product" asp-action="Index">Real Fur</a></li>
+                                        <li><a asp-controller="Product" asp-action="Index">Down Coats</a></li>
+                                        <li><a asp-controller="Product" asp-action="Index">Blazers</a></li>
+                                        <li><a asp-controller="Product" asp-action="Index">Trench Coats </a></li>
                                     </ul>
                                 </li>
                                 <li>
@@ -793,51 +793,51 @@
                             </ul> <!-- sub menu -->
                         </li>
                         <li class="menu-item-has-children">
-                            <a href="#">Computer <i class="fal fa-chevron-right"></i></a>
+                            <a >Computer <i class="fal fa-chevron-right"></i></a>
                             <ul class="sub-menu">
                                 <li class="menu-item-has-children">
-                                    <a href="#"><span>Accessories & Parts</span></a>
+                                    <a ><span>Accessories & Parts</span></a>
                                     <ul class="submenu-item">
-                                        <li><a asp-controller="Shop" asp-action="Index">Cables & Adapters</a></li>
-                                        <li><a asp-controller="Shop" asp-action="Index">Batteries</a></li>
-                                        <li><a asp-controller="Shop" asp-action="Index">Chargers</a></li>
-                                        <li><a asp-controller="Shop" asp-action="Index">Bags & Cases</a></li>
-                                        <li><a asp-controller="Shop" asp-action="Index">Electronic Cigarettes</a></li>
+                                        <li><a asp-controller="Product" asp-action="Index">Cables & Adapters</a></li>
+                                        <li><a asp-controller="Product" asp-action="Index">Batteries</a></li>
+                                        <li><a asp-controller="Product" asp-action="Index">Chargers</a></li>
+                                        <li><a asp-controller="Product" asp-action="Index">Bags & Cases</a></li>
+                                        <li><a asp-controller="Product" asp-action="Index">Electronic Cigarettes</a></li>
                                     </ul>
                                 </li>
                                 <li class="menu-item-has-children">
-                                    <a href="#"><span>Audio & Video</span></a>
+                                    <a ><span>Audio & Video</span></a>
                                     <ul class="submenu-item ">
-                                        <li><a asp-controller="Shop" asp-action="Index">Televisions</a></li>
-                                        <li><a asp-controller="Shop" asp-action="Index">TV Receivers</a></li>
-                                        <li><a asp-controller="Shop" asp-action="Index">Projectors</a></li>
-                                        <li><a asp-controller="Shop" asp-action="Index">Audio Amplifier Boards</a></li>
-                                        <li><a asp-controller="Shop" asp-action="Index">TV Sticks </a></li>
+                                        <li><a asp-controller="Product" asp-action="Index">Televisions</a></li>
+                                        <li><a asp-controller="Product" asp-action="Index">TV Receivers</a></li>
+                                        <li><a asp-controller="Product" asp-action="Index">Projectors</a></li>
+                                        <li><a asp-controller="Product" asp-action="Index">Audio Amplifier Boards</a></li>
+                                        <li><a asp-controller="Product" asp-action="Index">TV Sticks </a></li>
                                     </ul>
                                 </li>
                                 <li class="menu-item-has-children">
-                                    <a href="#"><span>Camera & Photo</span></a>
+                                    <a ><span>Camera & Photo</span></a>
                                     <ul class="submenu-item ">
-                                        <li><a asp-controller="Shop" asp-action="Index">Digital Cameras</a></li>
-                                        <li><a asp-controller="Shop" asp-action="Index">Camcorders</a></li>
-                                        <li><a asp-controller="Shop" asp-action="Index">Camera Drones</a></li>
-                                        <li><a asp-controller="Shop" asp-action="Index">Action Cameras</a></li>
-                                        <li><a asp-controller="Shop" asp-action="Index">Photo Studio Supplies </a></li>
+                                        <li><a asp-controller="Product" asp-action="Index">Digital Cameras</a></li>
+                                        <li><a asp-controller="Product" asp-action="Index">Camcorders</a></li>
+                                        <li><a asp-controller="Product" asp-action="Index">Camera Drones</a></li>
+                                        <li><a asp-controller="Product" asp-action="Index">Action Cameras</a></li>
+                                        <li><a asp-controller="Product" asp-action="Index">Photo Studio Supplies </a></li>
                                     </ul>
                                 </li>
                             </ul> <!-- sub menu -->
                         </li>
-                        <li><a asp-controller="Shop" asp-action="Index">Smartphone</a></li>
-                        <li><a asp-controller="Shop" asp-action="Index">Game Consoles</a></li>
-                        <li><a asp-controller="Shop" asp-action="Index">Mp3 & headphone</a></li>
-                        <li><a asp-controller="Shop" asp-action="Index">Tv & Video</a></li>
-                        <li><a asp-controller="Shop" asp-action="Index">Watches</a></li>
-                        <li><a asp-controller="Shop" asp-action="Index">Watches</a></li>
-                        <li><a asp-controller="Shop" asp-action="Index">Washing Machine</a></li>
-                        <li><a asp-controller="Shop" asp-action="Index">Camera</a></li>
-                        <li><a asp-controller="Shop" asp-action="Index">Audio & Theater</a></li>
-                        <li><a asp-controller="Shop" asp-action="Index">Accessories</a></li>
-                        <li><a asp-controller="Shop" asp-action="Index">Games & Consoles</a></li>
+                        <li><a asp-controller="Product" asp-action="Index">Smartphone</a></li>
+                        <li><a asp-controller="Product" asp-action="Index">Game Consoles</a></li>
+                        <li><a asp-controller="Product" asp-action="Index">Mp3 & headphone</a></li>
+                        <li><a asp-controller="Product" asp-action="Index">Tv & Video</a></li>
+                        <li><a asp-controller="Product" asp-action="Index">Watches</a></li>
+                        <li><a asp-controller="Product" asp-action="Index">Watches</a></li>
+                        <li><a asp-controller="Product" asp-action="Index">Washing Machine</a></li>
+                        <li><a asp-controller="Product" asp-action="Index">Camera</a></li>
+                        <li><a asp-controller="Product" asp-action="Index">Audio & Theater</a></li>
+                        <li><a asp-controller="Product" asp-action="Index">Accessories</a></li>
+                        <li><a asp-controller="Product" asp-action="Index">Games & Consoles</a></li>
                     </ul> <!-- menu content -->
                 </div> <!-- mobile main menu -->
             </div> <!-- mobile off canvas menu -->
@@ -896,10 +896,10 @@
                                 <h4 class="footer-title">Information</h4>
 
                                 <ul class="link">
-                                    <li><a href="#">Delivery</a></li>
-                                    <li><a href="#">Legal Notice</a></li>
+                                    <li><a >Delivery</a></li>
+                                    <li><a >Legal Notice</a></li>
                                     <li><a asp-controller="About" asp-action="Index">About us</a></li>
-                                    <li><a href="#">Secure payment</a></li>
+                                    <li><a >Secure payment</a></li>
                                     <li><a asp-controller="Contact" asp-action="Index">Contact us</a></li>
                                 </ul>
                             </div> <!-- footer link -->
@@ -907,10 +907,10 @@
                                 <h4 class="footer-title">Customer</h4>
 
                                 <ul class="link">
-                                    <li><a asp-controller="Shop" asp-action="Index">Prices drop</a></li>
-                                    <li><a asp-controller="Shop" asp-action="Index">New Product</a></li>
-                                    <li><a href="shop-3-column.html">Best Sales</a></li>
-                                    <li><a href="#">Sitemap</a></li>
+                                    <li><a asp-controller="Product" asp-action="Index">Prices drop</a></li>
+                                    <li><a asp-controller="Product" asp-action="Index">New Product</a></li>
+                                    <li><a asp-controller="Product" asp-action="Index">Best Sales</a></li>
+                                    <li><a >Sitemap</a></li>
                                     <li><a href="login.html">Login</a></li>
                                 </ul>
                             </div> <!-- footer link -->
@@ -919,20 +919,20 @@
 
                                 <ul class="link">
                                     <li><a asp-controller="About" asp-action="Index">About Our Shop</a></li>
-                                    <li><a href="#">Secure Shopping </a></li>
-                                    <li><a href="#">Delivery infomation </a></li>
-                                    <li><a href="#">Store Locations </a></li>
-                                    <li><a href="#">Affiliates </a></li>
+                                    <li><a >Secure Shopping </a></li>
+                                    <li><a >Delivery infomation </a></li>
+                                    <li><a >Store Locations </a></li>
+                                    <li><a >Affiliates </a></li>
                                 </ul>
                             </div> <!-- footer link -->
                             <div class="footer-link mt-50">
                                 <h4 class="footer-title">My account</h4>
 
                                 <ul class="link">
-                                    <li><a href="#">Personal info</a></li>
-                                    <li><a href="#">Order</a></li>
-                                    <li><a href="#">Credit Slips</a></li>
-                                    <li><a href="#">Address</a></li>
+                                    <li><a >Personal info</a></li>
+                                    <li><a >Order</a></li>
+                                    <li><a >Credit Slips</a></li>
+                                    <li><a >Address</a></li>
                                 </ul>
                             </div> <!-- footer link -->
                         </div> <!-- footer link wrapper -->
@@ -1074,17 +1074,17 @@
                                 </div>
                                 <div class="product-wishlist-compare">
                                     <ul class="d-flex flex-wrap">
-                                        <li><a href="#"><i class="fal fa-heart"></i> Add to wishlist</a></li>
-                                        <li><a href="#"><i class="fal fa-repeat"></i> Add to compare</a></li>
+                                        <li><a ><i class="fal fa-heart"></i> Add to wishlist</a></li>
+                                        <li><a ><i class="fal fa-repeat"></i> Add to compare</a></li>
                                     </ul>
                                 </div>
                                 <div class="product-share d-flex">
                                     <p>Share</p>
                                     <ul class="social media-body">
-                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-google"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
+                                        <li><a ><i class="fab fa-facebook-f"></i></a></li>
+                                        <li><a ><i class="fab fa-twitter"></i></a></li>
+                                        <li><a ><i class="fab fa-google"></i></a></li>
+                                        <li><a ><i class="fab fa-pinterest-p"></i></a></li>
                                     </ul>
                                 </div>
                             </div> <!-- Modal Quick View Content -->
@@ -1097,7 +1097,7 @@
     <!--====== Quick View Part Ends ======-->
     <!--====== BACK TOP TOP PART START ======-->
 
-    <a href="#" class="back-to-top"><i class="ion-android-arrow-up"></i></a>
+    <a  class="back-to-top"><i class="ion-android-arrow-up"></i></a>
 
     <!--====== BACK TOP TOP PART ENDS ======-->
     <!--====== Vendors js ======-->
