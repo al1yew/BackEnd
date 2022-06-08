@@ -1,0 +1,319 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<!--====== Breadcrumb Part Start ======-->
+
+<div class="breadcrumb-area">
+    <div class="container-fluid custom-container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="breadcrumb-item active">Cart</li>
+            </ol>
+        </nav>
+    </div> <!-- container -->
+</div>
+
+<!--====== Breadcrumb Part Ends ======-->
+<!--====== Cart Part Start ======-->
+
+<section class="cart-page pt-10">
+    <div class="container-fluid custom-container">
+        <div class="row">
+            <div class="col-xl-8">
+                <div class="shopping-cart mt-25">
+                    <h4 class="allup-title">Shopping Cart</h4>
+
+                    <div class="shopping-cart-table table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="image">Image</th>
+                                    <th class="product">Product</th>
+                                    <th class="price">Price</th>
+                                    <th class="quantity">Quantity</th>
+                                    <th class="total">Total</th>
+                                    <th class="delete">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="product-image">
+                                            <img src="~/assets/images/product-cart/cart-1.jpg" alt="cart">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="product-title">
+                                            <h4 class="title"><a asp-controller="Product" asp-action="Index">New Balance Fresh Foam LAZR v1 Sport eu accumsan massa facilisis</a></h4>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="product-price">
+                                            <span class="price">€18.90</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="product-quantity">
+                                            <div class="quantity mt-15 d-flex">
+                                                <button type="button" class="sub"><i class="fal fa-minus"></i></button>
+                                                <input type="text" value="1" />
+                                                <button type="button" class="add"><i class="fal fa-plus"></i></button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="product-total">
+                                            <span class="total-amount">€18.90</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="product-delete">
+                                            <a ><i class="fal fa-trash-alt"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="product-image">
+                                            <img src="~/assets/images/product-cart/cart-2.jpg" alt="cart">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="product-title">
+                                            <h4 class="title"><a asp-controller="Product" asp-action="Index">New Balance Fresh Foam LAZR v1 Sport eu accumsan massa facilisis</a></h4>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="product-price">
+                                            <span class="price">€18.90</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="product-quantity">
+                                            <div class="quantity mt-15 d-flex">
+                                                <button type="button" class="sub"><i class="fal fa-minus"></i></button>
+                                                <input type="text" value="1" />
+                                                <button type="button" class="add"><i class="fal fa-plus"></i></button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="product-total">
+                                            <span class="total-amount">€18.90</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="product-delete">
+                                            <a ><i class="fal fa-trash-alt"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="product-image">
+                                            <img src="~/assets/images/product-cart/cart-1.jpg" alt="cart">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="product-title">
+                                            <h4 class="title"><a asp-controller="Product" asp-action="Index">New Balance Fresh Foam LAZR v1 Sport eu accumsan massa facilisis</a></h4>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="product-price">
+                                            <span class="price">€18.90</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="product-quantity">
+                                            <div class="quantity mt-15 d-flex">
+                                                <button type="button" class="sub"><i class="fal fa-minus"></i></button>
+                                                <input type="text" value="1" />
+                                                <button type="button" class="add"><i class="fal fa-plus"></i></button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="product-total">
+                                            <span class="total-amount">€18.90</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="product-delete">
+                                            <a ><i class="fal fa-trash-alt"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="cart-btn text-right">
+                        <a class="main-btn" >Update cart</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4">
+                <div class="row">
+                    <div class="col-xl-12 col-md-6">
+                        <div class="cart-coupon mt-30">
+                            <h5 class="title">Discount Coupon Code</h5>
+                            <form action="#">
+                                <div class="single-form coupon-form d-flex flex-wrap">
+                                    <input type="text" placeholder="Coupon Code">
+                                    <button class="main-btn">Apply Coupon</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-md-6">
+                        <div class="cart-total mt-30">
+                            <div class="sub-total">
+                                <div class="single-total">
+                                    <span class="cart-value">Subtotal</span>
+                                    <span class="cart-amount">€18.90</span>
+                                </div>
+                                <div class="single-total">
+                                    <span class="cart-value">Shipping Cost</span>
+                                    <span class="cart-amount">€3.90</span>
+                                </div>
+                            </div>
+                            <div class="total">
+                                <div class="single-total">
+                                    <span class="cart-value">Total (tax excl.)</span>
+                                    <span class="cart-amount">€22.80</span>
+                                </div>
+                                <div class="single-total">
+                                    <span class="cart-value">Taxes</span>
+                                    <span class="cart-amount">€0.00</span>
+                                </div>
+                            </div>
+                            <div class="cart-total-btn text-right">
+                                <a class="main-btn" >Proceed to Checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--====== Cart Part Ends ======-->
+<!--====== Brand Part Start ======-->
+
+<div class="brand-area pt-80">
+    <div class="container-fluid custom-container">
+        <div class="row brand-active">
+            <div class="col-lg-2">
+                <div class="single-brand">
+                    <a >
+                        <img src="~/assets/images/brand/brand-1.jpg" alt="brand">
+                    </a>
+                </div> <!-- single brand -->
+            </div>
+            <div class="col-lg-2">
+                <div class="single-brand">
+                    <a >
+                        <img src="~/assets/images/brand/brand-2.jpg" alt="brand">
+                    </a>
+                </div> <!-- single brand -->
+            </div>
+            <div class="col-lg-2">
+                <div class="single-brand">
+                    <a >
+                        <img src="~/assets/images/brand/brand-3.jpg" alt="brand">
+                    </a>
+                </div> <!-- single brand -->
+            </div>
+            <div class="col-lg-2">
+                <div class="single-brand">
+                    <a >
+                        <img src="~/assets/images/brand/brand-4.jpg" alt="brand">
+                    </a>
+                </div> <!-- single brand -->
+            </div>
+            <div class="col-lg-2">
+                <div class="single-brand">
+                    <a >
+                        <img src="~/assets/images/brand/brand-5.jpg" alt="brand">
+                    </a>
+                </div> <!-- single brand -->
+            </div>
+            <div class="col-lg-2">
+                <div class="single-brand">
+                    <a >
+                        <img src="~/assets/images/brand/brand-6.jpg" alt="brand">
+                    </a>
+                </div> <!-- single brand -->
+            </div>
+            <div class="col-lg-2">
+                <div class="single-brand">
+                    <a >
+                        <img src="~/assets/images/brand/brand-4.jpg" alt="brand">
+                    </a>
+                </div> <!-- single brand -->
+            </div>
+        </div> <!-- row -->
+    </div> <!-- container -->
+</div>
+
+<!--====== Brand Part Ends ======-->
+<!--====== Features Banner Part Start ======-->
+
+<section class="features-banner-area pt-80 pb-100">
+    <div class="container-fluid custom-container">
+        <div class="features-banner-wrapper d-flex flex-wrap">
+            <div class="single-features-banner d-flex">
+                <div class="banner-icon">
+                    <img src="~/assets/images/banner-icon/icon1.png" alt="Icon">
+                </div>
+                <div class="banner-content media-body">
+                    <h3 class="banner-title">Free Shipping</h3>
+                    <p>Free shipping on all US order</p>
+                </div>
+            </div> <!-- single features banner -->
+            <div class="single-features-banner d-flex">
+                <div class="banner-icon">
+                    <img src="~/assets/images/banner-icon/icon2.png" alt="Icon">
+                </div>
+                <div class="banner-content media-body">
+                    <h3 class="banner-title">Support 24/7</h3>
+                    <p>Contact us 24 hours a day</p>
+                </div>
+            </div> <!-- single features banner -->
+            <div class="single-features-banner d-flex">
+                <div class="banner-icon">
+                    <img src="~/assets/images/banner-icon/icon3.png" alt="Icon">
+                </div>
+                <div class="banner-content media-body">
+                    <h3 class="banner-title">100% Money Back</h3>
+                    <p>You have 30 days to Return</p>
+                </div>
+            </div> <!-- single features banner -->
+            <div class="single-features-banner d-flex">
+                <div class="banner-icon">
+                    <img src="~/assets/images/banner-icon/icon4.png" alt="Icon">
+                </div>
+                <div class="banner-content media-body">
+                    <h3 class="banner-title">90 Days Return</h3>
+                    <p>If goods have problems</p>
+                </div>
+            </div> <!-- single features banner -->
+            <div class="single-features-banner d-flex">
+                <div class="banner-icon">
+                    <img src="~/assets/images/banner-icon/icon5.png" alt="Icon">
+                </div>
+                <div class="banner-content media-body">
+                    <h3 class="banner-title">Payment Secure</h3>
+                    <p>We ensure secure payment</p>
+                </div>
+            </div> <!-- single features banner -->
+        </div> <!-- features banner wrapper -->
+    </div> <!-- container -->
+</section>
+
+<!--====== Features Banner Part Ends ======-->
