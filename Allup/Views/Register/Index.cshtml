@@ -1,0 +1,183 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!--====== Breadcrumb Part Start ======-->
+
+<div class="breadcrumb-area">
+    <div class="container-fluid custom-container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="breadcrumb-item active">Register</li>
+            </ol>
+        </nav>
+    </div> <!-- container -->
+</div>
+
+<!--====== Breadcrumb Part Ends ======-->
+<!--====== Register Part Start ======-->
+
+<section class="register-area pt-10">
+    <div class="container-fluid custom-container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="login-register-wrapper mt-30">
+                    <h4 class="allup-title">Creat New Account</h4>
+                    <p class="mt-10">Already have an account? <a asp-controller="Login" asp-action="Index">Log in instead!</a></p>
+
+                    <form action="#">
+                        <div class="single-form">
+                            <input type="text" placeholder="First Name">
+                        </div>
+                        <div class="single-form">
+                            <input type="text" placeholder="Last Name">
+                        </div>
+                        <div class="single-form">
+                            <input type="email" placeholder="Email Address">
+                        </div>
+                        <div class="single-form">
+                            <input type="text" placeholder="Username">
+                        </div>
+                        <div class="single-form">
+                            <input type="password" placeholder="Password">
+                        </div>
+                        <div class="single-form">
+                            <input type="password" placeholder="Confirm Password">
+                        </div>
+                        <div class="custom-checkbox mt-30">
+                            <input type="checkbox" id="account-1">
+                            <label for="account-1"></label>
+                            <p>Receive Offers From Our Partners</p>
+                        </div>
+                        <div class="custom-checkbox mt-30">
+                            <input type="checkbox" id="account-2">
+                            <label for="account-2"></label>
+                            <p>Sign Up For Our Newsletter <br> Subscribe To Our Newsletters Now And Stay Up-To-Date With New Collections, The Latest Lookbooks And Exclusive Offers..</p>
+                        </div>
+                        <div class="single-form">
+                            <button class="main-btn main-btn-2">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--====== Register Part Ends ======-->
+<!--====== Brand Part Start ======-->
+
+<div class="brand-area pt-80">
+    <div class="container-fluid custom-container">
+        <div class="row brand-active">
+            <div class="col-lg-2">
+                <div class="single-brand">
+                    <a >
+                        <img src="~/assets/images/brand/brand-1.jpg" alt="brand">
+                    </a>
+                </div> <!-- single brand -->
+            </div>
+            <div class="col-lg-2">
+                <div class="single-brand">
+                    <a >
+                        <img src="~/assets/images/brand/brand-2.jpg" alt="brand">
+                    </a>
+                </div> <!-- single brand -->
+            </div>
+            <div class="col-lg-2">
+                <div class="single-brand">
+                    <a >
+                        <img src="~/assets/images/brand/brand-3.jpg" alt="brand">
+                    </a>
+                </div> <!-- single brand -->
+            </div>
+            <div class="col-lg-2">
+                <div class="single-brand">
+                    <a >
+                        <img src="~/assets/images/brand/brand-4.jpg" alt="brand">
+                    </a>
+                </div> <!-- single brand -->
+            </div>
+            <div class="col-lg-2">
+                <div class="single-brand">
+                    <a >
+                        <img src="~/assets/images/brand/brand-5.jpg" alt="brand">
+                    </a>
+                </div> <!-- single brand -->
+            </div>
+            <div class="col-lg-2">
+                <div class="single-brand">
+                    <a >
+                        <img src="~/assets/images/brand/brand-6.jpg" alt="brand">
+                    </a>
+                </div> <!-- single brand -->
+            </div>
+            <div class="col-lg-2">
+                <div class="single-brand">
+                    <a >
+                        <img src="~/assets/images/brand/brand-4.jpg" alt="brand">
+                    </a>
+                </div> <!-- single brand -->
+            </div>
+        </div> <!-- row -->
+    </div> <!-- container -->
+</div>
+
+<!--====== Brand Part Ends ======-->
+<!--====== Features Banner Part Start ======-->
+
+<section class="features-banner-area pt-80 pb-100">
+    <div class="container-fluid custom-container">
+        <div class="features-banner-wrapper d-flex flex-wrap">
+            <div class="single-features-banner d-flex">
+                <div class="banner-icon">
+                    <img src="~/assets/images/banner-icon/icon1.png" alt="Icon">
+                </div>
+                <div class="banner-content media-body">
+                    <h3 class="banner-title">Free Shipping</h3>
+                    <p>Free shipping on all US order</p>
+                </div>
+            </div> <!-- single features banner -->
+            <div class="single-features-banner d-flex">
+                <div class="banner-icon">
+                    <img src="~/assets/images/banner-icon/icon2.png" alt="Icon">
+                </div>
+                <div class="banner-content media-body">
+                    <h3 class="banner-title">Support 24/7</h3>
+                    <p>Contact us 24 hours a day</p>
+                </div>
+            </div> <!-- single features banner -->
+            <div class="single-features-banner d-flex">
+                <div class="banner-icon">
+                    <img src="~/assets/images/banner-icon/icon3.png" alt="Icon">
+                </div>
+                <div class="banner-content media-body">
+                    <h3 class="banner-title">100% Money Back</h3>
+                    <p>You have 30 days to Return</p>
+                </div>
+            </div> <!-- single features banner -->
+            <div class="single-features-banner d-flex">
+                <div class="banner-icon">
+                    <img src="~/assets/images/banner-icon/icon4.png" alt="Icon">
+                </div>
+                <div class="banner-content media-body">
+                    <h3 class="banner-title">90 Days Return</h3>
+                    <p>If goods have problems</p>
+                </div>
+            </div> <!-- single features banner -->
+            <div class="single-features-banner d-flex">
+                <div class="banner-icon">
+                    <img src="~/assets/images/banner-icon/icon5.png" alt="Icon">
+                </div>
+                <div class="banner-content media-body">
+                    <h3 class="banner-title">Payment Secure</h3>
+                    <p>We ensure secure payment</p>
+                </div>
+            </div> <!-- single features banner -->
+        </div> <!-- features banner wrapper -->
+    </div> <!-- container -->
+</section>
+
+<!--====== Features Banner Part Ends ======-->
