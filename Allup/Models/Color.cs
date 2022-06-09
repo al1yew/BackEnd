@@ -5,17 +5,15 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-
 namespace Allup.Models
 {
-    public class Tag
+    public class Color
     {
         public int Id { get; set; }
-        [StringLength(maximumLength:255, MinimumLength = 1)]
+        [StringLength(maximumLength: 255, MinimumLength = 1)]
         [Required]
-        public string TagName { get; set; }
-        public IEnumerable<ProductToTag> ProductToTags { get; set; }
-
+        public string ColorName { get; set; }
+        public IEnumerable<ProductToColor> ProductToColors { get; set; }
 
     }
 }

@@ -3,14 +3,16 @@ using Allup.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Allup.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220609054854_UpdatedProductImageTableAddedConstraints")]
+    partial class UpdatedProductImageTableAddedConstraints
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,23 +35,6 @@ namespace Allup.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Brands");
-                });
-
-            modelBuilder.Entity("Allup.Models.Color", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ColorName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(255)")
-                        .HasMaxLength(255);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Colors");
                 });
 
             modelBuilder.Entity("Allup.Models.Product", b =>
@@ -77,12 +62,6 @@ namespace Allup.Migrations
 
                     b.Property<decimal>("ExTax")
                         .HasColumnType("money");
-
-                    b.Property<string>("HoverImage")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MainImage")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("money");
@@ -126,50 +105,6 @@ namespace Allup.Migrations
                     b.ToTable("ProductImages");
                 });
 
-            modelBuilder.Entity("Allup.Models.ProductToColor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ColorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ColorId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductToColors");
-                });
-
-            modelBuilder.Entity("Allup.Models.ProductToSize", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SizeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("SizeId");
-
-                    b.ToTable("ProductToSizes");
-                });
-
             modelBuilder.Entity("Allup.Models.ProductToTag", b =>
                 {
                     b.Property<int>("Id")
@@ -190,23 +125,6 @@ namespace Allup.Migrations
                     b.HasIndex("TagId");
 
                     b.ToTable("ProductToTags");
-                });
-
-            modelBuilder.Entity("Allup.Models.Size", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("SizeName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(255)")
-                        .HasMaxLength(255);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Sizes");
                 });
 
             modelBuilder.Entity("Allup.Models.Tag", b =>
@@ -240,36 +158,6 @@ namespace Allup.Migrations
                     b.HasOne("Allup.Models.Product", "Product")
                         .WithMany("ProductImages")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Allup.Models.ProductToColor", b =>
-                {
-                    b.HasOne("Allup.Models.Color", "Color")
-                        .WithMany("ProductToColors")
-                        .HasForeignKey("ColorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Allup.Models.Product", "Product")
-                        .WithMany("ProductToColors")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Allup.Models.ProductToSize", b =>
-                {
-                    b.HasOne("Allup.Models.Product", "Product")
-                        .WithMany("ProductToSizes")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Allup.Models.Size", "Size")
-                        .WithMany("ProductToSizes")
-                        .HasForeignKey("SizeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
