@@ -1,4 +1,4 @@
-﻿
+﻿@model Product
 @{
     ViewData["Title"] = "Detail";
 }
@@ -26,29 +26,19 @@
             <div class="col-lg-6">
                 <div class="single-product-image mt-30">
                     <div class="product-single-image">
-                        <div class="single-image">
-                            <img src="~/assets/images/product-quick/product-1.jpg" alt="">
-                        </div>
-                        <div class="single-image">
-                            <img src="~/assets/images/product-quick/product-2.jpg" alt="">
-                        </div>
-                        <div class="single-image">
-                            <img src="~/assets/images/product-quick/product-3.jpg" alt="">
-                        </div>
-                        <div class="single-image">
-                            <img src="~/assets/images/product-quick/product-4.jpg" alt="">
-                        </div>
-                        <div class="single-image">
-                            <img src="~/assets/images/product-quick/product-5.jpg" alt="">
-                        </div>
+                        @foreach (ProductImage productImage in Model.ProductImages)
+                        {
+                            <div class="single-image">
+                                <img src="~/assets/images/product-quick/@productImage.Image" alt="">
+                            </div>
+                        }
                     </div>
                     <div class="product-single-thumb-image">
                         <ul class="product-single-thumb">
-                            <li><img src="~/assets/images/product-quick/product-1.jpg" alt="product"></li>
-                            <li><img src="~/assets/images/product-quick/product-2.jpg" alt="product"></li>
-                            <li><img src="~/assets/images/product-quick/product-3.jpg" alt="product"></li>
-                            <li><img src="~/assets/images/product-quick/product-4.jpg" alt="product"></li>
-                            <li><img src="~/assets/images/product-quick/product-5.jpg" alt="product"></li>
+                            @foreach (ProductImage productImage in Model.ProductImages)
+                            {
+                                <li><img src="~/assets/images/product-quick/@productImage.Image" alt="product"></li>
+                            }
                         </ul>
                     </div>
                 </div> <!-- single product image -->
@@ -58,11 +48,13 @@
                     <div class="tags d-flex">
                         <span class="tag-title">Tags:</span>
                         <ul class="tag-list media-body">
-                            <li><a >drone,</a></li>
-                            <li><a >camera</a></li>
+                            @foreach (ProductToTag productTag in Model.ProductToTags)
+                            {
+                                <li><a>@productTag.Tag.TagName,</a></li>
+                            }
                         </ul>
                     </div>
-                    <h2 class="product-title">New Balance Fresh Foam LAZR v1 Sport eu accumsan massa facilisis</h2>
+                    <h2 class="product-title">@Model.ProductName</h2>
                     <div class="review-rating d-flex flex-wrap">
                         <ul class="rating">
                             <li class="rating-on"><i class="fas fa-star"></i></li>
@@ -72,33 +64,40 @@
                             <li class="rating-on"><i class="fas fa-star"></i></li>
                         </ul>
                         <ul class="review-link">
-                            <li><a >(1 Review)</a></li>
-                            <li><a >Write A Review</a></li>
+                            <li><a>(1 Review)</a></li>
+                            <li><a>Write A Review</a></li>
                         </ul>
                     </div>
                     <div class="product-price">
-                        <span class="price-sale">€21.90</span>
-                        <span class="regular-price">€25.90</span>
+                        @if (Model.DiscountPrice > 0)
+                        {
+                            <span class="price-sale">€@Model.DiscountPrice</span>
+                            <span class="regular-price">€@Model.Price</span>
+                        }
+                        else
+                        {
+                            <span class="price-sale">€@Model.Price</span>
+                        }
                     </div>
                     <div class="product-basic-info">
                         <div class="single-info">
                             <span class="title">Ex Tax :</span>
-                            <span class="value">€3.00</span>
+                            <span class="value">€@Model.ExTax</span>
                         </div>
                         <div class="single-info">
                             <span class="title">Brand :</span>
-                            <span class="value"><a >Brac</a></span>
+                            <span class="value"><a>@Model.Brand</a></span>
                         </div>
                         <div class="single-info">
                             <span class="title"> Product Code :</span>
-                            <span class="value">abcd1234</span>
+                            <span class="value">@(Model.Seria + Model.Code)</span>
                         </div>
                         <div class="single-info">
-                            <span class="title"> Availability :</span>
-                            <span class="value">In stock </span>
+                            <span class="title @(Model.Count > 0 ?"text-success":"text-danger")"> Availability :</span>
+                            <span class="value">@(Model.Count > 0 ? "In Stock" : "Out Of Stock") </span>
                         </div>
                     </div>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas consectetur inventore voluptatem dignissimos nemo repellendus est, harum maiores veritatis quidem.</p>
+                    <p>@Html.Raw(Model.Description)</p>
 
                     <div class="product-size-color-quantity">
                         <div class="product-quantity mt-25">
@@ -115,17 +114,17 @@
                     </div>
                     <div class="product-wishlist-compare">
                         <ul class="d-flex flex-wrap">
-                            <li><a ><i class="fal fa-heart"></i> Add to wishlist</a></li>
-                            <li><a ><i class="fal fa-repeat"></i> Add to compare</a></li>
+                            <li><a><i class="fal fa-heart"></i> Add to wishlist</a></li>
+                            <li><a><i class="fal fa-repeat"></i> Add to compare</a></li>
                         </ul>
                     </div>
                     <div class="product-share d-flex">
                         <p>Share</p>
                         <ul class="social media-body">
-                            <li><a ><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a ><i class="fab fa-twitter"></i></a></li>
-                            <li><a ><i class="fab fa-google"></i></a></li>
-                            <li><a ><i class="fab fa-pinterest-p"></i></a></li>
+                            <li><a><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a><i class="fab fa-twitter"></i></a></li>
+                            <li><a><i class="fab fa-google"></i></a></li>
+                            <li><a><i class="fab fa-pinterest-p"></i></a></li>
                         </ul>
                     </div>
                     <div class="reassurance-block">
@@ -349,10 +348,10 @@
                                 <img class="second-image" src="~/assets/images/product/product-2.jpg" alt="product">
                             </a>
                             <ul class="product-meta">
-                                <li><a ><i class="icon ion-bag"></i></a></li>
-                                <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                <li><a ><i class="icon ion-android-options"></i></a></li>
-                                <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
+                                <li><a><i class="icon ion-bag"></i></a></li>
+                                <li><a><i class="icon ion-android-favorite-outline"></i></a></li>
+                                <li><a><i class="icon ion-android-options"></i></a></li>
+                                <li><a data-toggle="modal" data-target="#productQuickModal"><i class="icon ion-android-open"></i></a></li>
                             </ul>
                         </div>
                         <div class="product-content">
@@ -378,10 +377,10 @@
                                 <img class="second-image" src="~/assets/images/product/product-4.jpg" alt="product">
                             </a>
                             <ul class="product-meta">
-                                <li><a ><i class="icon ion-bag"></i></a></li>
-                                <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                <li><a ><i class="icon ion-android-options"></i></a></li>
-                                <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
+                                <li><a><i class="icon ion-bag"></i></a></li>
+                                <li><a><i class="icon ion-android-favorite-outline"></i></a></li>
+                                <li><a><i class="icon ion-android-options"></i></a></li>
+                                <li><a data-toggle="modal" data-target="#productQuickModal"><i class="icon ion-android-open"></i></a></li>
                             </ul>
                             <span class="discount-product">-12%</span>
                         </div>
@@ -408,10 +407,10 @@
                                 <img class="first-image" src="~/assets/images/product/product-5.jpg" alt="product">
                             </a>
                             <ul class="product-meta">
-                                <li><a ><i class="icon ion-bag"></i></a></li>
-                                <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                <li><a ><i class="icon ion-android-options"></i></a></li>
-                                <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
+                                <li><a><i class="icon ion-bag"></i></a></li>
+                                <li><a><i class="icon ion-android-favorite-outline"></i></a></li>
+                                <li><a><i class="icon ion-android-options"></i></a></li>
+                                <li><a data-toggle="modal" data-target="#productQuickModal"><i class="icon ion-android-open"></i></a></li>
                             </ul>
                         </div>
                         <div class="product-content">
@@ -437,10 +436,10 @@
                                 <img class="second-image" src="~/assets/images/product/product-7.jpg" alt="product">
                             </a>
                             <ul class="product-meta">
-                                <li><a ><i class="icon ion-bag"></i></a></li>
-                                <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                <li><a ><i class="icon ion-android-options"></i></a></li>
-                                <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
+                                <li><a><i class="icon ion-bag"></i></a></li>
+                                <li><a><i class="icon ion-android-favorite-outline"></i></a></li>
+                                <li><a><i class="icon ion-android-options"></i></a></li>
+                                <li><a data-toggle="modal" data-target="#productQuickModal"><i class="icon ion-android-open"></i></a></li>
                             </ul>
                         </div>
                         <div class="product-content">
@@ -465,10 +464,10 @@
                                 <img class="first-image" src="~/assets/images/product/product-8.jpg" alt="product">
                             </a>
                             <ul class="product-meta">
-                                <li><a ><i class="icon ion-bag"></i></a></li>
-                                <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                <li><a ><i class="icon ion-android-options"></i></a></li>
-                                <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
+                                <li><a><i class="icon ion-bag"></i></a></li>
+                                <li><a><i class="icon ion-android-favorite-outline"></i></a></li>
+                                <li><a><i class="icon ion-android-options"></i></a></li>
+                                <li><a data-toggle="modal" data-target="#productQuickModal"><i class="icon ion-android-open"></i></a></li>
                             </ul>
                         </div>
                         <div class="product-content">
@@ -494,10 +493,10 @@
                                 <img class="second-image" src="~/assets/images/product/product-9.jpg" alt="product">
                             </a>
                             <ul class="product-meta">
-                                <li><a ><i class="icon ion-bag"></i></a></li>
-                                <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                <li><a ><i class="icon ion-android-options"></i></a></li>
-                                <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
+                                <li><a><i class="icon ion-bag"></i></a></li>
+                                <li><a><i class="icon ion-android-favorite-outline"></i></a></li>
+                                <li><a><i class="icon ion-android-options"></i></a></li>
+                                <li><a data-toggle="modal" data-target="#productQuickModal"><i class="icon ion-android-open"></i></a></li>
                             </ul>
                         </div>
                         <div class="product-content">
@@ -523,10 +522,10 @@
                                 <img class="second-image" src="~/assets/images/product/product-9.jpg" alt="product">
                             </a>
                             <ul class="product-meta">
-                                <li><a ><i class="icon ion-bag"></i></a></li>
-                                <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                <li><a ><i class="icon ion-android-options"></i></a></li>
-                                <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
+                                <li><a><i class="icon ion-bag"></i></a></li>
+                                <li><a><i class="icon ion-android-favorite-outline"></i></a></li>
+                                <li><a><i class="icon ion-android-options"></i></a></li>
+                                <li><a data-toggle="modal" data-target="#productQuickModal"><i class="icon ion-android-open"></i></a></li>
                             </ul>
                         </div>
                         <div class="product-content">
@@ -571,10 +570,10 @@
                                 <img class="second-image" src="~/assets/images/product/product-2.jpg" alt="product">
                             </a>
                             <ul class="product-meta">
-                                <li><a ><i class="icon ion-bag"></i></a></li>
-                                <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                <li><a ><i class="icon ion-android-options"></i></a></li>
-                                <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
+                                <li><a><i class="icon ion-bag"></i></a></li>
+                                <li><a><i class="icon ion-android-favorite-outline"></i></a></li>
+                                <li><a><i class="icon ion-android-options"></i></a></li>
+                                <li><a data-toggle="modal" data-target="#productQuickModal"><i class="icon ion-android-open"></i></a></li>
                             </ul>
                         </div>
                         <div class="product-content">
@@ -600,10 +599,10 @@
                                 <img class="second-image" src="~/assets/images/product/product-4.jpg" alt="product">
                             </a>
                             <ul class="product-meta">
-                                <li><a ><i class="icon ion-bag"></i></a></li>
-                                <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                <li><a ><i class="icon ion-android-options"></i></a></li>
-                                <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
+                                <li><a><i class="icon ion-bag"></i></a></li>
+                                <li><a><i class="icon ion-android-favorite-outline"></i></a></li>
+                                <li><a><i class="icon ion-android-options"></i></a></li>
+                                <li><a data-toggle="modal" data-target="#productQuickModal"><i class="icon ion-android-open"></i></a></li>
                             </ul>
                             <span class="discount-product">-12%</span>
                         </div>
@@ -630,10 +629,10 @@
                                 <img class="first-image" src="~/assets/images/product/product-5.jpg" alt="product">
                             </a>
                             <ul class="product-meta">
-                                <li><a ><i class="icon ion-bag"></i></a></li>
-                                <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                <li><a ><i class="icon ion-android-options"></i></a></li>
-                                <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
+                                <li><a><i class="icon ion-bag"></i></a></li>
+                                <li><a><i class="icon ion-android-favorite-outline"></i></a></li>
+                                <li><a><i class="icon ion-android-options"></i></a></li>
+                                <li><a data-toggle="modal" data-target="#productQuickModal"><i class="icon ion-android-open"></i></a></li>
                             </ul>
                         </div>
                         <div class="product-content">
@@ -659,10 +658,10 @@
                                 <img class="second-image" src="~/assets/images/product/product-7.jpg" alt="product">
                             </a>
                             <ul class="product-meta">
-                                <li><a ><i class="icon ion-bag"></i></a></li>
-                                <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                <li><a ><i class="icon ion-android-options"></i></a></li>
-                                <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
+                                <li><a><i class="icon ion-bag"></i></a></li>
+                                <li><a><i class="icon ion-android-favorite-outline"></i></a></li>
+                                <li><a><i class="icon ion-android-options"></i></a></li>
+                                <li><a data-toggle="modal" data-target="#productQuickModal"><i class="icon ion-android-open"></i></a></li>
                             </ul>
                         </div>
                         <div class="product-content">
@@ -687,10 +686,10 @@
                                 <img class="first-image" src="~/assets/images/product/product-8.jpg" alt="product">
                             </a>
                             <ul class="product-meta">
-                                <li><a ><i class="icon ion-bag"></i></a></li>
-                                <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                <li><a ><i class="icon ion-android-options"></i></a></li>
-                                <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
+                                <li><a><i class="icon ion-bag"></i></a></li>
+                                <li><a><i class="icon ion-android-favorite-outline"></i></a></li>
+                                <li><a><i class="icon ion-android-options"></i></a></li>
+                                <li><a data-toggle="modal" data-target="#productQuickModal"><i class="icon ion-android-open"></i></a></li>
                             </ul>
                         </div>
                         <div class="product-content">
@@ -716,10 +715,10 @@
                                 <img class="second-image" src="~/assets/images/product/product-9.jpg" alt="product">
                             </a>
                             <ul class="product-meta">
-                                <li><a ><i class="icon ion-bag"></i></a></li>
-                                <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                <li><a ><i class="icon ion-android-options"></i></a></li>
-                                <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
+                                <li><a><i class="icon ion-bag"></i></a></li>
+                                <li><a><i class="icon ion-android-favorite-outline"></i></a></li>
+                                <li><a><i class="icon ion-android-options"></i></a></li>
+                                <li><a data-toggle="modal" data-target="#productQuickModal"><i class="icon ion-android-open"></i></a></li>
                             </ul>
                         </div>
                         <div class="product-content">
@@ -745,10 +744,10 @@
                                 <img class="second-image" src="~/assets/images/product/product-9.jpg" alt="product">
                             </a>
                             <ul class="product-meta">
-                                <li><a ><i class="icon ion-bag"></i></a></li>
-                                <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                <li><a ><i class="icon ion-android-options"></i></a></li>
-                                <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
+                                <li><a><i class="icon ion-bag"></i></a></li>
+                                <li><a><i class="icon ion-android-favorite-outline"></i></a></li>
+                                <li><a><i class="icon ion-android-options"></i></a></li>
+                                <li><a data-toggle="modal" data-target="#productQuickModal"><i class="icon ion-android-open"></i></a></li>
                             </ul>
                         </div>
                         <div class="product-content">
@@ -779,49 +778,49 @@
         <div class="row brand-active">
             <div class="col-lg-2">
                 <div class="single-brand">
-                    <a >
+                    <a>
                         <img src="~/assets/images/brand/brand-1.jpg" alt="brand">
                     </a>
                 </div> <!-- single brand -->
             </div>
             <div class="col-lg-2">
                 <div class="single-brand">
-                    <a >
+                    <a>
                         <img src="~/assets/images/brand/brand-2.jpg" alt="brand">
                     </a>
                 </div> <!-- single brand -->
             </div>
             <div class="col-lg-2">
                 <div class="single-brand">
-                    <a >
+                    <a>
                         <img src="~/assets/images/brand/brand-3.jpg" alt="brand">
                     </a>
                 </div> <!-- single brand -->
             </div>
             <div class="col-lg-2">
                 <div class="single-brand">
-                    <a >
+                    <a>
                         <img src="~/assets/images/brand/brand-4.jpg" alt="brand">
                     </a>
                 </div> <!-- single brand -->
             </div>
             <div class="col-lg-2">
                 <div class="single-brand">
-                    <a >
+                    <a>
                         <img src="~/assets/images/brand/brand-5.jpg" alt="brand">
                     </a>
                 </div> <!-- single brand -->
             </div>
             <div class="col-lg-2">
                 <div class="single-brand">
-                    <a >
+                    <a>
                         <img src="~/assets/images/brand/brand-6.jpg" alt="brand">
                     </a>
                 </div> <!-- single brand -->
             </div>
             <div class="col-lg-2">
                 <div class="single-brand">
-                    <a >
+                    <a>
                         <img src="~/assets/images/brand/brand-4.jpg" alt="brand">
                     </a>
                 </div> <!-- single brand -->
