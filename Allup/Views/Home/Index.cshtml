@@ -1,16 +1,11 @@
-﻿
+﻿@model List<Product>
 @{
     ViewData["Title"] = "Index";
 }
 
 
 
-
-
-
 @* 206ci setir detail page gonderir *@
-
-
 
 
 <!--====== Slider Part Start ======-->
@@ -209,1212 +204,153 @@
             <div class="tab-pane fade show active" id="new" role="tabpanel" aria-labelledby="new-tab">
                 <div class="product-items">
                     <div class="row product-active">
-                        <div class="col-lg-2">
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Detail" asp-route-id="1">
-                                        <img class="first-image" src="~/assets/images/product/product-1.jpg" alt="product">
-                                        <img class="second-image" src="~/assets/images/product/product-2.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">Cale 6 eu accumsan massa facilisis Madden by Steve</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€11.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
+                        @for (int i = 0; i < Math.Round((decimal)Model.Count / 2); i++)
+                        {
+                            <div class="col-lg-2">
+                                @foreach (Product product in Model.Skip(i * 2).Take(2))
+                                {
+                                    <div class="single-product mt-30">
+                                        <div class="product-image">
+                                            <a asp-controller="Product" asp-action="Detail" asp-route-id="@product.Id">
+                                                <img class="first-image" src="~/assets/images/product/@product.MainImage" alt="product">
+                                                <img class="second-image" src="~/assets/images/product/@product.HoverImage" alt="product">
+                                            </a>
+                                            <ul class="product-meta">
+                                                <li><a><i class="icon ion-bag"></i></a></li>
+                                                <li><a><i class="icon ion-android-favorite-outline"></i></a></li>
+                                                <li><a><i class="icon ion-android-options"></i></a></li>
+                                                <li><a data-toggle="modal" data-target="#productQuickModal" asp-controller="Product" asp-action="DetailModal" asp-route-id="@product.Id" class="detailmodal"><i class="icon ion-android-open"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="product-content">
+                                            <ul class="product-rating">
+                                                <li><i class="fas fa-star"></i></li>
+                                                <li><i class="fas fa-star"></i></li>
+                                                <li><i class="fas fa-star"></i></li>
+                                                <li><i class="fas fa-star"></i></li>
+                                                <li><i class="fas fa-star"></i></li>
+                                            </ul>
+                                            <h4 class="product-title"><a asp-controller="Product" asp-action="Detail" asp-route-id="@product.Id">@product.ProductName</a></h4>
+                                            <div class="product-price">
+                                                @if (product.DiscountPrice > 0)
+                                                {
+                                                    <span class="price-sale">€@product.Price</span>
+                                                    <span class="regular-price">€@product.DiscountPrice</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="regular-price">€@product.Price</span>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div> <!-- single product -->
+                                }
+                            </div>
 
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-10.jpg" alt="product">
-                                        <img class="second-image" src="~/assets/images/product/product-11.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">Winter Jacket eu accumsan massa facili originals Kaval Wind breaker</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€23.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-3.jpg" alt="product">
-                                        <img class="second-image" src="~/assets/images/product/product-4.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                    <span class="discount-product">-12%</span>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">Originals Kaval Wind breaker Winter Jacket eu...</a></h4>
-                                    <div class="product-price">
-                                        <span class="regular-price ">€23.90</span>
-                                        <span class="price-sale">€21.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-12.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">Juicy Couture Juicy Quilted Terry Track Jacket eu...</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€35.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-5.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">Madden by Steve Madden Cale 6 eu accumsan massa...</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€11.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-16.jpg" alt="product">
-                                        <img class="second-image" src="~/assets/images/product/product-6.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                    <span class="discount-product">-12%</span>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">Trans-Weight Hooded Wind and Water Resistant Shell</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€11.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-6.jpg" alt="product">
-                                        <img class="second-image" src="~/assets/images/product/product-7.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">Water and Wind Resistant Insulated Jacket eu massa</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€11.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-13.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">New Balance Fresh Foam Kaymin eu accumsan massa...</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€11.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-8.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">Juicy Couture Solid Sleeve Puffer Jacket eu accumsan..</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€18.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-14.jpg" alt="product">
-                                        <img class="second-image" src="~/assets/images/product/product-15.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">New Balance Fresh Foam LAZR v1 Sport eu accumsan...</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€18.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-3.jpg" alt="product">
-                                        <img class="second-image" src="~/assets/images/product/product-9.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">Cale 6 eu accumsan massa facilisis Madden by Steve</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€29.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-9.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">New Balance Arishi Sport v1Couture Juicy eu</a></h4>
-                                    <div class="product-price">
-                                        <span class="regular-price">€29.00</span>
-                                        <span class="price-sale">€26.10</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-3.jpg" alt="product">
-                                        <img class="second-image" src="~/assets/images/product/product-9.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">Cale 6 eu accumsan massa facilisis Madden by Steve</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€29.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-9.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">New Balance Arishi Sport v1Couture Juicy eu</a></h4>
-                                    <div class="product-price">
-                                        <span class="regular-price">€29.00</span>
-                                        <span class="price-sale">€26.10</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-                        </div>
+                        }
                     </div> <!-- row -->
                 </div> <!-- product items -->
             </div>
             <div class="tab-pane fade" id="bestseller" role="tabpanel" aria-labelledby="bestseller-tab">
                 <div class="product-items">
                     <div class="row product-active">
-                        <div class="col-lg-2">
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-1.jpg" alt="product">
-                                        <img class="second-image" src="~/assets/images/product/product-2.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">Cale 6 eu accumsan massa facilisis Madden by Steve</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€11.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
+                        @for (int i = 0; i < Math.Round((decimal)Model.Count / 2); i++)
+                        {
+                            <div class="col-lg-2">
+                                @foreach (Product product in Model.Skip(i * 2).Take(2))
+                                {
+                                    <div class="single-product mt-30">
+                                        <div class="product-image">
+                                            <a asp-controller="Product" asp-action="Detail" asp-route-id="@product.Id">
+                                                <img class="first-image" src="~/assets/images/product/@product.MainImage" alt="product">
+                                                <img class="second-image" src="~/assets/images/product/@product.HoverImage" alt="product">
+                                            </a>
+                                            <ul class="product-meta">
+                                                <li><a><i class="icon ion-bag"></i></a></li>
+                                                <li><a><i class="icon ion-android-favorite-outline"></i></a></li>
+                                                <li><a><i class="icon ion-android-options"></i></a></li>
+                                                <li><a data-toggle="modal" data-target="#productQuickModal" asp-controller="Product" asp-action="DetailModal" asp-route-id="@product.Id" class="detailmodal"><i class="icon ion-android-open"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="product-content">
+                                            <ul class="product-rating">
+                                                <li class="rating-on"><i class="fas fa-star"></i></li>
+                                                <li class="rating-on"><i class="fas fa-star"></i></li>
+                                                <li class="rating-on"><i class="fas fa-star"></i></li>
+                                                <li class="rating-on"><i class="fas fa-star"></i></li>
+                                                <li class="rating-on"><i class="fas fa-star"></i></li>
+                                            </ul>
+                                            <h4 class="product-title"><a asp-controller="Product" asp-action="Detail" asp-route-id="@product.Id">@product.ProductName</a></h4>
+                                            <div class="product-price">
+                                                @if (product.DiscountPrice > 0)
+                                                {
+                                                    <span class="price-sale">€@product.Price</span>
+                                                    <span class="regular-price">€@product.DiscountPrice</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="regular-price">€@product.Price</span>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div> <!-- single product -->
 
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-10.jpg" alt="product">
-                                        <img class="second-image" src="~/assets/images/product/product-11.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">Winter Jacket eu accumsan massa facili originals Kaval Wind breaker</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€23.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-3.jpg" alt="product">
-                                        <img class="second-image" src="~/assets/images/product/product-4.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                    <span class="discount-product">-12%</span>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">Originals Kaval Wind breaker Winter Jacket eu...</a></h4>
-                                    <div class="product-price">
-                                        <span class="regular-price ">€23.90</span>
-                                        <span class="price-sale">€21.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
+                                }
+                            </div>
 
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-12.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">Juicy Couture Juicy Quilted Terry Track Jacket eu...</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€35.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-5.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">Madden by Steve Madden Cale 6 eu accumsan massa...</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€11.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-16.jpg" alt="product">
-                                        <img class="second-image" src="~/assets/images/product/product-6.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                    <span class="discount-product">-12%</span>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">Trans-Weight Hooded Wind and Water Resistant Shell</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€11.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-6.jpg" alt="product">
-                                        <img class="second-image" src="~/assets/images/product/product-7.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">Water and Wind Resistant Insulated Jacket eu massa</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€11.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-13.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">New Balance Fresh Foam Kaymin eu accumsan massa...</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€11.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-8.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">Juicy Couture Solid Sleeve Puffer Jacket eu accumsan..</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€18.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-14.jpg" alt="product">
-                                        <img class="second-image" src="~/assets/images/product/product-15.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">New Balance Fresh Foam LAZR v1 Sport eu accumsan...</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€18.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-3.jpg" alt="product">
-                                        <img class="second-image" src="~/assets/images/product/product-9.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">Cale 6 eu accumsan massa facilisis Madden by Steve</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€29.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-9.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">New Balance Arishi Sport v1Couture Juicy eu</a></h4>
-                                    <div class="product-price">
-                                        <span class="regular-price">€29.00</span>
-                                        <span class="price-sale">€26.10</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-3.jpg" alt="product">
-                                        <img class="second-image" src="~/assets/images/product/product-9.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">Cale 6 eu accumsan massa facilisis Madden by Steve</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€29.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-9.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">New Balance Arishi Sport v1Couture Juicy eu</a></h4>
-                                    <div class="product-price">
-                                        <span class="regular-price">€29.00</span>
-                                        <span class="price-sale">€26.10</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-                        </div>
+                        }
                     </div> <!-- row -->
                 </div> <!-- product items -->
             </div>
             <div class="tab-pane fade" id="featured" role="tabpanel" aria-labelledby="featured-tab">
                 <div class="product-items">
                     <div class="row product-active">
-                        <div class="col-lg-2">
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-1.jpg" alt="product">
-                                        <img class="second-image" src="~/assets/images/product/product-2.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">Cale 6 eu accumsan massa facilisis Madden by Steve</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€11.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
+                        @for (int i = 0; i < Math.Round((decimal)Model.Count / 2); i++)
+                        {
+                            <div class="col-lg-2">
+                                @foreach (Product product in Model.Skip(i * 2).Take(2))
+                                {
+                                    <div class="single-product mt-30">
+                                        <div class="product-image">
+                                            <a asp-controller="Product" asp-action="Detail" asp-route-id="@product.Id">
+                                                <img class="first-image" src="~/assets/images/product/@product.MainImage" alt="product">
+                                                <img class="second-image" src="~/assets/images/product/@product.HoverImage" alt="product">
+                                            </a>
+                                            <ul class="product-meta">
+                                                <li><a><i class="icon ion-bag"></i></a></li>
+                                                <li><a><i class="icon ion-android-favorite-outline"></i></a></li>
+                                                <li><a><i class="icon ion-android-options"></i></a></li>
+                                                <li><a data-toggle="modal" data-target="#productQuickModal" asp-controller="Product" asp-action="DetailModal" asp-route-id="@product.Id" class="detailmodal"><i class="icon ion-android-open"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="product-content">
+                                            <ul class="product-rating">
+                                                <li><i class="fas fa-star"></i></li>
+                                                <li><i class="fas fa-star"></i></li>
+                                                <li><i class="fas fa-star"></i></li>
+                                                <li><i class="fas fa-star"></i></li>
+                                                <li><i class="fas fa-star"></i></li>
+                                            </ul>
+                                            <h4 class="product-title"><a asp-controller="Product" asp-action="Detail" asp-route-id="@product.Id">@product.ProductName</a></h4>
+                                            <div class="product-price">
+                                                @if (product.DiscountPrice > 0)
+                                                {
+                                                    <span class="price-sale">€@product.Price</span>
+                                                    <span class="regular-price">€@product.DiscountPrice</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="regular-price">€@product.Price</span>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div> <!-- single product -->
 
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-10.jpg" alt="product">
-                                        <img class="second-image" src="~/assets/images/product/product-11.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">Winter Jacket eu accumsan massa facili originals Kaval Wind breaker</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€23.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-3.jpg" alt="product">
-                                        <img class="second-image" src="~/assets/images/product/product-4.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                    <span class="discount-product">-12%</span>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">Originals Kaval Wind breaker Winter Jacket eu...</a></h4>
-                                    <div class="product-price">
-                                        <span class="regular-price ">€23.90</span>
-                                        <span class="price-sale">€21.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
+                                }
 
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-12.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">Juicy Couture Juicy Quilted Terry Track Jacket eu...</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€35.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-5.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">Madden by Steve Madden Cale 6 eu accumsan massa...</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€11.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
+                            </div>
+                        }
 
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-16.jpg" alt="product">
-                                        <img class="second-image" src="~/assets/images/product/product-6.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                    <span class="discount-product">-12%</span>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">Trans-Weight Hooded Wind and Water Resistant Shell</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€11.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-6.jpg" alt="product">
-                                        <img class="second-image" src="~/assets/images/product/product-7.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">Water and Wind Resistant Insulated Jacket eu massa</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€11.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-13.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">New Balance Fresh Foam Kaymin eu accumsan massa...</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€11.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-8.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">Juicy Couture Solid Sleeve Puffer Jacket eu accumsan..</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€18.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-14.jpg" alt="product">
-                                        <img class="second-image" src="~/assets/images/product/product-15.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">New Balance Fresh Foam LAZR v1 Sport eu accumsan...</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€18.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-3.jpg" alt="product">
-                                        <img class="second-image" src="~/assets/images/product/product-9.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">Cale 6 eu accumsan massa facilisis Madden by Steve</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€29.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-9.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">New Balance Arishi Sport v1Couture Juicy eu</a></h4>
-                                    <div class="product-price">
-                                        <span class="regular-price">€29.00</span>
-                                        <span class="price-sale">€26.10</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-3.jpg" alt="product">
-                                        <img class="second-image" src="~/assets/images/product/product-9.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">Cale 6 eu accumsan massa facilisis Madden by Steve</a></h4>
-                                    <div class="product-price">
-                                        <span class="price-sale">€29.90</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-
-                            <div class="single-product mt-30">
-                                <div class="product-image">
-                                    <a asp-controller="Product" asp-action="Index">
-                                        <img class="first-image" src="~/assets/images/product/product-9.jpg" alt="product">
-                                    </a>
-                                    <ul class="product-meta">
-                                        <li><a ><i class="icon ion-bag"></i></a></li>
-                                        <li><a ><i class="icon ion-android-favorite-outline"></i></a></li>
-                                        <li><a ><i class="icon ion-android-options"></i></a></li>
-                                        <li><a data-toggle="modal" data-target="#productQuickModal" ><i class="icon ion-android-open"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="product-rating">
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                        <li class="rating-on"><i class="fas fa-star"></i></li>
-                                    </ul>
-                                    <h4 class="product-title"><a asp-controller="Product" asp-action="Index">New Balance Arishi Sport v1Couture Juicy eu</a></h4>
-                                    <div class="product-price">
-                                        <span class="regular-price">€29.00</span>
-                                        <span class="price-sale">€26.10</span>
-                                    </div>
-                                </div>
-                            </div> <!-- single product -->
-                        </div>
                     </div> <!-- row -->
                 </div> <!-- product items -->
             </div>
@@ -1443,27 +379,27 @@
                             </div> <!-- products gallery thumb -->
                             <div class="products-gallery-image">
                                 <div class="single-products-image">
-                                    <a >
+                                    <a>
                                         <img src="~/assets/images/special-products/special-products-1.jpg" alt="products">
                                     </a>
                                 </div>
                                 <div class="single-products-image">
-                                    <a >
+                                    <a>
                                         <img src="~/assets/images/special-products/special-products-2.jpg" alt="products">
                                     </a>
                                 </div>
                                 <div class="single-products-image">
-                                    <a >
+                                    <a>
                                         <img src="~/assets/images/special-products/special-products-3.jpg" alt="products">
                                     </a>
                                 </div>
                                 <div class="single-products-image">
-                                    <a >
+                                    <a>
                                         <img src="~/assets/images/special-products/special-products-4.jpg" alt="products">
                                     </a>
                                 </div>
                                 <div class="single-products-image">
-                                    <a >
+                                    <a>
                                         <img src="~/assets/images/special-products/special-products-5.jpg" alt="products">
                                     </a>
                                 </div>
@@ -1474,7 +410,7 @@
                         <div class="special-products-countdown mt-50">
                             <div class="products-countdown-wrapper">
                                 <h2 class="special-title">Deal of the week</h2>
-                                <h3 class="products-title"><a >Originals Kaval Wind...</a></h3>
+                                <h3 class="products-title"><a>Originals Kaval Wind...</a></h3>
                                 <div class="products-rating">
                                     <ul>
                                         <li><i class="fas fa-star"></i></li>
@@ -1493,7 +429,7 @@
                                         <span class="regular-price">€23.90</span>
                                     </div>
                                     <div class="product-cart">
-                                        <a class="main-btn main-btn-2" >Add to cart</a>
+                                        <a class="main-btn main-btn-2">Add to cart</a>
                                     </div>
                                 </div>
                             </div> <!-- special products countdown -->
@@ -1516,27 +452,27 @@
                             </div> <!-- products gallery thumb -->
                             <div class="products-gallery-image">
                                 <div class="single-products-image">
-                                    <a >
+                                    <a>
                                         <img src="~/assets/images/special-products/special-products-5.jpg" alt="products">
                                     </a>
                                 </div>
                                 <div class="single-products-image">
-                                    <a >
+                                    <a>
                                         <img src="~/assets/images/special-products/special-products-6.jpg" alt="products">
                                     </a>
                                 </div>
                                 <div class="single-products-image">
-                                    <a >
+                                    <a>
                                         <img src="~/assets/images/special-products/special-products-8.jpg" alt="products">
                                     </a>
                                 </div>
                                 <div class="single-products-image">
-                                    <a >
+                                    <a>
                                         <img src="~/assets/images/special-products/special-products-7.jpg" alt="products">
                                     </a>
                                 </div>
                                 <div class="single-products-image">
-                                    <a >
+                                    <a>
                                         <img src="~/assets/images/special-products/special-products-4.jpg" alt="products">
                                     </a>
                                 </div>
@@ -1547,7 +483,7 @@
                         <div class="special-products-countdown mt-50">
                             <div class="products-countdown-wrapper">
                                 <h2 class="special-title">Deal of the week</h2>
-                                <h3 class="products-title"><a >Originals Kaval Wind...</a></h3>
+                                <h3 class="products-title"><a>Originals Kaval Wind...</a></h3>
                                 <div class="products-rating">
                                     <ul>
                                         <li><i class="fas fa-star"></i></li>
@@ -1566,7 +502,7 @@
                                         <span class="regular-price">€23.90</span>
                                     </div>
                                     <div class="product-cart">
-                                        <a class="main-btn main-btn-2" >Add to cart</a>
+                                        <a class="main-btn main-btn-2">Add to cart</a>
                                     </div>
                                 </div>
                             </div> <!-- special products countdown -->
@@ -2297,49 +1233,49 @@
         <div class="row brand-active">
             <div class="col-lg-2">
                 <div class="single-brand">
-                    <a >
+                    <a>
                         <img src="~/assets/images/brand/brand-1.jpg" alt="brand">
                     </a>
                 </div> <!-- single brand -->
             </div>
             <div class="col-lg-2">
                 <div class="single-brand">
-                    <a >
+                    <a>
                         <img src="~/assets/images/brand/brand-2.jpg" alt="brand">
                     </a>
                 </div> <!-- single brand -->
             </div>
             <div class="col-lg-2">
                 <div class="single-brand">
-                    <a >
+                    <a>
                         <img src="~/assets/images/brand/brand-3.jpg" alt="brand">
                     </a>
                 </div> <!-- single brand -->
             </div>
             <div class="col-lg-2">
                 <div class="single-brand">
-                    <a >
+                    <a>
                         <img src="~/assets/images/brand/brand-4.jpg" alt="brand">
                     </a>
                 </div> <!-- single brand -->
             </div>
             <div class="col-lg-2">
                 <div class="single-brand">
-                    <a >
+                    <a>
                         <img src="~/assets/images/brand/brand-5.jpg" alt="brand">
                     </a>
                 </div> <!-- single brand -->
             </div>
             <div class="col-lg-2">
                 <div class="single-brand">
-                    <a >
+                    <a>
                         <img src="~/assets/images/brand/brand-6.jpg" alt="brand">
                     </a>
                 </div> <!-- single brand -->
             </div>
             <div class="col-lg-2">
                 <div class="single-brand">
-                    <a >
+                    <a>
                         <img src="~/assets/images/brand/brand-4.jpg" alt="brand">
                     </a>
                 </div> <!-- single brand -->

@@ -95,7 +95,11 @@
                                                 <li><a><i class="icon ion-bag"></i></a></li>
                                                 <li><a><i class="icon ion-android-favorite-outline"></i></a></li>
                                                 <li><a><i class="icon ion-android-options"></i></a></li>
-                                                <li><a data-toggle="modal" data-target="#productQuickModal"><i class="icon ion-android-open"></i></a></li>
+                                                <li>
+                                                    <a data-toggle="modal" data-target="#productQuickModal" class="detailmodal" asp-controller="Product" asp-action="DetailModal" asp-route-id="@product.Id">
+                                                        <i class="icon ion-android-open"></i>
+                                                    </a>
+                                                </li>
                                             </ul>
                                             <span class=" @(product.DiscountPrice != 0 ? "discount-product" : "")">
                                                 @(product.DiscountPrice != 0 ? @Math.Round(100 - ((product.DiscountPrice / product.Price) * 100))+"%" : "")
@@ -173,12 +177,16 @@
                                                     <span class="price-sale">€@product1.Price</span>
                                                 }
                                             </div>
-                                            <p> @product1.Description</p>
+                                            <p> @Html.Raw(product1.Description)</p>
                                             <ul class="product-meta">
                                                 <li><a><i class="icon ion-bag"></i></a></li>
                                                 <li><a><i class="icon ion-android-favorite-outline"></i></a></li>
                                                 <li><a><i class="icon ion-android-options"></i></a></li>
-                                                <li><a data-toggle="modal" data-target="#productQuickModal"><i class="icon ion-android-open"></i></a></li>
+                                                <li>
+                                                    <a data-toggle="modal" data-target="#productQuickModal" class="detailmodal" asp-controller="Product" asp-action="DetailModal" asp-route-id="@product1.Id">
+                                                        <i class="icon ion-android-open"></i>
+                                                    </a>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>

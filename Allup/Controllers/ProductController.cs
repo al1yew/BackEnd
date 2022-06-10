@@ -28,7 +28,6 @@ namespace Allup.Controllers
 
         public async Task<IActionResult> Detail(int? id)
         {
-
             if (id == null)
             {
                 return BadRequest();
@@ -46,6 +45,27 @@ namespace Allup.Controllers
             }
 
             return View(product);
+        }
+
+        public async Task<IActionResult> DetailModal(int? id)
+        {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+
+            Product product = await _context.Products
+                .Include(p => p.ProductToTags).ThenInclude(pt => pt.Tag)
+                .Include(p => p.ProductImages)
+                .Include(p => p.Brand)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return PartialView("_ProductModalPartial", product);
         }
     }
 }
