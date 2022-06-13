@@ -67,5 +67,14 @@ namespace Allup.Controllers
 
             return PartialView("_ProductModalPartial", product);
         }
+        public async Task<IActionResult> Search(string search)
+        {
+            List<Product> products = await _context.Products
+                .Where(p => p.ProductName.ToLower().Contains(search.ToLower()) ||
+                p.Brand.BrandName.ToLower().Contains(search.ToLower()) ||
+                p.ProductToTags.Any(pt => pt.Tag.TagName.ToLower().Contains(search.ToLower()))).ToListAsync();
+
+            return PartialView("_SearchPartial", products);
+        }
     }
 }

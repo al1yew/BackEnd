@@ -1,7 +1,9 @@
-﻿$(document).ready(function () {
+﻿
+$(document).ready(function () {
+    //-------------------- Product Modal 
+
     $(".detailmodal").click(function (e) {
         e.preventDefault();
-
         let url = $(this).attr('href');
         console.log(url);
 
@@ -34,5 +36,30 @@
 
             })
 
+    });
+
+    //-------------------- Search Navigation
+
+    $(".input-search").keyup(function () {
+        let inputvalue = $(this).val().trim();
+
+        //------ Got the value of input type search. Do not forget to add asp-append-version="true" in layout script tag of custom.js
+
+        let url = $(this).data('url');
+        //------ Got the data-url of input to make fetch method by joining url to input value
+
+        url = url + "?search=" + inputvalue;
+
+        if (inputvalue) {
+            console.log(inputvalue)
+            fetch(url)
+                .then(res => res.text())
+                .then(data => {
+                    $(".search-body .list-group").html(data);
+                })
+        }
+        else {
+            $(".search-body .list-group").html('');
+        }
     });
 })

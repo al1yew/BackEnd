@@ -126,7 +126,7 @@
                                     </div>
                                 </div>
                                 <div class="header-search media-body">
-                                    <form action="#">
+                                    <form action="#" style="position:relative;">
                                         <div class="search-category">
                                             <select>
                                                 <option value="0">All categories</option>
@@ -233,10 +233,16 @@
                                                 <option value="112">Games &amp; Consoles</option>
                                             </select>
                                         </div>
-                                        <input type="text" placeholder="Enter your search key ... ">
+                                        <input type="text" class="input-search" data-url="http://localhost:35130/product/" placeholder="Enter your search key ... ">
                                         <button><i class="icon ion-android-search"></i></button>
+                                        <div class="search-body">
+                                            <ul class="list-group" style="position:absolute; width:67%; right:0; z-index:500;">
+
+                                            </ul>
+                                        </div>
                                     </form>
                                 </div>
+
                                 <div class="header-cart">
                                     <div class="cart-btn">
                                         <a>
@@ -961,7 +967,7 @@
     <div class="modal fade " id="productQuickModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                
+
             </div> <!-- Modal content -->
         </div> <!-- Modal dialog -->
     </div> <!-- Modal -->
@@ -983,7 +989,7 @@
     <script src="~/assets/js/plugins/jquery-ui.min.js"></script>
 
     <!--Moy javascript dla modal-->
-    <script src="~/assets/js/Custom.js"></script>
+    <script src="~/assets/js/Custom.js" asp-append-version="true"></script>
 
     <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
     <!-- <script src="~/assets/js/plugins.min.js"></script> -->
