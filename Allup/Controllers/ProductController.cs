@@ -1,7 +1,9 @@
 ﻿using Allup.DAL;
 using Allup.Models;
+using Allup.ViewModels.BasketViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,6 +69,7 @@ namespace Allup.Controllers
 
             return PartialView("_ProductModalPartial", product);
         }
+
         public async Task<IActionResult> Search(string search)
         {
             List<Product> products = await _context.Products
@@ -75,6 +78,59 @@ namespace Allup.Controllers
                 p.ProductToTags.Any(pt => pt.Tag.TagName.ToLower().Contains(search.ToLower()))).ToListAsync();
 
             return PartialView("_SearchPartial", products);
+        }
+
+        public async Task<IActionResult> AddToBasket(int? id)
+        {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+
+            Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            string basket = HttpContext.Request.Cookies["basket"];
+
+            List<BasketViewModel> BasketVMs = null;
+
+            if (basket != null)
+            {
+                BasketVMs = JsonConvert.DeserializeObject<List<BasketViewModel>>(basket);
+            }
+            else
+            {
+                BasketVMs = new List<BasketViewModel>();
+            }
+
+            if (BasketVMs.Exists(bvm => bvm.ProductId == id))
+            {
+                BasketVMs.Find(bvm => bvm.ProductId == id).Count++;
+            }
+            else
+            {
+                BasketViewModel basketViewModel = new BasketViewModel
+                {
+                    ProductId = product.Id,
+                    Count = 1,
+                    Image = product.MainImage,
+                    Name = product.ProductName,
+                    Price = product.DiscountPrice > 0 ? product.DiscountPrice : product.Price,
+                    ExTax = product.ExTax
+                };
+
+                BasketVMs.Add(basketViewModel);
+            }
+
+            basket = JsonConvert.SerializeObject(BasketVMs);
+
+            HttpContext.Response.Cookies.Append("basket", basket);
+
+            return PartialView("_BasketPartial", BasketVMs);
         }
     }
 }

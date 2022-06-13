@@ -47,10 +47,11 @@ $(document).ready(function () {
 
         let url = $(this).data('url');
         //------ Got the data-url of input to make fetch method by joining url to input value
-        console.log(url);
 
         url = url + '?search=' + inputvalue;
-        console.log(url);
+        //------ Url must be like http://localhost:35130/product/Search + our new url 
+        //------ If(inputvalue) proves the fact that if imputvalue is 0, it returns FALSE, if inputvalue is 1 or more, it returns TRUE
+        //------ Now we fetch it to small ul li absolute item with update page without page reload
 
         if (inputvalue) {
             console.log(inputvalue)
@@ -64,4 +65,16 @@ $(document).ready(function () {
             $(".search-body .list-group").html('');
         }
     });
+
+    //-------------------- Basket
+
+    $('.addtobasket').click(function (e) {
+        e.preventDefault();
+
+        let url = $(this).attr('href');
+
+        fetch(url).then(res => res.text()).then(data => {
+            $(".mini-cart").html(data);
+        })
+    })
 })
