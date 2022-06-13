@@ -132,5 +132,29 @@ namespace Allup.Controllers
 
             return PartialView("_BasketPartial", BasketVMs);
         }
+
+        public async Task<IActionResult> RemoveFromBasket(int? id)
+        {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+
+            string basket = HttpContext.Request.Cookies["basket"];
+
+            List<BasketViewModel> BasketVMs = null;
+
+            BasketVMs = JsonConvert.DeserializeObject<List<BasketViewModel>>(basket);
+
+            //return Content(BasketVMs.ToString());
+
+            if (BasketVMs.Exists(bvm => bvm.ProductId == id))
+            {
+                BasketVMs.Find(bvm => bvm.ProductId == id).Count = 0;
+            }
+
+            return PartialView("_BasketPartial", BasketVMs);
+
+        }
     }
 }

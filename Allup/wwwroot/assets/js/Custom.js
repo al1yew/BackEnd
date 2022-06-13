@@ -73,8 +73,22 @@ $(document).ready(function () {
 
         let url = $(this).attr('href');
 
-        fetch(url).then(res => res.text()).then(data => {
-            $(".mini-cart").html(data);
-        })
+        fetch(url)
+            .then(res => res.text())
+            .then(data => {
+                $(".mini-cart").html(data);
+            })
+    })
+
+    $('.deleteproduct').click(function (e) {
+
+        let url = $(this).attr('href');
+        console.log('salamsams')
+
+        fetch(url)
+            .then(res => res.text())
+            .then(data => {
+                $(".mini-cart").html(data);
+            })
     })
 })
