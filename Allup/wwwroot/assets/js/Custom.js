@@ -41,14 +41,16 @@ $(document).ready(function () {
     //-------------------- Search Navigation
 
     $(".input-search").keyup(function () {
-        let inputvalue = $(this).val().trim();
+        let inputvalue = $(this).val();
 
         //------ Got the value of input type search. Do not forget to add asp-append-version="true" in layout script tag of custom.js
 
         let url = $(this).data('url');
         //------ Got the data-url of input to make fetch method by joining url to input value
+        console.log(url);
 
-        url = url + "?search=" + inputvalue;
+        url = url + '?search=' + inputvalue;
+        console.log(url);
 
         if (inputvalue) {
             console.log(inputvalue)

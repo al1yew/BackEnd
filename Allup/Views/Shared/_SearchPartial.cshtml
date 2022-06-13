@@ -4,12 +4,14 @@
 @foreach (Product product in Model)
 {
     <li class="list-group-item d-flex justify-content-between align-items-center">
-        <div class="image-parent" >
-            <img src="assets/images/product/@product.MainImage" style="width:80px">
-        </div>
+
+        <img src="assets/images/product/@product.MainImage" style="width:80px">
+
         @product.ProductName
+
         <p class="text-danger px-3">
             @(product.DiscountPrice > 0 ? product.DiscountPrice : product.Price)
         </p>
+
     </li>
 }
