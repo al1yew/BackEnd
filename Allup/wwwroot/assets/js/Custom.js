@@ -80,10 +80,9 @@ $(document).ready(function () {
             })
     })
 
-    $('.deleteproduct').click(function (e) {
-
+    $(document).on('click', '.deletefrombasket', function (e) {
+        e.preventDefault();
         let url = $(this).attr('href');
-        console.log('salamsams')
 
         fetch(url)
             .then(res => res.text())

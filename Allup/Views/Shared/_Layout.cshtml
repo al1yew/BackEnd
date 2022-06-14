@@ -1,6 +1,12 @@
-﻿<!doctype html>
-<html class="no-js" lang="en">
+﻿@using Allup.Services
+@inject LayoutService layoutService
 
+@{ 
+    List<BasketViewModel> basketVMs = await layoutService.GetBasket();
+}
+
+<!doctype html>
+<html class="no-js" lang="en">
 
 <!-- Mirrored from demo.hasthemes.com/allup/allup/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Sep 2020 10:46:32 GMT -->
 <head>
@@ -248,12 +254,12 @@
                                         <a>
                                             <i class="icon ion-bag"></i>
                                             <span class="text">Cart :</span>
-                                            <span class="total">$0.00</span>
-                                            <span class="count">0</span>
+                                            <span class="total">$@(basketVMs.Sum(b => b.Count * b.Price) + basketVMs.Sum(b => b.ExTax * b.Count))</span>
+                                            <span class="count">@basketVMs.Count</span>
                                         </a>
                                     </div>
                                     <div class="mini-cart">
-                                        
+                                    @await Html.PartialAsync("_BasketPartial", basketVMs) 
                                     </div> <!-- mini cart -->
                                 </div>
                             </div> <!-- header search cart -->

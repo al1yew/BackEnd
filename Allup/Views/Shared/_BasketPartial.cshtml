@@ -13,7 +13,7 @@
                 <div class="cart-item-content media-body">
                     <h5 class="product-name"><a asp-controller="Product" asp-action="Detail" asp-route-id="@basketViewModel.ProductId">@basketViewModel.Name</a></h5>
                     <span class="product-price">€@basketViewModel.Price</span>
-                    <a asp-controller="Product" asp-action="DeleteFromBasket" asp-route-id="@basketViewModel.ProductId" class="product-close"><i class="fal fa-times"></i></a>
+                    <a asp-controller="Basket" asp-action="DeleteFromBasket" asp-route-id="@basketViewModel.ProductId" class="product-close deletefrombasket"><i class="fal fa-times"></i></a>
                 </div>
             </div>
         </li>
@@ -33,7 +33,7 @@
     </div>
     <div class="cart-total price_inline">
         <span class="label">Total</span>
-        <span class="value">€@(Model.Sum(b => b.Price * b.Count) + @Model.Sum(b => b.ExTax * b.Count))</span>
+        <span class="value">€@(Model.Sum(b => b.Price * b.Count) + Model.Sum(b => b.ExTax * b.Count))</span>
     </div>
 </div> <!-- price content -->
 <div class="checkout text-center">

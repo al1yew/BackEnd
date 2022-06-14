@@ -1,4 +1,5 @@
 using Allup.DAL;
+using Allup.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -39,6 +40,13 @@ namespace Allup
             {
                 options.IdleTimeout = TimeSpan.FromSeconds(10);
             });
+
+            //services.AddScoped
+            //services.AddSingleton
+            //services.AddTransient
+            services.AddScoped<LayoutService>();
+
+            services.AddHttpContextAccessor();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -47,6 +55,7 @@ namespace Allup
             {
                 app.UseDeveloperExceptionPage();
             }
+
             app.UseSession();
 
             app.UseRouting();
