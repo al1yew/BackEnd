@@ -1,6 +1,6 @@
 ﻿@model List<BasketViewModel>
 
-<div class="cart-btn">
+<div class="cart-btn webelement">
     <a>
         <i class="icon ion-bag"></i>
         <span class="text">Cart :</span>
@@ -9,11 +9,10 @@
     </a>
 </div>
 
-<a>
+<a class="mobileelement">
     <i class="fal fa-shopping-cart"></i>
-    <span>0</span>
+    <span>@Model.Count</span>
 </a>
-
 
 <div class="mini-cart">
 

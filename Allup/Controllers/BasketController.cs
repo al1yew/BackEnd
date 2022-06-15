@@ -26,23 +26,17 @@ namespace Allup.Controllers
         }
         public async Task<IActionResult> AddToBasket(int? id)
         {
-            if (id == null)
-            {
-                return BadRequest();
-            }
+            if (id == null) return BadRequest();
 
             Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
 
-            if (product == null)
-            {
-                return NotFound();
-            }
+            if (product == null) return NotFound();
 
             string basket = HttpContext.Request.Cookies["basket"];
 
             List<BasketViewModel> BasketVMs = null;
 
-            if (basket != null)
+            if (!string.IsNullOrWhiteSpace(basket))
             {
                 BasketVMs = JsonConvert.DeserializeObject<List<BasketViewModel>>(basket);
             }
@@ -87,7 +81,7 @@ namespace Allup.Controllers
 
             BasketViewModel basketVM = BasketVMs.Find(b => b.ProductId == id);
 
-            if (BasketVMs == null) return NotFound();
+            if (basketVM == null) return NotFound();
 
             BasketVMs.Remove(basketVM);
 

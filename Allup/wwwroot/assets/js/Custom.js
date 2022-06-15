@@ -70,7 +70,6 @@ $(document).ready(function () {
 
     $('.addtobasket').click(function (e) {
         e.preventDefault();
-
         let url = $(this).attr('href');
 
         fetch(url)

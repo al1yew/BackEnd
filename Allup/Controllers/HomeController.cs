@@ -23,7 +23,7 @@ namespace Allup.Controllers
 
             List<BasketViewModel> basketVMs = null;
 
-            if (basket != null)
+            if (!string.IsNullOrWhiteSpace(basket))
             {
                 basketVMs = JsonConvert.DeserializeObject<List<BasketViewModel>>(basket);
             }

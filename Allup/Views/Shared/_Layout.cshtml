@@ -1,7 +1,7 @@
-﻿@using Allup.Services
-@inject LayoutService layoutService
+﻿@using Allup.Interfaces
+@inject ILayoutService layoutService
 
-@{ 
+@{
     List<BasketViewModel> basketVMs = await layoutService.GetBasket();
 }
 
@@ -44,6 +44,28 @@
     <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
     <!-- <link rel="stylesheet" href="~/assets/css/vendor/plugins.min.css">
     <link rel="stylesheet" href="~/assets/css/style.min.css"> -->
+
+    <style>
+        @@media only screen and (max-width: 993px) {
+            .webelement {
+                display: none !important;
+            }
+
+            .mobileelement {
+                display: block !important;
+            }
+        }
+
+        @@media only screen and (min-width: 992px) {
+            .webelement {
+                display: block !important;
+            }
+
+            .mobileelement {
+                display: none !important;
+            }
+        }
+    </style>
 
 </head>
 
@@ -243,25 +265,13 @@
                                         <button><i class="icon ion-android-search"></i></button>
                                         <div class="search-body">
                                             <ul class="list-group" style="position:absolute; width:67%; right:0; z-index:500;">
-
                                             </ul>
                                         </div>
                                     </form>
                                 </div>
 
                                 <div class="header-cart">
-                                    <!--<div class="cart-btn">
-                                        <a>
-                                            <i class="icon ion-bag"></i>
-                                            <span class="text">Cart :</span>
-                                            <span class="total">$@(basketVMs.Sum(b => b.Count * b.Price) + basketVMs.Sum(b => b.ExTax * b.Count))</span>
-                                            <span class="count">@basketVMs.Count</span>
-                                        </a>
-                                    </div>
-                                    <div class="mini-cart">
-
-                                    </div>--> <!-- mini cart -->
-                                    @await Html.PartialAsync("_BasketPartial", basketVMs) 
+                                    @await Html.PartialAsync("_BasketPartial", basketVMs)
                                 </div>
                             </div> <!-- header search cart -->
                         </div>
@@ -573,7 +583,6 @@
                         <button><i class="icon ion-android-search"></i></button>
                         <div class="search-body">
                             <ul class="list-group" style="position:absolute; width:67%; right:0; z-index:500;">
-
                             </ul>
                         </div>
                     </form>
