@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Allup.ViewComponents
 {
-    public class SubscribeViewComponent : ViewComponent
+    public class NewsLetterViewComponent : ViewComponent
     {
         private readonly AppDbContext _context;
 
-        public SubscribeViewComponent(AppDbContext context)
+        public NewsLetterViewComponent(AppDbContext context)
         {
             _context = context;
         }

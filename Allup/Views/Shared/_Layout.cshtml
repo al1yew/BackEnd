@@ -90,9 +90,9 @@
 
     @RenderBody()
 
-    <!--====== Newsletter Part Start ======
+    <!--====== Newsletter Part Start ====== -->
 
-    @await Component.InvokeAsync("Subscribe")
+    @await Component.InvokeAsync("NewsLetter")
 
     <!--====== Newsletter Part Ends ======-->
     <!--====== Footer Part Start ======-->
@@ -101,14 +101,20 @@
 
     <!--====== Footer Part Ends ======-->
     <!--====== Quick View Part Start ======-->
+
+
     <!-- Modal -->
+
     <div class="modal fade " id="productQuickModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
 
             </div> <!-- Modal content -->
         </div> <!-- Modal dialog -->
-    </div> <!-- Modal -->
+    </div> 
+    
+    <!-- Modal -->
+
     <!--====== Quick View Part Ends ======-->
     <!--====== BACK TOP TOP PART START ======-->
 
@@ -134,11 +140,6 @@
     <!--====== Main Activation js ======-->
     <script src="~/assets/js/main.js"></script>
 
-
-
-
 </body>
-
-
 <!-- Mirrored from demo.hasthemes.com/allup/allup/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Sep 2020 10:47:16 GMT -->
 </html>
