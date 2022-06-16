@@ -1,4 +1,11 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @using Allup.Models
 @using Allup.ViewModels.BasketViewModel
-@using Allup.ViewComponents 
+@using Allup.ViewComponents
+
+@*@using Allup.Interfaces
+@inject ILayoutService layoutService
+@{
+    List<BasketViewModel> basketVMs = await layoutService.GetBasket();
+    IDictionary<string, string> settings = await layoutService.GetSetting();
+}*@
