@@ -3,6 +3,7 @@
 
 @{
     List<BasketViewModel> basketVMs = await layoutService.GetBasket();
+    IDictionary<string, string> settings = await layoutService.GetSetting();
 }
 
 <!doctype html>
@@ -89,7 +90,7 @@
                 <div class="container-fluid custom-container">
                     <div class="header-nav-wrapper d-flex justify-content-between">
                         <div class="header-static-nav">
-                            <p>Get FREE Shipping with <span class="text">$35!</span> Code: FREESHIPPING</p>
+                            @Html.Raw(settings.FirstOrDefault(s => s.Key == "Title").Value)
                         </div>
                         <div class="header-menu-nav">
                             <ul class="menu-nav">
@@ -139,7 +140,7 @@
                             <div class="header-logo-contact d-flex  ">
                                 <div class="desktop-logo">
                                     <a asp-controller="Home" asp-action="Index">
-                                        <img src="~/assets/images/logo.png" alt="Logo">
+                                        <img src="~/assets/images/@settings.FirstOrDefault(s=> s.Key == "HeaderLogo").Value" alt="Logo">
                                     </a>
                                 </div> <!-- desktop logo -->
                             </div>
@@ -150,7 +151,8 @@
                                     <i class="icon ion-ios-telephone-outline"></i>
                                     <div class="phone media-body">
                                         <p>24/7 Support</p>
-                                        <a href="tel:+48500500500">+48 500 500 500</a>
+                                        <a href="tel:@settings.FirstOrDefault(s => s.Key == "SupportPhone").Value
+                                           ">@settings.FirstOrDefault(s => s.Key == "SupportPhone").Value</a>
                                     </div>
                                 </div>
                                 <div class="header-search media-body">
@@ -791,86 +793,12 @@
     <!--====== Newsletter Part Ends ======-->
     <!--====== Footer Part Start ======-->
 
-    <section class="footer-area bg_cover" style="background-image: url(assets/images/bg-footer.jpg)">
-        <div class="footer-widget pt-30 pb-70">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="footer-contact mt-50">
-                            <h4 class="footer-title">Contact Details</h4>
+ 
 
-                            <ul>
-                                <li><i class="fas fa-map-marker-alt"></i> 45 Grand Central Terminal New York,NY 1017 United State USA</li>
-                                <li><i class="fas fa-phone"></i> <a href="tell:123-456-789">+123 456 789</a></li>
-                                <li><i class="fas fa-envelope"></i><a href="mailto://email@yourwebsitename.com">email@yourwebsitename.com</a></li>
-                                <li><i class="far fa-clock"></i> Mon-Sat 9:00pm - 5:00pm Sun:Closed</li>
-                            </ul>
-                        </div> <!-- footer contact -->
-                    </div>
-                    <div class="col-lg-8">
-                        <div class="footer-link-wrapper d-flex flex-wrap justify-content-between">
-                            <div class="footer-link mt-50">
-                                <h4 class="footer-title">Information</h4>
+    @await 
 
-                                <ul class="link">
-                                    <li><a>Delivery</a></li>
-                                    <li><a>Legal Notice</a></li>
-                                    <li><a asp-controller="About" asp-action="Index">About us</a></li>
-                                    <li><a>Secure payment</a></li>
-                                    <li><a asp-controller="Contact" asp-action="Index">Contact us</a></li>
-                                </ul>
-                            </div> <!-- footer link -->
-                            <div class="footer-link mt-50">
-                                <h4 class="footer-title">Customer</h4>
 
-                                <ul class="link">
-                                    <li><a asp-controller="Product" asp-action="Index">Prices drop</a></li>
-                                    <li><a asp-controller="Product" asp-action="Index">New Product</a></li>
-                                    <li><a asp-controller="Product" asp-action="Index">Best Sales</a></li>
-                                    <li><a>Sitemap</a></li>
-                                    <li><a asp-controller="Login" asp-action="Index">Login</a></li>
-                                </ul>
-                            </div> <!-- footer link -->
-                            <div class="footer-link mt-50">
-                                <h4 class="footer-title">About Us</h4>
 
-                                <ul class="link">
-                                    <li><a asp-controller="About" asp-action="Index">About Our Shop</a></li>
-                                    <li><a>Secure Shopping </a></li>
-                                    <li><a>Delivery infomation </a></li>
-                                    <li><a>Store Locations </a></li>
-                                    <li><a>Affiliates </a></li>
-                                </ul>
-                            </div> <!-- footer link -->
-                            <div class="footer-link mt-50">
-                                <h4 class="footer-title">My account</h4>
-
-                                <ul class="link">
-                                    <li><a>Personal info</a></li>
-                                    <li><a>Order</a></li>
-                                    <li><a>Credit Slips</a></li>
-                                    <li><a>Address</a></li>
-                                </ul>
-                            </div> <!-- footer link -->
-                        </div> <!-- footer link wrapper -->
-                    </div>
-                </div> <!-- row -->
-            </div> <!-- container -->
-        </div> <!-- footer widget -->
-
-        <div class="footer-copyright">
-            <div class="container">
-                <div class="footer-copyright-payment text-center d-lg-flex justify-content-between align-items-center">
-                    <div class="copyright-text">
-                        <p>Copyright 2020 &copy; <a href="https://hasthemes.com/">HasThemes</a> . All Rights Reserved</p>
-                    </div>
-                    <div class="payment">
-                        <img src="~/assets/images/payment.png" alt="payment">
-                    </div>
-                </div> <!-- footer copyright payment -->
-            </div> <!-- container -->
-        </div> <!-- footer copyright -->
-    </section>
 
     <!--====== Footer Part Ends ======-->
     <!--====== Quick View Part Start ======-->

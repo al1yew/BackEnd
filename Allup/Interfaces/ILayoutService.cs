@@ -8,6 +8,8 @@ namespace Allup.Interfaces
 {
     public interface ILayoutService
     {
-        public Task<List<BasketViewModel>> GetBasket();
+        Task<List<BasketViewModel>> GetBasket();
+
+        Task<IDictionary<string, string>> GetSetting();
     }
 }

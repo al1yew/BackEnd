@@ -1,0 +1,91 @@
+﻿
+
+
+<section class="footer-area bg_cover" style="background-image: url(assets/images/bg-footer.jpg)">
+    <div class="footer-widget pt-30 pb-70">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="footer-contact mt-50">
+                        <h4 class="footer-title">Contact Details</h4>
+
+                        <ul>
+                            <li><i class="fas fa-map-marker-alt"></i> @Model.FirstOrDefault(s => s.Key == "Address").Value</li>
+                            <li>
+                                <i class="fas fa-phone"></i> <a href="tel:@Model.FirstOrDefault(s => s.Key == "Phone").Value">
+                                    @Model.FirstOrDefault(s => s.Key == "Phone").Value
+                                </a>
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i><a href="mailto://@Model.FirstOrDefault(s => s.Key == "SupportPhone").Value">
+                                    @Model.FirstOrDefault(s => s.Key == "SupportPhone").Value
+                                </a>
+                            </li>
+                            <li><i class="far fa-clock"></i> @Model.FirstOrDefault(s => s.Key == "WorkDays").Value</li>
+                        </ul>
+                    </div> <!-- footer contact -->
+                </div>
+                <div class="col-lg-8">
+                    <div class="footer-link-wrapper d-flex flex-wrap justify-content-between">
+                        <div class="footer-link mt-50">
+                            <h4 class="footer-title">Information</h4>
+
+                            <ul class="link">
+                                <li><a>Delivery</a></li>
+                                <li><a>Legal Notice</a></li>
+                                <li><a asp-controller="About" asp-action="Index">About us</a></li>
+                                <li><a>Secure payment</a></li>
+                                <li><a asp-controller="Contact" asp-action="Index">Contact us</a></li>
+                            </ul>
+                        </div> <!-- footer link -->
+                        <div class="footer-link mt-50">
+                            <h4 class="footer-title">Customer</h4>
+
+                            <ul class="link">
+                                <li><a asp-controller="Product" asp-action="Index">Prices drop</a></li>
+                                <li><a asp-controller="Product" asp-action="Index">New Product</a></li>
+                                <li><a asp-controller="Product" asp-action="Index">Best Sales</a></li>
+                                <li><a>Sitemap</a></li>
+                                <li><a asp-controller="Login" asp-action="Index">Login</a></li>
+                            </ul>
+                        </div> <!-- footer link -->
+                        <div class="footer-link mt-50">
+                            <h4 class="footer-title">About Us</h4>
+
+                            <ul class="link">
+                                <li><a asp-controller="About" asp-action="Index">About Our Shop</a></li>
+                                <li><a>Secure Shopping </a></li>
+                                <li><a>Delivery infomation </a></li>
+                                <li><a>Store Locations </a></li>
+                                <li><a>Affiliates </a></li>
+                            </ul>
+                        </div> <!-- footer link -->
+                        <div class="footer-link mt-50">
+                            <h4 class="footer-title">My account</h4>
+
+                            <ul class="link">
+                                <li><a>Personal info</a></li>
+                                <li><a>Order</a></li>
+                                <li><a>Credit Slips</a></li>
+                                <li><a>Address</a></li>
+                            </ul>
+                        </div> <!-- footer link -->
+                    </div> <!-- footer link wrapper -->
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+    </div> <!-- footer widget -->
+
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="footer-copyright-payment text-center d-lg-flex justify-content-between align-items-center">
+                <div class="copyright-text">
+                    <p>Copyright 2020 &copy; <a href="https://hasthemes.com/">HasThemes</a> . All Rights Reserved</p>
+                </div>
+                <div class="payment">
+                    <img src="~/assets/images/payment.png" alt="payment">
+                </div>
+            </div> <!-- footer copyright payment -->
+        </div> <!-- container -->
+    </div> <!-- footer copyright -->
+</section>

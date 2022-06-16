@@ -23,5 +23,7 @@ namespace Allup.DAL
         public DbSet<ProductToColor> ProductToColors { get; set; }
         public DbSet<Size> Sizes { get; set; }
         public DbSet<Color> Colors { get; set; }
+        public DbSet<Setting> Settings { get; set; }
+        public DbSet<Slider> Sliders { get; set; }
     }
 }

@@ -50,5 +50,12 @@ namespace Allup.Services
 
             return basketVMs;
         }
+
+        public async Task<IDictionary<string, string>> GetSetting()
+        {
+            IDictionary<string, string> settings = await _context.Settings.ToDictionaryAsync(x => x.Key, x => x.Value);
+
+            return settings;
+        }
     }
 }
