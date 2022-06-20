@@ -11,7 +11,7 @@ namespace Allup.Models
     {
         public int Id { get; set; }
         [Required]
-        [StringLength(maximumLength:255)]
+        [StringLength(maximumLength: 255)]
         public string ProductName { get; set; }
         [Required]
         [Column(TypeName = "money")]
@@ -22,23 +22,27 @@ namespace Allup.Models
         [Column(TypeName = "money")]
         public double ExTax { get; set; }
         [Required]
-        [StringLength(maximumLength:4)]
+        [StringLength(maximumLength: 4)]
         public string Seria { get; set; }
-        [Required]
-        [Column(TypeName = "int")]
         [Range(0, 9999)]
+        [Column(TypeName = "int")]
+        [Required]
         public int Code { get; set; }
-        [StringLength(maximumLength:1000)]
+        [StringLength(maximumLength: 1000)]
         public string Description { get; set; }
         [Range(0, int.MaxValue)]
         public int Count { get; set; }
-        public Brand Brand{ get; set; }
-        public int BrandId { get; set; }
+        [StringLength(maximumLength: 255)]
         public string MainImage { get; set; }
+        [StringLength(maximumLength: 255)]
         public string HoverImage { get; set; }
+        public Brand Brand { get; set; }
+        public int BrandId { get; set; }
+        public bool IsNewArrival { get; set; }
+        public bool IsBestSeller { get; set; }
+        public bool IsFeature { get; set; }
 
-
-        public IEnumerable<ProductToColor> ProductToColors{ get; set; }
+        public IEnumerable<ProductToColor> ProductToColors { get; set; }
         public IEnumerable<ProductToSize> ProductToSizes { get; set; }
         public IEnumerable<ProductToTag> ProductToTags { get; set; }
         public IEnumerable<ProductImage> ProductImages { get; set; }

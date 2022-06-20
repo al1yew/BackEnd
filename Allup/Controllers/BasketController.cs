@@ -1,6 +1,6 @@
 ﻿using Allup.DAL;
 using Allup.Models;
-using Allup.ViewModels.BasketViewModel;
+using Allup.ViewModels.BasketViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -24,6 +24,7 @@ namespace Allup.Controllers
         {
             return View();
         }
+
         public async Task<IActionResult> AddToBasket(int? id)
         {
             if (id == null) return BadRequest();

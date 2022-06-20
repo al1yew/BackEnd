@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Allup.ViewModels.BasketViewModel
+namespace Allup.ViewModels.BasketViewModels
 {
     public class BasketViewModel
     {

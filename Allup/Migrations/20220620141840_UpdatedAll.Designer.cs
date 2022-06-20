@@ -3,14 +3,16 @@ using Allup.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Allup.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220620141840_UpdatedAll")]
+    partial class UpdatedAll
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,7 +90,7 @@ namespace Allup.Migrations
                     b.Property<bool>("IsFeature")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsNewArrival")
+                    b.Property<bool>("IsNewArrivel")
                         .HasColumnType("bit");
 
                     b.Property<string>("MainImage")

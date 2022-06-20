@@ -1,6 +1,6 @@
 ﻿using Allup.DAL;
+using Allup.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,17 +8,16 @@ using System.Threading.Tasks;
 
 namespace Allup.ViewComponents
 {
-    public class FooterViewComponent : ViewComponent
+    public class SliderViewComponent : ViewComponent
     {
         private readonly AppDbContext _context;
-
-        public FooterViewComponent(AppDbContext context)
+        public SliderViewComponent(AppDbContext context)
         {
             _context = context;
         }
-        public async Task<IViewComponentResult> InvokeAsync(IDictionary<string, string> settings)
+        public async Task<IViewComponentResult> InvokeAsync(List<Slider> sliders)
         {
-            return View(await Task.FromResult(settings));
+            return View(await Task.FromResult(sliders));
         }
     }
 }

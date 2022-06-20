@@ -1,15 +1,13 @@
 ﻿@using Allup.Interfaces
 @inject ILayoutService layoutService
 
-@{
+@{ 
     List<BasketViewModel> basketVMs = await layoutService.GetBasket();
-    IDictionary<string, string> settings = await layoutService.GetSetting();
+    IDictionary<string, string> settings = await layoutService.GetSetting(); 
 }
 
 <!doctype html>
 <html class="no-js" lang="en">
-
-<!-- Mirrored from demo.hasthemes.com/allup/allup/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Sep 2020 10:46:32 GMT -->
 <head>
     <meta charset="utf-8">
 
@@ -84,7 +82,7 @@
     <!--====== PRELOADER PART ENDS ======-->
     <!--====== Header Part Start ======-->
 
-    @await Component.InvokeAsync("Header")
+    @await Component.InvokeAsync("Header", settings)
 
     <!--====== Header Part Ends ======-->
 
@@ -92,17 +90,15 @@
 
     <!--====== Newsletter Part Start ====== -->
 
-    @await Component.InvokeAsync("NewsLetter")
+    @*@await Component.InvokeAsync("NewsLetter", settings)*@
 
     <!--====== Newsletter Part Ends ======-->
     <!--====== Footer Part Start ======-->
 
-    @await Component.InvokeAsync("Footer")
+    @await Component.InvokeAsync("Footer", settings)
 
     <!--====== Footer Part Ends ======-->
     <!--====== Quick View Part Start ======-->
-
-
     <!-- Modal -->
 
     <div class="modal fade " id="productQuickModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -111,10 +107,9 @@
 
             </div> <!-- Modal content -->
         </div> <!-- Modal dialog -->
-    </div> 
-    
-    <!-- Modal -->
+    </div>
 
+    <!-- Modal -->
     <!--====== Quick View Part Ends ======-->
     <!--====== BACK TOP TOP PART START ======-->
 

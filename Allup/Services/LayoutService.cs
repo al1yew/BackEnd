@@ -1,7 +1,7 @@
 ﻿using Allup.DAL;
 using Allup.Interfaces;
 using Allup.Models;
-using Allup.ViewModels.BasketViewModel;
+using Allup.ViewModels.BasketViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;

@@ -1,4 +1,4 @@
-﻿using Allup.ViewModels.BasketViewModel;
+﻿using Allup.ViewModels.BasketViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +9,7 @@ namespace Allup.Interfaces
     public interface ILayoutService
     {
         Task<List<BasketViewModel>> GetBasket();
+
         Task<IDictionary<string, string>> GetSetting();
     }
 }

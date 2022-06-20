@@ -1,0 +1,22 @@
+﻿@model List<Slider>
+
+<section class="slider-area slider-active">
+    @foreach (Slider slider in Model)
+    {
+        <div class="single-slider">
+            <div class="slider-image">
+                <img src="~/assets/images/@slider.Image" alt="slider">
+            </div>
+            <div class="slider-content-wrapper">
+                <div class="container-fluid custom-container">
+                    <div class="slider-content">
+                        <h4 data-animation="fadeInDown" data-delay="0.5s" class="sub-title">@slider.SubTitle</h4>
+                        <h1 data-animation="fadeInLeft" data-delay="0.5s" class="main-title ">@Html.Raw(slider.MainTitle)</h1>
+                        <p data-animation="fadeInRightBig" data-delay="0.5s">@slider.Description</p>
+                        <a data-animation="zoomIn" data-delay="0.5s" class="main-btn " href="@slider.RedirectUrl">Shop Now</a>
+                    </div>
+                </div> <!-- container -->
+            </div>
+        </div> <!-- single slider -->
+    }
+</section>

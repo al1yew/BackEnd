@@ -1,5 +1,7 @@
 ﻿using Allup.DAL;
-using Allup.ViewModels.BasketViewModel;
+using Allup.Models;
+using Allup.ViewModels.BasketViewModels;
+using Allup.ViewModels.HomeViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -19,20 +21,18 @@ namespace Allup.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            string basket = HttpContext.Request.Cookies["basket"];
+            List<Product> products = await _context.Products.ToListAsync();
 
-            List<BasketViewModel> basketVMs = null;
-
-            if (!string.IsNullOrWhiteSpace(basket))
+            HomeViewModel homeViewModel = new HomeViewModel
             {
-                basketVMs = JsonConvert.DeserializeObject<List<BasketViewModel>>(basket);
-            }
-            else
-            {
-                basketVMs = new List<BasketViewModel>();
-            }
+                Products = await _context.Products.ToListAsync(),
+                Sliders = await _context.Sliders.ToListAsync(),
+                BestSeller = products.Where(p => p.IsBestSeller).ToList(),
+                Feature = products.Where(p => p.IsFeature).ToList(),
+                NewArrivel = products.Where(p => p.IsNewArrival).ToList()
+            };
 
-            return View(await _context.Products.ToListAsync());
+            return View(homeViewModel);
         }
     }
 }

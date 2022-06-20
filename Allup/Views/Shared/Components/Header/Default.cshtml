@@ -1,10 +1,4 @@
-﻿@using Allup.Interfaces
-@inject ILayoutService layoutService
-@model IDictionary<string, string>
-
-@{
-    List<BasketViewModel> basketVMs = await layoutService.GetBasket();
-}
+﻿@model HeaderViewModel
 
 <header class="header-area">
     <div class="desktop-nav d-none d-lg-block">
@@ -12,7 +6,7 @@
             <div class="container-fluid custom-container">
                 <div class="header-nav-wrapper d-flex justify-content-between">
                     <div class="header-static-nav">
-                        @Html.Raw(Model.FirstOrDefault(s => s.Key == "Title").Value)
+                        @Html.Raw(Model.Settings.FirstOrDefault(s => s.Key == "Title").Value)
                     </div>
                     <div class="header-menu-nav">
                         <ul class="menu-nav">
@@ -62,7 +56,7 @@
                         <div class="header-logo-contact d-flex  ">
                             <div class="desktop-logo">
                                 <a asp-controller="Home" asp-action="Index">
-                                    <img src="~/assets/images/@Model.FirstOrDefault(s=> s.Key == "HeaderLogo").Value" alt="Logo">
+                                    <img src="~/assets/images/@Model.Settings.FirstOrDefault(s=> s.Key == "HeaderLogo").Value" alt="Logo">
                                 </a>
                             </div> <!-- desktop logo -->
                         </div>
@@ -73,8 +67,8 @@
                                 <i class="icon ion-ios-telephone-outline"></i>
                                 <div class="phone media-body">
                                     <p>24/7 Support</p>
-                                    <a href="tel:@Model.FirstOrDefault(s => s.Key == "SupportPhone").Value
-                                           ">@Model.FirstOrDefault(s => s.Key == "SupportPhone").Value</a>
+                                    <a href="tel:@Model.Settings.FirstOrDefault(s => s.Key == "SupportPhone").Value
+                                           ">@Model.Settings.FirstOrDefault(s => s.Key == "SupportPhone").Value</a>
                                     </div>
                                 </div>
                                 <div class="header-search media-body">
@@ -195,7 +189,7 @@
                                 </div>
 
                                 <div class="header-cart">
-                                    @await Html.PartialAsync("_BasketPartial", basketVMs)
+                                    @await Html.PartialAsync("_BasketPartial", Model.BasketVMs)
                                 </div>
                             </div> <!-- header search cart -->
                         </div>
@@ -387,7 +381,7 @@
                                         </div>
                                     </li>
                                     <li class="header-cart">
-                                        @await Html.PartialAsync("_BasketPartial", basketVMs)
+                                        @await Html.PartialAsync("_BasketPartial", Model.BasketVMs)
                                     </li>
                                 </ul>
                             </div>

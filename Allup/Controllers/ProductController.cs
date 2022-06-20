@@ -1,6 +1,6 @@
 ﻿using Allup.DAL;
 using Allup.Models;
-using Allup.ViewModels.BasketViewModel;
+using Allup.ViewModels.BasketViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -22,10 +22,6 @@ namespace Allup.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _context.Products.ToListAsync());
-            //return View(await _context.Products
-            //    .Include(p => p.ProductToColors).ThenInclude(pc => pc.Color)
-            //    .Include(p => p.ProductToSizes).ThenInclude(ps => ps.Size)
-            //    .ToListAsync());
         }
 
         public async Task<IActionResult> Detail(int? id)
