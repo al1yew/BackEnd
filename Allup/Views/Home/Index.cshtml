@@ -166,7 +166,7 @@
         </div> <!-- row -->
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="new" role="tabpanel" aria-labelledby="new-tab">
-                @await Html.PartialAsync("_HomeProductPartial", Model.NewArrivel)
+                @await Html.PartialAsync("_HomeProductPartial", Model.NewArrival)
             </div>
             <div class="tab-pane fade" id="bestseller" role="tabpanel" aria-labelledby="bestseller-tab">
                 @await Html.PartialAsync("_HomeProductPartial", Model.BestSeller)
@@ -358,13 +358,13 @@
         </div> <!-- row -->
         <div class="tab-content">
             <div class="tab-pane fade show active" id="computer" role="tabpanel" aria-labelledby="computer-tab">
-                @await Html.PartialAsync("_HomeProductPartial", Model.NewArrivel)
+                @*@await Html.PartialAsync("_HomeProductPartial", Model.NewArrivel) tut budut kategorii*@
             </div>
             <div class="tab-pane fade" id="smartphone" role="tabpanel" aria-labelledby="smartphone-tab">
-                @await Html.PartialAsync("_HomeProductPartial", Model.BestSeller)
+                @*@await Html.PartialAsync("_HomeProductPartial", Model.BestSeller) tut budut kategorii*@
             </div>
             <div class="tab-pane fade" id="game" role="tabpanel" aria-labelledby="game-tab">
-                @await Html.PartialAsync("_HomeProductPartial", Model.Feature)
+                @*@await Html.PartialAsync("_HomeProductPartial", Model.Feature) tut budut kategorii*@
             </div>
         </div> <!-- tab content -->
     </div> <!-- container -->

@@ -7,7 +7,6 @@
                 <div class="newsletter-content">
                     <h2 class="newsletter-title">@Model.FirstOrDefault(x => x.Key == "SubscribeTitle").Value</h2>
                     <p>@Model.FirstOrDefault(x => x.Key == "SubscribeText").Value</p>
-
                     <div class="newsletter-forn">
                         <form action="#">
                             <input type="text" placeholder="Your Email address">

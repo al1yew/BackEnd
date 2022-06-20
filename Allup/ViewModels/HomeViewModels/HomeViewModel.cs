@@ -12,6 +12,6 @@ namespace Allup.ViewModels.HomeViewModels
         public List<Slider> Sliders { get; set; }
         public List<Product> BestSeller { get; set; }
         public List<Product> Feature { get; set; }
-        public List<Product> NewArrivel { get; set; }
+        public List<Product> NewArrival { get; set; }
     }
 }

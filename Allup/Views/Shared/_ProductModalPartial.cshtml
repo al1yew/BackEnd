@@ -92,7 +92,9 @@
                     </div>
                 </div>
                 <div class="product-add-cart">
-                    <button><i class="icon ion-bag"></i> Add to cart</button>
+                    <a class="addtobasket" asp-controller="Basket" asp-action="AddToBasket" asp-route-id="@Model.Id">
+                        <i class="icon ion-bag"></i> Add to cart
+                    </a>
                 </div>
                 <div class="product-wishlist-compare">
                     <ul class="d-flex flex-wrap">

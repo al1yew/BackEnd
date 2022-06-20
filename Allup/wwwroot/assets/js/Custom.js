@@ -71,7 +71,8 @@ $(document).ready(function () {
     $('.addtobasket').click(function (e) {
         e.preventDefault();
         let url = $(this).attr('href');
-
+        console.log('slammsmamssm')
+        console.log(url)
         fetch(url)
             .then(res => res.text())
             .then(data => {
