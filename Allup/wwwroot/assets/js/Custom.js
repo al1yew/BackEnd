@@ -92,12 +92,24 @@ $(document).ready(function () {
 
     //-------------------- Tabmenu in homepage
 
+    //let path = window.location.pathname
+    //path = path.split('/')
+    //let links = $('.header-menu-for-tabmenu')
+
+    //for (let i of links) {
+    //    console.log(links.attr('class'))
+
+    //    if (links.attr('id').toLowerCase() == path[1].toLowerCase()) {
+    //        links[i].classList.add('active')
+    //    }
+    //    else {
+    //        links[i].classList.remove('active')
+    //    }
+    //}
+
     let path = window.location.pathname
     path = path.split('/')
-    console.log(path);
-    let links = $('.header-horizontal-menu .menu-content li')
-
-    console.log(links)
+    let links = $('.header-menu-for-tabmenu')
 
     for (var i = 0; i < links.length; i++) {
         let hrefpath = links[i].children[0].getAttribute('href').split('/')
@@ -108,4 +120,6 @@ $(document).ready(function () {
         }
     }
 
+
 })
+

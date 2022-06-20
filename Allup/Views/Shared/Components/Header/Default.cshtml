@@ -288,11 +288,10 @@
                         <div class="col-lg-9 position-static">
                             <div class="header-horizontal-menu">
                                 <ul class="menu-content">
-                                    <li class="active">
+                                    <li class="active header-menu-for-tabmenu home">
                                         <a asp-controller="Home" asp-action="Index">Home </a>
-
                                     </li>
-                                    <li><a asp-controller="About" asp-action="Index">About</a></li>
+                                    <li id="about" class="header-menu-for-tabmenu about"><a asp-controller="About" asp-action="Index">About</a></li>
                                     <li>
                                         <a>Pages <i class="fal fa-chevron-down"></i></a>
                                         <ul class="sub-menu">
@@ -306,42 +305,13 @@
                                             <li><a asp-controller="Register" asp-action="Index">Register</a></li>
                                         </ul>
                                     </li>
-                                    <li class="position-static">
+                                    <li id="product" class="header-menu-for-tabmenu product">
                                         <a asp-controller="Product" asp-action="Index">Shop</a>
                                     </li>
-                                    <li class="position-static">
-                                        <ul class="mega-sub-menu">
-                                            <li class="custom-menu">
-                                                <div class="row">
-                                                    <div class="col-lg-4 col-md-12">
-                                                        <div class="menu-block">
-                                                            <h6 class="custom-title">Women is Clothes &amp; Fashion</h6>
-                                                            <p>Shop women is clothing and accessories and get inspired by the latest fashion trends.</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-4 col-md-12">
-                                                        <div class="menu-block">
-                                                            <h6 class="custom-title">Simple Style</h6>
-                                                            <p>A new flattering style with all the comfort of our linen.</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-4 col-md-12">
-                                                        <div class="menu-block">
-                                                            <h6 class="custom-title">Easy Layers</h6>
-                                                            <p>Endless styling possibilities in a collection full of versatile pieces.</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="custom-banner">
-                                                    <a asp-controller="Product" asp-action="Index"><img src="~/assets/images/custom_banner.jpg" alt="" class="img-responsive"></a>
-                                                </div>
-                                            </li>
-                                        </ul> <!--  mega sub menu -->
-                                    </li>
-                                    <li>
+                                    <li id="blog" class="blog header-menu-for-tabmenu">
                                         <a asp-controller="Blog" asp-action="Index">Blog </a>
                                     </li>
-                                    <li><a asp-controller="Contact" asp-action="Index">Contact</a></li>
+                                    <li class="contact header-menu-for-tabmenu" id="contact"><a asp-controller="Contact" asp-action="Index">Contact</a></li>
                                 </ul>
                             </div> <!-- header horizontal menu -->
                         </div>

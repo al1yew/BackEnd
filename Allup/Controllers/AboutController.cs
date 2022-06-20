@@ -17,7 +17,7 @@ namespace Allup.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Settings.Include(s=>s.Key.Contains("About")).ToListAsync());
+            return View();
         }
     }
 }

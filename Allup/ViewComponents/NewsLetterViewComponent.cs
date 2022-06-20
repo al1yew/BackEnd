@@ -16,10 +16,8 @@ namespace Allup.ViewComponents
         {
             _context = context;
         }
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(IDictionary<string, string> settings)
         {
-            IDictionary<string, string> settings = await _context.Settings.ToDictionaryAsync(x => x.Key, y => y.Value);
-
             return View(await Task.FromResult(settings));
         }
     }
