@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace Allup.Areas.Manage.Controllers
 {
+    [Area("Manage")]
     public class HomeController : Controller
     {
-        [Area("Manage")]
         public IActionResult Index()
         {
-            //return Content("salamsmasmasmam");
             return View();
         }
     }
