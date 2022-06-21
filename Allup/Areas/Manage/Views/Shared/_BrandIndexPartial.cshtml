@@ -1,0 +1,37 @@
+﻿@model List<Brand>
+@{ int no = 1; }
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Setting</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Brand brand in Model)
+        {
+            <tr>
+                <td>@no</td>
+                <td>@brand.BrandName</td>
+                <td style="color:@(brand.IsDeleted ? "red":"green")">@(brand.IsDeleted ? "Deactive" : "Active")</td>
+                <td>
+                    <a class="btn btn-warning" asp-area="manage" asp-controller="brand" asp-action="update" asp-route-id="@brand.Id">Update</a>
+                    @if (brand.IsDeleted)
+                    {
+                        <a class="btn btn-primary restoreBtn" asp-area="manage" asp-controller="brand"
+                           asp-action="Restore" asp-route-id="@brand.Id" asp-route-status="@ViewBag.Status">Restore</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-danger deleteBtn" asp-area="manage" asp-controller="brand" 
+                        asp-action="delete" asp-route-id="@brand.Id" asp-route-status="@ViewBag.Status">Delete</a>
+                    }
+                </td>
+            </tr>
+            no++;
+        }
+    </tbody>
+</table>

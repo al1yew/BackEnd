@@ -11,8 +11,13 @@ namespace Allup.Models
     {
         public int Id { get; set; }
         [Required]
-        [StringLength(maximumLength:255)]
+        [StringLength(maximumLength: 255)]
         public string BrandName { get; set; }
         public IEnumerable<Product> Products { get; set; }
+        public Nullable<DateTime> CreatedAt { get; set; }
+        public bool IsDeleted { get; set; }
+        public Nullable<DateTime> DeletedAt { get; set; }
+        public bool IsUpdated { get; set; }
+        public Nullable<DateTime> UpdatedAt { get; set; }
     }
 }
