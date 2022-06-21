@@ -68,7 +68,7 @@ $(document).ready(function () {
 
     //-------------------- Basket
 
-    $('.addtobasket').click(function (e) {
+    $(document).on("click", ".addtobasket", function (e) {
         e.preventDefault();
         let url = $(this).attr('href');
         console.log('slammsmamssm')
@@ -79,6 +79,11 @@ $(document).ready(function () {
                 $(".header-cart").html(data);
             })
     })
+
+
+    //$('.addtobasket').click(function (e) {
+
+    //})
 
     $(document).on('click', '.deletefrombasket', function (e) {
         e.preventDefault();

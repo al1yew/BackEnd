@@ -38,8 +38,7 @@ namespace Allup
             });
 
             services.AddScoped<ILayoutService, LayoutService>();
-            //services.AddSingleton<ILayoutService, LayoutService>();
-            //services.AddTransient<ILayoutService, LayoutService>();
+
             services.AddHttpContextAccessor();
         }
 
@@ -59,6 +58,8 @@ namespace Allup
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute("default", "{controller=home}/{action=index}/{id?}");
+
+                endpoints.MapControllerRoute("areas", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
