@@ -1,18 +1,14 @@
 ﻿@model List<Brand>
-@{
-    ViewData["Title"] = "Index";
 
-    int no = 1;
-}
 <div class="row justify-content-between">
     <div class="col-lg-2">
         <h1>Brands</h1>
     </div>
     <div class="col-lg-6">
         <form>
-            <div class="row">
-                <div class="col">
-                    <label class="form-label">Brand Statusu</label>
+            <div class="row justify-content-center">
+                <div class="col-lg-5 align-items-center py-2">
+                    <label class="form-label">Sort By</label>
                     <select name="status" class="form-select" aria-label="Default select example">
                         @if (ViewBag.Status == 0)
                         {
@@ -25,24 +21,24 @@
 
                         @if (ViewBag.Status == 1)
                         {
-                            <option selected value="1">Silinenler</option>
+                            <option selected value="1">Deleted</option>
                         }
                         else
                         {
-                            <option value="1">Silinenler</option>
+                            <option value="1">Deleted</option>
                         }
 
                         @if (ViewBag.Status == 2)
                         {
-                            <option selected value="2">Silinmiyenler</option>
+                            <option selected value="2">Active</option>
                         }
                         else
                         {
-                            <option value="2">Silinmiyenler</option>
+                            <option value="2">Active</option>
                         }
                     </select>
                 </div>
-                <div class="col">
+                <div class="col-lg-2">
                     <button class="btn btn-primary" type="submit">Filter</button>
                 </div>
             </div>

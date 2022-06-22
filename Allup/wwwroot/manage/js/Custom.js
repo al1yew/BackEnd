@@ -4,14 +4,13 @@
 
 
         Swal.fire({
-            title: 'Eminsen?',
-            text: "Bunu Geri Qaytara Bilmiyecen!",
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            cancelButtonText: "Silme",
-            confirmButtonText: 'Beli, Sil!'
+            confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
 
@@ -22,8 +21,8 @@
                     .then(data => { $('.tblContent').html(data) });
 
                 Swal.fire(
-                    'Silindi!',
-                    'Secdiyniz Brand Silindi.',
+                    'Deleted!',
+                    'Your Brand has been deleted.',
                     'success'
                 )
             }
@@ -34,14 +33,13 @@
         e.preventDefault();
 
         Swal.fire({
-            title: 'Eminsen?',
-            text: "Bunu Geri Qaytara Bilmiyecen!",
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            cancelButtonText: "Silme",
-            confirmButtonText: 'Beli, Sil!'
+            confirmButtonText: 'Yes, restore it!'
         }).then((result) => {
             if (result.isConfirmed) {
 
@@ -52,8 +50,8 @@
                     .then(data => { $('.tblContent').html(data) });
 
                 Swal.fire(
-                    'Silindi!',
-                    'Secdiyniz Brand Silindi.',
+                    'Restored!',
+                    'Your Brand has been restored.',
                     'success'
                 )
             }

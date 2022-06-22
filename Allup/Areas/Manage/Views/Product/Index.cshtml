@@ -15,6 +15,7 @@
     <thead>
         <tr>
             <th>№</th>
+            <th>Product Code</th>
             <th>Product Name</th>
             <th>Discount Price</th>
             <th>Real Price</th>
@@ -26,18 +27,19 @@
     <tbody>
         @foreach (Product product in Model)
         {
-            <tr>
-                <td class="col-lg-1">@product.Id</td>
-                <td class="col-lg-3">@product.ProductName</td>
-                <td class="col-lg-1">@product.DiscountPrice</td>
-                <td class="col-lg-1">@product.Price</td>
-                <td class="col-lg-1">
-                    <a class="btn btn-warning" asp-controller="Product" asp-action="Update" asp-area="Manage">Update</a>
-                </td>
-                <td class="col-lg-1">
-                    <a class="btn btn-danger" asp-controller="Product" asp-action="Delete" asp-area="Manage">Delete</a>
-                </td>
-            </tr>
+        <tr>
+            <td class="col-lg-1">@product.Id</td>
+            <td class="col-lg-1">@(product.Seria + product.Code)</td>
+            <td class="col-lg-3">@product.ProductName</td>
+            <td class="col-lg-1">@product.DiscountPrice</td>
+            <td class="col-lg-1">@product.Price</td>
+            <td class="col-lg-1">
+                <a class="btn btn-warning" asp-controller="Product" asp-action="Update" asp-area="Manage">Update</a>
+            </td>
+            <td class="col-lg-1">
+                <a class="btn btn-danger" asp-controller="Product" asp-action="Delete" asp-area="Manage">Delete</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

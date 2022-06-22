@@ -95,7 +95,7 @@ namespace Allup.Areas.Manage.Controllers
 
             if (dbBrand == null) return NotFound();
 
-            if (await _context.Brands.AnyAsync(b => b.Id != brand.Id && !b.IsDeleted && b.BrandName.ToLower().Trim() == brand.BrandName.ToLower().Trim()))
+            if (await _context.Brands.AnyAsync(b => b.Id != brand.Id && b.BrandName.ToLower().Trim() == brand.BrandName.ToLower().Trim() && !b.IsDeleted))
             {
                 ModelState.AddModelError("Name", $"{brand.BrandName} already exists");
                 return View();
@@ -118,6 +118,8 @@ namespace Allup.Areas.Manage.Controllers
             Brand brand = await _context.Brands.FirstOrDefaultAsync(b => b.Id == id);
 
             if (brand == null) return NotFound();
+            //if we want to delete permanently also from db we write:
+            //_context.Brands.Remove(brand);
 
             brand.IsDeleted = true;
             brand.DeletedAt = DateTime.UtcNow.AddHours(4);
