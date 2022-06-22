@@ -58,6 +58,27 @@
         })
     })
 
+    if ($('.isMaininput').is(":checked")) {
+        $('.imagecontainer').removeClass('d-none');
+        $('.parentcontainer').addClass('d-none');
+    } else {
+        $('.imagecontainer').addClass('d-none');
+        $('.parentcontainer').removeClass('d-none');
+    }
+
+    $(document).on('change', '.isMaininput', function () {
+        console.log($(this).is(":checked"))
+        if ($(this).is(":checked")) {
+            $('.imagecontainer').removeClass('d-none');
+            $('.parentcontainer').addClass('d-none');
+        } else {
+            $('.imagecontainer').addClass('d-none');
+            $('.parentcontainer').removeClass('d-none');
+        }
+    })
+
+
+
     toastr.options = {
         "closeButton": true,
         "debug": false,

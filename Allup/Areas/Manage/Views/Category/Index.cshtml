@@ -22,7 +22,7 @@
         </form>
     </div>
     <div class="col-lg-1">
-        <a class="btn btn-success" asp-area="Manage" asp-controller="Brand" asp-action="Create">Create</a>
+        <a class="btn btn-success" asp-area="Manage" asp-controller="Category" asp-action="Create">Create</a>
     </div>
 </div>
 <div class="row">
@@ -37,12 +37,12 @@
         @if (Model.HasPrev)
         {
             <li class="page-item">
-                <a class="page-link" asp-area="Manage" asp-controller="Brand" asp-action="Index" asp-route-status="@ViewBag.Status"
+                <a class="page-link" asp-area="Manage" asp-controller="Category" asp-action="Index" asp-route-status="@ViewBag.Status"
                    asp-route-page="1">@("<<")</a>
             </li>
 
             <li class="page-item">
-                <a class="page-link" asp-area="Manage" asp-controller="Brand" asp-action="Index" asp-route-status="@ViewBag.Status"
+                <a class="page-link" asp-area="Manage" asp-controller="Category" asp-action="Index" asp-route-status="@ViewBag.Status"
                    asp-route-page="@(Model.Page-1)">@("<")</a>
             </li>
         }
@@ -50,7 +50,7 @@
         @for (int i = 1; i <= Model.PageCount; i++)
         {
             <li class="page-item">
-                <a class="page-link" asp-area="Manage" asp-controller="Brand" asp-action="Index" asp-route-status="@ViewBag.Status"
+                <a class="page-link" asp-area="Manage" asp-controller="Category" asp-action="Index" asp-route-status="@ViewBag.Status"
                    asp-route-page="@i"> @i </a>
             </li>
         }
@@ -58,12 +58,12 @@
         @if (Model.HasNext)
         {
             <li class="page-item">
-                <a class="page-link" asp-area="Manage" asp-controller="Brand" asp-action="Index" asp-route-status="@ViewBag.Status"
+                <a class="page-link" asp-area="Manage" asp-controller="Category" asp-action="Index" asp-route-status="@ViewBag.Status"
                    asp-route-page="@(Model.Page + 1)">@(">")</a>
             </li>
 
             <li class="page-item">
-                <a class="page-link" asp-area="Manage" asp-controller="Brand" asp-action="Index" asp-route-status="@ViewBag.Status"
+                <a class="page-link" asp-area="Manage" asp-controller="Category" asp-action="Index" asp-route-status="@ViewBag.Status"
                    asp-route-page="@Model.PageCount">@(">>")</a>
             </li>
         }
