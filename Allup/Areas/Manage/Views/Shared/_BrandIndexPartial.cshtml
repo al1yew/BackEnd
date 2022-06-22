@@ -1,24 +1,30 @@
 ﻿@model List<Brand>
-@{ int no = 1; }
+@{
+    int no = ViewBag.BrandsCount * (ViewBag.Page - 1);
+    }
 
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
-            <th>No</th>
-            <th>Name</th>
-            <th>Status</th>
-            <th>Setting</th>
+            <th class="col-lg-1">№</th>
+            <th class="col-lg-3">Name</th>
+            <th class="col-lg-1">Status</th>
+            <th class="col-lg-1">Update</th>
+            <th class="col-lg-1">Delete/Restore</th>
         </tr>
     </thead>
     <tbody>
         @foreach (Brand brand in Model)
         {
+            no++;
             <tr>
-                <td>@no</td>
-                <td>@brand.BrandName</td>
-                <td style="color:@(brand.IsDeleted ? "red":"green")">@(brand.IsDeleted ? "Deactive" : "Active")</td>
-                <td>
+                <td class="col-lg-1">@no</td>
+                <td class="col-lg-3">@brand.BrandName</td>
+                <td class="col-lg-1" style="color:@(brand.IsDeleted ? "red" : "green")">@(brand.IsDeleted ? "Deleted" : "Active")</td>
+                <td class="col-lg-1">
                     <a class="btn btn-warning" asp-area="manage" asp-controller="brand" asp-action="update" asp-route-id="@brand.Id">Update</a>
+                </td>
+                <td class="col-lg-1">
                     @if (brand.IsDeleted)
                     {
                         <a class="btn btn-primary restoreBtn" asp-area="manage" asp-controller="brand"
@@ -31,7 +37,6 @@
                     }
                 </td>
             </tr>
-            no++;
         }
     </tbody>
 </table>

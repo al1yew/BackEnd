@@ -19,7 +19,7 @@ namespace Allup.Areas.Manage.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(int? status)
+        public async Task<IActionResult> Index(int? status, int page = 1)
         {
             IQueryable<Brand> brands = _context.Brands;
 
@@ -35,9 +35,16 @@ namespace Allup.Areas.Manage.Controllers
                 }
             }
 
-            ViewBag.Status = status;
+            int brandCount = int.Parse(_context.Settings.FirstOrDefault(s => s.Key == "PageBrandsCount").Value);
 
-            return View(await brands.ToListAsync());
+            List<Brand> brandsList = await brands.Skip((page - 1) * brandCount).Take(brandCount).ToListAsync();
+            //prosto bele gonderek, ozunu de View(bura yaza bilerik)
+            ViewBag.Status = status;
+            ViewBag.Page = page;
+            ViewBag.BrandsCount = brandCount;
+            ViewBag.PageCount = (int)Math.Ceiling((decimal)brands.Count() / brandCount);
+
+            return View(brandsList);
         }
 
         [HttpGet]
