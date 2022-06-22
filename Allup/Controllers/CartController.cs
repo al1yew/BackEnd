@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Allup.Controllers
 {
-    public class AboutController : Controller
+    public class CartController : Controller
     {
         private readonly AppDbContext _context;
-        public AboutController(AppDbContext context)
+        public CartController(AppDbContext context)
         {
             _context = context;
         }

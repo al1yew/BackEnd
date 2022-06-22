@@ -14,6 +14,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+//BrandSlider kimi Featuresi de her yere salmaq lazimdi, bunu sonra elemek olar. 
+
 namespace Allup
 {
     public class Startup

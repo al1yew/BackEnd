@@ -13,5 +13,8 @@ namespace Allup.ViewModels.HomeViewModels
         public List<Product> BestSeller { get; set; }
         public List<Product> Feature { get; set; }
         public List<Product> NewArrival { get; set; }
+        public List<BrandSlider> BrandSliders { get; set; }
+
+        //bizde burda hele productlarin kategoriyalari olacag size color filan
     }
 }

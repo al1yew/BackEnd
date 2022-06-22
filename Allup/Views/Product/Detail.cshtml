@@ -1,4 +1,4 @@
-﻿@model Product
+﻿@model ProductDetailViewModel
 @{
     ViewData["Title"] = "Detail";
 }
@@ -26,7 +26,7 @@
             <div class="col-lg-6">
                 <div class="single-product-image mt-30">
                     <div class="product-single-image">
-                        @foreach (ProductImage productImage in Model.ProductImages)
+                        @foreach (ProductImage productImage in Model.Product.ProductImages)
                         {
                             <div class="single-image">
                                 <img src="~/assets/images/product-quick/@productImage.Image" alt="">
@@ -35,7 +35,7 @@
                     </div>
                     <div class="product-single-thumb-image">
                         <ul class="product-single-thumb">
-                            @foreach (ProductImage productImage in Model.ProductImages)
+                            @foreach (ProductImage productImage in Model.Product.ProductImages)
                             {
                                 <li><img src="~/assets/images/product-quick/@productImage.Image" alt="product"></li>
                             }
@@ -48,13 +48,13 @@
                     <div class="tags d-flex">
                         <span class="tag-title">Tags:</span>
                         <ul class="tag-list media-body">
-                            @foreach (ProductToTag productTag in Model.ProductToTags)
+                            @foreach (ProductToTag productTag in Model.Product.ProductToTags)
                             {
                                 <li><a>@productTag.Tag.TagName,</a></li>
                             }
                         </ul>
                     </div>
-                    <h2 class="product-title">@Model.ProductName</h2>
+                    <h2 class="product-title">@Model.Product.ProductName</h2>
                     <div class="review-rating d-flex flex-wrap">
                         <ul class="rating">
                             <li class="rating-on"><i class="fas fa-star"></i></li>
@@ -69,35 +69,35 @@
                         </ul>
                     </div>
                     <div class="product-price">
-                        @if (Model.DiscountPrice > 0)
+                        @if (Model.Product.DiscountPrice > 0)
                         {
-                            <span class="price-sale">€@Model.DiscountPrice</span>
-                            <span class="regular-price">€@Model.Price</span>
+                            <span class="price-sale">€@Model.Product.DiscountPrice</span>
+                            <span class="regular-price">€@Model.Product.Price</span>
                         }
                         else
                         {
-                            <span class="price-sale">€@Model.Price</span>
+                            <span class="price-sale">€@Model.Product.Price</span>
                         }
                     </div>
                     <div class="product-basic-info">
                         <div class="single-info">
                             <span class="title">Ex Tax :</span>
-                            <span class="value">€@Model.ExTax</span>
+                            <span class="value">€@Model.Product.ExTax</span>
                         </div>
                         <div class="single-info">
                             <span class="title">Brand :</span>
-                            <span class="value"><a>@Model.Brand</a></span>
+                            <span class="value"><a>@Model.Product.Brand</a></span>
                         </div>
                         <div class="single-info">
                             <span class="title"> Product Code :</span>
-                            <span class="value">@(Model.Seria + Model.Code)</span>
+                            <span class="value">@(Model.Product.Seria + Model.Product.Code)</span>
                         </div>
                         <div class="single-info">
-                            <span class="title @(Model.Count > 0 ?"text-success":"text-danger")"> Availability :</span>
-                            <span class="value">@(Model.Count > 0 ? "In Stock" : "Out Of Stock") </span>
+                            <span class="title @(Model.Product.Count > 0 ?"text-success":"text-danger")"> Availability :</span>
+                            <span class="value">@(Model.Product.Count > 0 ? "In Stock" : "Out Of Stock") </span>
                         </div>
                     </div>
-                    <p>@Html.Raw(Model.Description)</p>
+                    <p>@Html.Raw(Model.Product.Description)</p>
 
                     <div class="product-size-color-quantity">
                         <div class="product-quantity mt-25">
@@ -771,117 +771,5 @@
 </section>
 
 <!--====== Product Part Ends ======-->
-<!--====== Brand Part Start ======-->
 
-<div class="brand-area pt-80">
-    <div class="container-fluid custom-container">
-        <div class="row brand-active">
-            <div class="col-lg-2">
-                <div class="single-brand">
-                    <a>
-                        <img src="~/assets/images/brand/brand-1.jpg" alt="brand">
-                    </a>
-                </div> <!-- single brand -->
-            </div>
-            <div class="col-lg-2">
-                <div class="single-brand">
-                    <a>
-                        <img src="~/assets/images/brand/brand-2.jpg" alt="brand">
-                    </a>
-                </div> <!-- single brand -->
-            </div>
-            <div class="col-lg-2">
-                <div class="single-brand">
-                    <a>
-                        <img src="~/assets/images/brand/brand-3.jpg" alt="brand">
-                    </a>
-                </div> <!-- single brand -->
-            </div>
-            <div class="col-lg-2">
-                <div class="single-brand">
-                    <a>
-                        <img src="~/assets/images/brand/brand-4.jpg" alt="brand">
-                    </a>
-                </div> <!-- single brand -->
-            </div>
-            <div class="col-lg-2">
-                <div class="single-brand">
-                    <a>
-                        <img src="~/assets/images/brand/brand-5.jpg" alt="brand">
-                    </a>
-                </div> <!-- single brand -->
-            </div>
-            <div class="col-lg-2">
-                <div class="single-brand">
-                    <a>
-                        <img src="~/assets/images/brand/brand-6.jpg" alt="brand">
-                    </a>
-                </div> <!-- single brand -->
-            </div>
-            <div class="col-lg-2">
-                <div class="single-brand">
-                    <a>
-                        <img src="~/assets/images/brand/brand-4.jpg" alt="brand">
-                    </a>
-                </div> <!-- single brand -->
-            </div>
-        </div> <!-- row -->
-    </div> <!-- container -->
-</div>
-
-<!--====== Brand Part Ends ======-->
-<!--====== Features Banner Part Start ======-->
-
-<section class="features-banner-area pt-80 pb-100">
-    <div class="container-fluid custom-container">
-        <div class="features-banner-wrapper d-flex flex-wrap">
-            <div class="single-features-banner d-flex">
-                <div class="banner-icon">
-                    <img src="~/assets/images/banner-icon/icon1.png" alt="Icon">
-                </div>
-                <div class="banner-content media-body">
-                    <h3 class="banner-title">Free Shipping</h3>
-                    <p>Free shipping on all US order</p>
-                </div>
-            </div> <!-- single features banner -->
-            <div class="single-features-banner d-flex">
-                <div class="banner-icon">
-                    <img src="~/assets/images/banner-icon/icon2.png" alt="Icon">
-                </div>
-                <div class="banner-content media-body">
-                    <h3 class="banner-title">Support 24/7</h3>
-                    <p>Contact us 24 hours a day</p>
-                </div>
-            </div> <!-- single features banner -->
-            <div class="single-features-banner d-flex">
-                <div class="banner-icon">
-                    <img src="~/assets/images/banner-icon/icon3.png" alt="Icon">
-                </div>
-                <div class="banner-content media-body">
-                    <h3 class="banner-title">100% Money Back</h3>
-                    <p>You have 30 days to Return</p>
-                </div>
-            </div> <!-- single features banner -->
-            <div class="single-features-banner d-flex">
-                <div class="banner-icon">
-                    <img src="~/assets/images/banner-icon/icon4.png" alt="Icon">
-                </div>
-                <div class="banner-content media-body">
-                    <h3 class="banner-title">90 Days Return</h3>
-                    <p>If goods have problems</p>
-                </div>
-            </div> <!-- single features banner -->
-            <div class="single-features-banner d-flex">
-                <div class="banner-icon">
-                    <img src="~/assets/images/banner-icon/icon5.png" alt="Icon">
-                </div>
-                <div class="banner-content media-body">
-                    <h3 class="banner-title">Payment Secure</h3>
-                    <p>We ensure secure payment</p>
-                </div>
-            </div> <!-- single features banner -->
-        </div> <!-- features banner wrapper -->
-    </div> <!-- container -->
-</section>
-
-<!--====== Features Banner Part Ends ======-->
+@await Component.InvokeAsync("BrandSlider", Model.BrandSliders)

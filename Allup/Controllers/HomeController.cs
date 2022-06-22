@@ -29,7 +29,8 @@ namespace Allup.Controllers
                 Sliders = await _context.Sliders.ToListAsync(),
                 BestSeller = products.Where(p => p.IsBestSeller).ToList(),
                 Feature = products.Where(p => p.IsFeature).ToList(),
-                NewArrival = products.Where(p => p.IsNewArrival).ToList()
+                NewArrival = products.Where(p => p.IsNewArrival).ToList(),
+                BrandSliders = await _context.BrandSliders.ToListAsync()
             };
 
             return View(homeViewModel);

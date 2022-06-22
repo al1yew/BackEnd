@@ -1,4 +1,4 @@
-﻿
+﻿@model List<BrandSlider>
 @{
     ViewData["Title"] = "Index";
 }
@@ -55,7 +55,7 @@
                         <div class="my-account-dashboard account-wrapper">
                             <h4 class="account-title">Dashboard</h4>
                             <div class="welcome-dashboard">
-                                <p>Hello, <strong>Alex Tuntuni</strong> (If Not <strong>Tuntuni !</strong> <a >Logout</a> )</p>
+                                <p>Hello, <strong>Alex Tuntuni</strong> (If Not <strong>Tuntuni !</strong> <a>Logout</a> )</p>
                             </div>
                             <p class="mt-25">From your account dashboard. you can easily check & view your recent orders, manage your shipping and billing addresses and edit your password and account details.</p>
                         </div>
@@ -82,7 +82,7 @@
                                             <td>Aug 22, 2020</td>
                                             <td>Pending</td>
                                             <td>$100</td>
-                                            <td><a >View</a></td>
+                                            <td><a>View</a></td>
                                         </tr>
                                         <tr>
                                             <td>2</td>
@@ -90,7 +90,7 @@
                                             <td>July 22, 2020</td>
                                             <td>Approved</td>
                                             <td>$45</td>
-                                            <td><a >View</a></td>
+                                            <td><a>View</a></td>
                                         </tr>
                                         <tr>
                                             <td>3</td>
@@ -98,7 +98,7 @@
                                             <td>June 22, 2020</td>
                                             <td>On Hold</td>
                                             <td>$99</td>
-                                            <td><a >View</a></td>
+                                            <td><a>View</a></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -123,13 +123,13 @@
                                             <td>Mostarizing Oil</td>
                                             <td>Aug 22, 2020</td>
                                             <td>Yes</td>
-                                            <td><a >Download File</a></td>
+                                            <td><a>Download File</a></td>
                                         </tr>
                                         <tr>
                                             <td>Katopeno Altuni</td>
                                             <td>July 22, 2020</td>
                                             <td>Never</td>
-                                            <td><a >Download File</a></td>
+                                            <td><a>Download File</a></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -149,7 +149,7 @@
                                 <h6 class="name">Alex Tuntuni</h6>
                                 <p>1355 Market St, Suite 900 <br> San Francisco, CA 94103</p>
                                 <p>Mobile: (123) 456-7890</p>
-                                <a class="main-btn main-btn-2" ><i class="far fa-edit"></i> Edit Address</a>
+                                <a class="main-btn main-btn-2"><i class="far fa-edit"></i> Edit Address</a>
                             </div>
                         </div>
                     </div>
@@ -215,117 +215,6 @@
 </section>
 
 <!--====== My Account Part Ends ======-->
-<!--====== Brand Part Start ======-->
 
-<div class="brand-area pt-80">
-    <div class="container-fluid custom-container">
-        <div class="row brand-active">
-            <div class="col-lg-2">
-                <div class="single-brand">
-                    <a >
-                        <img src="~/assets/images/brand/brand-1.jpg" alt="brand">
-                    </a>
-                </div> <!-- single brand -->
-            </div>
-            <div class="col-lg-2">
-                <div class="single-brand">
-                    <a >
-                        <img src="~/assets/images/brand/brand-2.jpg" alt="brand">
-                    </a>
-                </div> <!-- single brand -->
-            </div>
-            <div class="col-lg-2">
-                <div class="single-brand">
-                    <a >
-                        <img src="~/assets/images/brand/brand-3.jpg" alt="brand">
-                    </a>
-                </div> <!-- single brand -->
-            </div>
-            <div class="col-lg-2">
-                <div class="single-brand">
-                    <a >
-                        <img src="~/assets/images/brand/brand-4.jpg" alt="brand">
-                    </a>
-                </div> <!-- single brand -->
-            </div>
-            <div class="col-lg-2">
-                <div class="single-brand">
-                    <a >
-                        <img src="~/assets/images/brand/brand-5.jpg" alt="brand">
-                    </a>
-                </div> <!-- single brand -->
-            </div>
-            <div class="col-lg-2">
-                <div class="single-brand">
-                    <a >
-                        <img src="~/assets/images/brand/brand-6.jpg" alt="brand">
-                    </a>
-                </div> <!-- single brand -->
-            </div>
-            <div class="col-lg-2">
-                <div class="single-brand">
-                    <a >
-                        <img src="~/assets/images/brand/brand-4.jpg" alt="brand">
-                    </a>
-                </div> <!-- single brand -->
-            </div>
-        </div> <!-- row -->
-    </div> <!-- container -->
-</div>
+@await Component.InvokeAsync("BrandSlider", Model)
 
-<!--====== Brand Part Ends ======-->
-<!--====== Features Banner Part Start ======-->
-
-<section class="features-banner-area pt-80 pb-100">
-    <div class="container-fluid custom-container">
-        <div class="features-banner-wrapper d-flex flex-wrap">
-            <div class="single-features-banner d-flex">
-                <div class="banner-icon">
-                    <img src="~/assets/images/banner-icon/icon1.png" alt="Icon">
-                </div>
-                <div class="banner-content media-body">
-                    <h3 class="banner-title">Free Shipping</h3>
-                    <p>Free shipping on all US order</p>
-                </div>
-            </div> <!-- single features banner -->
-            <div class="single-features-banner d-flex">
-                <div class="banner-icon">
-                    <img src="~/assets/images/banner-icon/icon2.png" alt="Icon">
-                </div>
-                <div class="banner-content media-body">
-                    <h3 class="banner-title">Support 24/7</h3>
-                    <p>Contact us 24 hours a day</p>
-                </div>
-            </div> <!-- single features banner -->
-            <div class="single-features-banner d-flex">
-                <div class="banner-icon">
-                    <img src="~/assets/images/banner-icon/icon3.png" alt="Icon">
-                </div>
-                <div class="banner-content media-body">
-                    <h3 class="banner-title">100% Money Back</h3>
-                    <p>You have 30 days to Return</p>
-                </div>
-            </div> <!-- single features banner -->
-            <div class="single-features-banner d-flex">
-                <div class="banner-icon">
-                    <img src="~/assets/images/banner-icon/icon4.png" alt="Icon">
-                </div>
-                <div class="banner-content media-body">
-                    <h3 class="banner-title">90 Days Return</h3>
-                    <p>If goods have problems</p>
-                </div>
-            </div> <!-- single features banner -->
-            <div class="single-features-banner d-flex">
-                <div class="banner-icon">
-                    <img src="~/assets/images/banner-icon/icon5.png" alt="Icon">
-                </div>
-                <div class="banner-content media-body">
-                    <h3 class="banner-title">Payment Secure</h3>
-                    <p>We ensure secure payment</p>
-                </div>
-            </div> <!-- single features banner -->
-        </div> <!-- features banner wrapper -->
-    </div> <!-- container -->
-</section>
-
-<!--====== Features Banner Part Ends ======-->
