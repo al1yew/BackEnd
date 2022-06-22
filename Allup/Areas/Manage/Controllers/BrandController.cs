@@ -1,5 +1,6 @@
 ﻿using Allup.DAL;
 using Allup.Models;
+using Allup.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -37,14 +38,16 @@ namespace Allup.Areas.Manage.Controllers
 
             int brandCount = int.Parse(_context.Settings.FirstOrDefault(s => s.Key == "PageBrandsCount").Value);
 
-            List<Brand> brandsList = await brands.Skip((page - 1) * brandCount).Take(brandCount).ToListAsync();
-            //prosto bele gonderek, ozunu de View(bura yaza bilerik)
             ViewBag.Status = status;
-            ViewBag.Page = page;
-            ViewBag.BrandsCount = brandCount;
-            ViewBag.PageCount = (int)Math.Ceiling((decimal)brands.Count() / brandCount);
 
-            return View(brandsList);
+            return View(PaginationList<Brand>.Create(brands, page, brandCount));
+
+            //List<Brand> brandsList = await brands.Skip((page - 1) * brandCount).Take(brandCount).ToListAsync();
+            //ViewBag.Status = status;
+            //ViewBag.Page = page;
+            //ViewBag.BrandsCount = brandCount;
+            //ViewBag.PageCount = (int)Math.Ceiling((decimal)brands.Count() / brandCount);
+
         }
 
         [HttpGet]
@@ -52,6 +55,7 @@ namespace Allup.Areas.Manage.Controllers
         {
             return View();
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]

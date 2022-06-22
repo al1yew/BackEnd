@@ -46,5 +46,8 @@ namespace Allup.Models
         public IEnumerable<ProductToSize> ProductToSizes { get; set; }
         public IEnumerable<ProductToTag> ProductToTags { get; set; }
         public IEnumerable<ProductImage> ProductImages { get; set; }
+
+        public Category Category { get; set; }
+        public Nullable<int> CategoryId { get; set; }
     }
 }

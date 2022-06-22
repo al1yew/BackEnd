@@ -1,6 +1,6 @@
-﻿@model List<Brand>
+﻿@model PaginationList<Brand>
 @{
-    int no = ViewBag.BrandsCount * (ViewBag.Page - 1);
+    int no = Model.BrandCount * (Model.Page - 1);
     }
 
 <table class="table table-bordered table-striped">
