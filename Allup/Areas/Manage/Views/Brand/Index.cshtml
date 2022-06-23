@@ -10,35 +10,9 @@
                 <div class="col-lg-4 align-items-center py-2">
                     <label class="form-label">Sort By</label>
                     <select name="status" class="form-select" aria-label="Default select example">
-                        @*@if (ViewBag.Status == 0)
-                        {
-                            <option selected value="0">All</option>
-                        }
-                        else
-                        {
-                            <option value="0">All</option>
-                        }
-                        @if (ViewBag.Status == 1)
-                        {
-                            <option selected value="1">Deleted</option>
-                        }
-                        else
-                        {
-                            <option value="1">Deleted</option>
-                        }
-                        @if (ViewBag.Status == 2)
-                        {
-                            <option selected value="2">Active</option>
-                        }
-                        else
-                        {
-                            <option value="2">Active</option>
-                        }*@
-
                         <option selected="@(ViewBag.Status == 0 ? "true" : "false")" value="0">All</option>
                         <option selected="@(ViewBag.Status == 1 ? "true" : "false")" value="1">Deleted</option>
                         <option selected="@(ViewBag.Status == 2 ? "true" : "false")" value="2">Active</option>
-
                     </select>
                 </div>
                 <div class="col-lg-2">
@@ -58,36 +32,21 @@
 </div>
 
 <div class="row justify-content-center w-100">
-        <ul class="pagination ">
+    <ul class="pagination ">
+        @if (Model.HasPrev)
+        {
+            <li class="page-item"><a class="page-link" asp-area="Manage" asp-controller="Brand" asp-action="Index" asp-route-status="@ViewBag.Status" asp-route-page="1">@("<<")</a></li>
 
-            @if (Model.HasPrev)
-            {
-                <li class="page-item"> <a class="page-link" asp-area="Manage" asp-controller="Brand" asp-action="Index" asp-route-status="@ViewBag.Status"
-                       asp-route-page="1">@("<<")</a></li>
-
-                <li class="page-item"><a class="page-link" asp-area="Manage" asp-controller="Brand" asp-action="Index" asp-route-status="@ViewBag.Status"
-                       asp-route-page="@(Model.Page-1)">@("<")</a></li>
-            }
-
-            @for (int i = 1; i <= Model.PageCount; i++)
-            {
-                <li class="page-item">
-                    <a class="page-link" asp-area="Manage" asp-controller="Brand" asp-action="Index" asp-route-status="@ViewBag.Status"
-                       asp-route-page="@i"> @i </a>
-                </li>
-            }
-
-            @if (Model.HasNext)
-            {
-                <li class="page-item">
-                    <a class="page-link" asp-area="Manage" asp-controller="Brand" asp-action="Index" asp-route-status="@ViewBag.Status"
-                       asp-route-page="@(Model.Page + 1)">@(">")</a>
-                </li>
-
-                <li class="page-item">
-                    <a class="page-link" asp-area="Manage" asp-controller="Brand" asp-action="Index" asp-route-status="@ViewBag.Status"
-                       asp-route-page="@Model.PageCount">@(">>")</a>
-                </li>
-            }
-        </ul>
+            <li class="page-item"><a class="page-link" asp-area="Manage" asp-controller="Brand" asp-action="Index" asp-route-status="@ViewBag.Status" asp-route-page="@(Model.Page-1)">@("<")</a></li>
+        }
+        @for (int i = 1; i <= Model.PageCount; i++)
+        {
+            <li class="page-item @(Model.Page == i ? "active":"")"><a class="page-link" asp-area="Manage" asp-controller="Brand" asp-action="Index" asp-route-status="@ViewBag.Status" asp-route-page="@i">@i</a></li>
+        }
+        @if (Model.HasNext)
+        {
+            <li class="page-item"><a class="page-link" asp-area="Manage" asp-controller="Brand" asp-action="Index" asp-route-status="@ViewBag.Status" asp-route-page="@(Model.Page+1)">@(">")</a></li>
+            <li class="page-item"><a class="page-link" asp-area="Manage" asp-controller="Brand" asp-action="Index" asp-route-status="@ViewBag.Status" asp-route-page="@Model.PageCount">@(">>")</a></li>
+        }
+    </ul>
 </div>

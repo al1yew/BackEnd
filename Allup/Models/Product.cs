@@ -41,12 +41,10 @@ namespace Allup.Models
         public bool IsNewArrival { get; set; }
         public bool IsBestSeller { get; set; }
         public bool IsFeature { get; set; }
-
         public IEnumerable<ProductToColor> ProductToColors { get; set; }
         public IEnumerable<ProductToSize> ProductToSizes { get; set; }
         public IEnumerable<ProductToTag> ProductToTags { get; set; }
         public IEnumerable<ProductImage> ProductImages { get; set; }
-
         public Category Category { get; set; }
         public Nullable<int> CategoryId { get; set; }
     }

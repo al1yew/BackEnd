@@ -14,6 +14,7 @@ namespace Allup.Models
         [StringLength(maximumLength: 255)]
         public string BrandName { get; set; }
         public IEnumerable<Product> Products { get; set; }
+
         public Nullable<DateTime> CreatedAt { get; set; }
         public bool IsDeleted { get; set; }
         public Nullable<DateTime> DeletedAt { get; set; }

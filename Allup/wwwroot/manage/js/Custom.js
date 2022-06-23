@@ -2,7 +2,6 @@
     $(document).on('click', '.deleteBtn', function (e) {
         e.preventDefault();
 
-
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -22,7 +21,7 @@
 
                 Swal.fire(
                     'Deleted!',
-                    'Your Brand has been deleted.',
+                    '',
                     'success'
                 )
             }
@@ -46,14 +45,28 @@
                 let url = $(this).attr('href');
 
                 fetch(url)
-                    .then(res => res.text())
-                    .then(data => { $('.tblContent').html(data) });
+                    .then(res => {
+                        if (res.status == 400) {
+                            //alert("mumkun olmadi");
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Something went wrong!',
+                                footer: '<a href="">Why do I have this issue?</a>'
+                            })
+                        } else {
+                            Swal.fire(
+                                'Restored!',
+                                '',
+                                'success'
+                            )
 
-                Swal.fire(
-                    'Restored!',
-                    'Your Brand has been restored.',
-                    'success'
-                )
+                            return res.text()
+
+                        }
+
+                    })
+                    .then(data => { $('.tblContent').html(data) });
             }
         })
     })
@@ -76,8 +89,6 @@
             $('.parentcontainer').removeClass('d-none');
         }
     })
-
-
 
     toastr.options = {
         "closeButton": true,

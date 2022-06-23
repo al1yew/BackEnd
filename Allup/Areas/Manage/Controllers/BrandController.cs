@@ -22,32 +22,25 @@ namespace Allup.Areas.Manage.Controllers
 
         public async Task<IActionResult> Index(int? status, int page = 1)
         {
-            IQueryable<Brand> brands = _context.Brands;
+            IQueryable<Brand> query = _context.Brands;
 
             if (status != null && status > 0)
             {
                 if (status == 1)
                 {
-                    brands = brands.Where(b => b.IsDeleted);
+                    query = query.Where(b => b.IsDeleted);
                 }
                 else if (status == 2)
                 {
-                    brands = brands.Where(b => !b.IsDeleted);
+                    query = query.Where(b => !b.IsDeleted);
                 }
             }
-
-            int brandCount = int.Parse(_context.Settings.FirstOrDefault(s => s.Key == "PageBrandsCount").Value);
+            
+            int brandCount = int.Parse(_context.Settings.FirstOrDefault(s => s.Key == "PageItemsCount").Value);
 
             ViewBag.Status = status;
 
-            return View(PaginationList<Brand>.Create(brands, page, brandCount));
-
-            //List<Brand> brandsList = await brands.Skip((page - 1) * brandCount).Take(brandCount).ToListAsync();
-            //ViewBag.Status = status;
-            //ViewBag.Page = page;
-            //ViewBag.BrandsCount = brandCount;
-            //ViewBag.PageCount = (int)Math.Ceiling((decimal)brands.Count() / brandCount);
-
+            return View(PaginationList<Brand>.Create(query, page, brandCount));
         }
 
         [HttpGet]
@@ -55,7 +48,6 @@ namespace Allup.Areas.Manage.Controllers
         {
             return View();
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -106,7 +98,7 @@ namespace Allup.Areas.Manage.Controllers
 
             if (dbBrand == null) return NotFound();
 
-            if (await _context.Brands.AnyAsync(b => b.Id != brand.Id && b.BrandName.ToLower().Trim() == brand.BrandName.ToLower().Trim() && !b.IsDeleted))
+            if (await _context.Brands.AnyAsync(b => b.Id != brand.Id && !b.IsDeleted && b.BrandName.ToLower().Trim() == brand.BrandName.ToLower().Trim()))
             {
                 ModelState.AddModelError("Name", $"{brand.BrandName} already exists");
                 return View();
@@ -114,7 +106,7 @@ namespace Allup.Areas.Manage.Controllers
 
             dbBrand.BrandName = brand.BrandName;
             dbBrand.IsUpdated = true;
-            dbBrand.UpdatedAt = DateTime.UtcNow.AddHours(+4);
+            dbBrand.UpdatedAt = DateTime.UtcNow.AddHours(4);
             await _context.SaveChangesAsync();
 
             TempData["success"] = "Brand Is Updated";
@@ -122,7 +114,7 @@ namespace Allup.Areas.Manage.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> Delete(int? id, int? status)
+        public async Task<IActionResult> Delete(int? id, int? status, int page)
         {
             if (id == null) return BadRequest();
 
@@ -137,26 +129,26 @@ namespace Allup.Areas.Manage.Controllers
 
             await _context.SaveChangesAsync();
 
-            IQueryable<Brand> brands = _context.Brands;
+            IQueryable<Brand> query = _context.Brands;
 
             if (status != null && status > 0)
             {
                 if (status == 1)
                 {
-                    brands = brands.Where(b => b.IsDeleted);
+                    query = query.Where(b => b.IsDeleted);
                 }
                 else if (status == 2)
                 {
-                    brands = brands.Where(b => !b.IsDeleted);
+                    query = query.Where(b => !b.IsDeleted);
                 }
             }
 
             ViewBag.Status = status;
 
-            return PartialView("_BrandIndexPartial", await brands.ToListAsync());
+            return PartialView("_BrandIndexPartial", await query.ToListAsync());
         }
 
-        public async Task<IActionResult> Restore(int? id, int? status)
+        public async Task<IActionResult> Restore(int? id, int? status, int page)
         {
             if (id == null) return BadRequest();
 
@@ -169,23 +161,25 @@ namespace Allup.Areas.Manage.Controllers
 
             await _context.SaveChangesAsync();
 
-            IQueryable<Brand> brands = _context.Brands;
+            IQueryable<Brand> query = _context.Brands;
 
             if (status != null && status > 0)
             {
                 if (status == 1)
                 {
-                    brands = brands.Where(b => b.IsDeleted);
+                    query = query.Where(b => b.IsDeleted);
                 }
                 else if (status == 2)
                 {
-                    brands = brands.Where(b => !b.IsDeleted);
+                    query = query.Where(b => !b.IsDeleted);
                 }
             }
 
             ViewBag.Status = status;
 
-            return PartialView("_BrandIndexPartial", await brands.ToListAsync());
+            int pageCount = int.Parse(_context.Settings.FirstOrDefault(s => s.Key == "PageItemsCount").Value);
+
+            return PartialView("_BrandIndexPartial", PaginationList<Brand>.Create(query, page, pageCount));
         }
     }
 }

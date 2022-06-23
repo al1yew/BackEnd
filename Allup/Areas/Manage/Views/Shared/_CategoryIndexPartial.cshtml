@@ -1,7 +1,7 @@
 ﻿@model PaginationList<Category>
 @{
-    int no = Model.BrandCount * (Model.Page - 1);
-    }
+    int no = Model.ItemsCount * (Model.Page - 1);
+}
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -21,7 +21,7 @@
             no++;
             <tr>
                 <td class="col-lg-1">@no</td>
-                <td class="col-lg-1">@category.Image</td>
+                <td class="col-lg-1"><img class="img-fluid" src="~/assets/images/@category.Image" /></td>
                 <td class="col-lg-3">@category.Name</td>
                 <td>@(category.IsMain ? "Main Category"  :"Sub Category")</td>
                 <td class="col-lg-1" style="color:@(category.IsDeleted ? "red" : "green")">@(category.IsDeleted ? "Deleted" : "Active")</td>
@@ -36,8 +36,8 @@
                     }
                     else
                     {
-                        <a class="btn btn-danger deleteBtn" asp-area="Manage" asp-controller="Category" 
-                        asp-action="Delete" asp-route-id="@category.Id" asp-route-status="@ViewBag.Status">Delete</a>
+                        <a class="btn btn-danger deleteBtn" asp-area="Manage" asp-controller="Category"
+                           asp-action="Delete" asp-route-id="@category.Id" asp-route-status="@ViewBag.Status">Delete</a>
                     }
                 </td>
             </tr>
