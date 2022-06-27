@@ -35,12 +35,12 @@ namespace Allup.Areas.Manage.Controllers
                     query = query.Where(b => !b.IsDeleted);
                 }
             }
-            
-            int brandCount = int.Parse(_context.Settings.FirstOrDefault(s => s.Key == "PageItemsCount").Value);
+
+            int itemCount = int.Parse(_context.Settings.FirstOrDefault(s => s.Key == "PageItemsCount").Value);
 
             ViewBag.Status = status;
 
-            return View(PaginationList<Brand>.Create(query, page, brandCount));
+            return View(PaginationList<Brand>.Create(query, page, itemCount));
         }
 
         [HttpGet]
