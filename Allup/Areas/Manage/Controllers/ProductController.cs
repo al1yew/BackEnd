@@ -9,6 +9,7 @@ using System.ComponentModel.DataAnnotations;
 using Allup.Models;
 using Allup.ViewModels;
 using Microsoft.AspNetCore.Hosting;
+using Allup.Extensions;
 
 namespace Allup.Areas.Manage.Controllers
 {
@@ -51,7 +52,7 @@ namespace Allup.Areas.Manage.Controllers
         public async Task<IActionResult> Create()
         {
             ViewBag.BrandsForProducts = await _context.Brands.Where(b => !b.IsDeleted).ToListAsync();
-            ViewBag.MainCategories = await _context.Categories.Where(c => !c.IsDeleted && c.IsMain).ToListAsync();
+            ViewBag.MainCategories = await _context.Categories.Where(c => !c.IsDeleted).ToListAsync();
             return View();
         }
 
@@ -59,15 +60,35 @@ namespace Allup.Areas.Manage.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Product product)
         {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
+            ViewBag.BrandsForProducts = await _context.Brands.Where(b => !b.IsDeleted).ToListAsync();
+            ViewBag.MainCategories = await _context.Categories.Where(c => !c.IsDeleted).ToListAsync();
+
+            if (!ModelState.IsValid) return View();
 
             if (await _context.Products.AnyAsync(p => p.ProductName.ToLower().Trim() == product.ProductName.ToLower().Trim() && !p.IsDeleted))
             {
                 ModelState.AddModelError("Name", $"{product.ProductName} already exists");
                 return View();
+            }
+
+            if (product.Files != null)
+            {
+                foreach (var item in product.Files)
+                {
+                    if (!item.CheckContentType("image/jpeg"))
+                    {
+                        ModelState.AddModelError("File", "You can choose only JPG(JPEG) format!");
+                        return View();
+                    }
+
+                    if (item.CheckFileLength(15))
+                    {
+                        ModelState.AddModelError("File", "File must be 15kb at most!");
+                        return View();
+                    }
+
+                }
+
             }
 
             product.CreatedAt = DateTime.UtcNow.AddHours(+4);

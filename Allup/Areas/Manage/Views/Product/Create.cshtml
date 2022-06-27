@@ -1,78 +1,74 @@
 ﻿@model Product
 
 @{ SelectList selectCategoriesItems = new SelectList(ViewBag.MainCategories, nameof(Category.Id), nameof(Category.Name));
-                SelectList selectBrandsItems = new SelectList(ViewBag.BrandsForProducts, nameof(Brand.Id), nameof(Brand.BrandName)); }
+    SelectList selectBrandsItems = new SelectList(ViewBag.BrandsForProducts, nameof(Brand.Id), nameof(Brand.BrandName)); }
 
 <h1>Create</h1>
 
-<div class=" row justify-content-center">
-    <div class="col-lg-10">
-        <form method="post" enctype="multipart/form-data">
-            <div class="form-check">
-                <input asp-for="ProductName" class="form-check-input isMaininput">
-                <label asp-for="ProductName" class="form-check-label"></label>
-                <span class="text-danger" asp-validation-for="ProductName"></span>
+<div class="my-3 row justify-content-center">
+    <div class="col-lg-11">
+        <form class="row justify-content-between" method="post" enctype="multipart/form-data">
+            <div class="col-lg-12  form-group">
+                <label asp-for="ProductName" class="form-label"> Product Name</label>
+                <input asp-for="ProductName" class="form-control">
+                <span class="text-danger" asp-validation-for="ProductName"> The Product Name field is required!</span>
             </div>
-            <div class="form-group parentcontainer">
-                <label asp-for="Category"></label>
+            <div class="col-lg-6 pr-2 form-group">
+                <label class="form-label" asp-for="Category"></label>
                 <select asp-for="Category" class="form-control" asp-items="@selectCategoriesItems">
                     <option value="">Select Category</option>
                 </select>
                 <span class="text-danger" asp-validation-for="Category"></span>
             </div>
-            <div class="form-group parentcontainer">
-                <label asp-for="Brand"></label>
+            <div class="col-lg-6 pl-2 form-group">
+                <label class="form-label" asp-for="Brand"></label>
                 <select asp-for="Brand" class="form-control" asp-items="@selectBrandsItems">
                     <option value="">Select Brand</option>
                 </select>
                 <span class="text-danger" asp-validation-for="Brand"></span>
             </div>
-            <div class="mb-3 form-group">
+            <div class="col-lg-6 pr-2 mb-3 form-group">
                 <label asp-for="Price" class="form-label"></label>
                 <input asp-for="Price" class="form-control">
                 <span class="text-danger" asp-validation-for="Price"></span>
             </div>
-            <div class="mb-3 form-group">
-                <label asp-for="DiscountPrice" class="form-label"></label>
+            <div class="col-lg-6 pl-2 mb-3 form-group">
+                <label asp-for="DiscountPrice" class="form-label">Discount Price</label>
                 <input asp-for="DiscountPrice" class="form-control">
-                <span class="text-danger" asp-validation-for="DiscountPrice"></span>
+                <span class="text-danger" asp-validation-for="DiscountPrice"> The Discount Price field is required!</span>
             </div>
-            <div class="mb-3 form-group">
+            <div class="col-lg-6 pr-2 mb-3 form-group">
                 <label asp-for="ExTax" class="form-label"></label>
                 <input asp-for="ExTax" class="form-control">
                 <span class="text-danger" asp-validation-for="ExTax"></span>
             </div>
-            <div class="mb-3 form-group">
+            <div class="col-lg-6 pl-2 mb-3 form-group">
                 <label asp-for="Count" class="form-label"></label>
                 <input asp-for="Count" class="form-control">
                 <span class="text-danger" asp-validation-for="Count"></span>
             </div>
-            <div class="mb-3 form-group">
+            <div class="col-lg-12  mb-3 form-group">
                 <label asp-for="Description" class="form-label"></label>
-                <input asp-for="Description" class="form-control">
+                <textarea asp-for="Description" class="form-control"></textarea>
                 <span class="text-danger" asp-validation-for="Description"></span>
             </div>
-            <div class="mb-3 form-group">
-                <label asp-for="IsNewArrival" class="form-label"></label>
-                <input asp-for="IsNewArrival" class="form-control">
-                <span class="text-danger" asp-validation-for="IsNewArrival"></span>
+            <div class="col-lg-12 row">
+                <p class="col-lg-12">Inputs below are for tab content at home page of your website. Each product that you add will appear as New Product</p>
+                <div class="col-lg-3 ml-3 form-check">
+                    <input asp-for="IsBestSeller" class="form-check-input isMaininput">
+                    <label asp-for="IsBestSeller" class="form-check-label">Is it best seller?</label>
+                </div>
+                <div class="col-lg-3 ml-3 form-check mb-3">
+                    <input asp-for="IsFeature" class="form-check-input isMaininput">
+                    <label asp-for="IsFeature" class="form-check-label">Is it featured product?</label>
+                </div>
             </div>
-            <div class="mb-3 form-group">
-                <label asp-for="IsBestSeller" class="form-label"></label>
-                <input asp-for="IsBestSeller" class="form-control">
-                <span class="text-danger" asp-validation-for="IsBestSeller"></span>
+            <div class="col-lg-12  mb-3 form-group">
+                <label class="col-form-label">Select Multiple Files</label>
+                <input asp-for="Files" accept="image/jpeg" class="form-control">
+                <span class="text-danger" asp-validation-for="Files"></span>
             </div>
-            <div class="mb-3 form-group">
-                <label asp-for="IsFeature" class="form-label"></label>
-                <input asp-for="IsFeature" class="form-control">
-                <span class="text-danger" asp-validation-for="IsFeature"></span>
-            </div>
-            <div class="mb-3 form-group imagecontainer">
-                <label asp-for="File" class="form-label"></label>
-                <input asp-for="File" accept="image/jpeg" class="form-control">
-                <span class="text-danger" asp-validation-for="File"></span>
-            </div>
-            <button type="submit" class="btn btn-primary">Create</button>
+            <button type="submit" class="ml-2 btn btn-primary">Create</button>
         </form>
     </div>
 </div>
