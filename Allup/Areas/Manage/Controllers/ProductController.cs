@@ -71,6 +71,8 @@ namespace Allup.Areas.Manage.Controllers
                 return View();
             }
 
+            List<string> photos = null;
+
             if (product.Files != null)
             {
                 foreach (var item in product.Files)
@@ -81,19 +83,33 @@ namespace Allup.Areas.Manage.Controllers
                         return View();
                     }
 
-                    if (item.CheckFileLength(15))
+                    if (item.CheckFileLength(15000))
                     {
-                        ModelState.AddModelError("File", "File must be 15kb at most!");
+                        ModelState.AddModelError("File", "File must be 15000kb at most!");
                         return View();
                     }
 
+                    photos = await product.Files.CreateAsync(_env, "assets", "images");
                 }
+            }
 
+            product.MainImage = photos[0];
+            product.HoverImage = photos[1];
+
+            List<ProductImage> productImages = null;
+
+            for (int i = 2; i <= photos.Count; i++)
+            {
+                productImages.Add(photos[i]);
             }
 
             product.CreatedAt = DateTime.UtcNow.AddHours(+4);
-
+            product.ProductName = product.ProductName.Trim();
+            //product.Price = product.Price;
+            //product.DiscountPrice = product.DiscountPrice;
+            productImages.
             await _context.Products.AddAsync(product);
+            await _context.ProductImages.AddAsync(productImages);
             await _context.SaveChangesAsync();
 
             TempData["success"] = "Product Is Created";
