@@ -42,35 +42,35 @@ namespace Allup.Extensions
 
         }
 
-        public async static Task<List<string>> CreateAsync(this List<IFormFile> files, IWebHostEnvironment env, params string[] folders)
-        {
-            List<string> photos = null;
+        //public async static Task<List<string>> CreateAsync(this List<IFormFile> files, IWebHostEnvironment env, params string[] folders)
+        //{
+        //    List<string> photos = null;
 
-            string fileName = Guid.NewGuid().ToString() + "_" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + "_";
+        //    string fileName = Guid.NewGuid().ToString() + "_" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + "_";
 
-            string path = Path.Combine(env.WebRootPath);
+        //    string path = Path.Combine(env.WebRootPath);
 
-            foreach (var file in files)
-            {
-                fileName += file.FileName;
+        //    foreach (var file in files)
+        //    {
+        //        fileName += file.FileName;
 
-                photos.Add(fileName);
+        //        photos.Add(fileName);
 
-                foreach (string folder in folders)
-                {
-                    path = Path.Combine(path, folder);
-                }
+        //        foreach (string folder in folders)
+        //        {
+        //            path = Path.Combine(path, folder);
+        //        }
 
-                path = Path.Combine(path, fileName);
+        //        path = Path.Combine(path, fileName);
 
-                using (FileStream stream = new FileStream(path, FileMode.Create))
-                {
-                    await file.CopyToAsync(stream);
-                }
-            }
+        //        using (FileStream stream = new FileStream(path, FileMode.Create))
+        //        {
+        //            await file.CopyToAsync(stream);
+        //        }
+        //    }
 
-            return photos;
-        }
+        //    return photos;
+        //}
 
     }
 }

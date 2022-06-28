@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Allup.Helper;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using Allup.Models;
@@ -25,7 +26,7 @@ namespace Allup.Areas.Manage.Controllers
             _env = env;
         }
 
-        public async Task<IActionResult> Index(int? status, int page = 1)
+        public IActionResult Index(int? status, int page = 1)
         {
             IQueryable<Product> query = _context.Products;
 
@@ -41,7 +42,8 @@ namespace Allup.Areas.Manage.Controllers
                 }
             }
 
-            int itemCount = int.Parse(_context.Settings.FirstOrDefault(s => s.Key == "PageItemsCount").Value);
+            //int itemCount = int.Parse(_context.Settings.FirstOrDefault(s => s.Key == "PageItemsCount").Value);
+            int itemCount = 10;
 
             ViewBag.Status = status;
 
@@ -52,7 +54,7 @@ namespace Allup.Areas.Manage.Controllers
         public async Task<IActionResult> Create()
         {
             ViewBag.BrandsForProducts = await _context.Brands.Where(b => !b.IsDeleted).ToListAsync();
-            ViewBag.MainCategories = await _context.Categories.Where(c => !c.IsDeleted).ToListAsync();
+            ViewBag.Categories = await _context.Categories.Where(c => !c.IsDeleted && !c.IsMain).ToListAsync();
             return View();
         }
 
@@ -61,17 +63,17 @@ namespace Allup.Areas.Manage.Controllers
         public async Task<IActionResult> Create(Product product)
         {
             ViewBag.BrandsForProducts = await _context.Brands.Where(b => !b.IsDeleted).ToListAsync();
-            ViewBag.MainCategories = await _context.Categories.Where(c => !c.IsDeleted).ToListAsync();
+            ViewBag.Categories = await _context.Categories.Where(c => !c.IsDeleted && !c.IsMain).ToListAsync();
 
             if (!ModelState.IsValid) return View();
-
+            //burdan sonra kechmir niyese 
             if (await _context.Products.AnyAsync(p => p.ProductName.ToLower().Trim() == product.ProductName.ToLower().Trim() && !p.IsDeleted))
             {
                 ModelState.AddModelError("Name", $"{product.ProductName} already exists");
                 return View();
             }
 
-            List<string> photos = null;
+            List<ProductImage> photos = null;
 
             if (product.Files != null)
             {
@@ -89,27 +91,27 @@ namespace Allup.Areas.Manage.Controllers
                         return View();
                     }
 
-                    photos = await product.Files.CreateAsync(_env, "assets", "images");
+                    //photos = await product.Files.CreateAsync(_env, "assets", "images");
                 }
             }
 
-            product.MainImage = photos[0];
-            product.HoverImage = photos[1];
+            //product.MainImage = photos[0];
+            //product.HoverImage = photos[1];
 
             List<ProductImage> productImages = null;
 
-            for (int i = 2; i <= photos.Count; i++)
-            {
-                productImages.Add(photos[i]);
-            }
+            //for (int i = 2; i <= photos.Count; i++)
+            //{
+            //    productImages.Add(photos[i]);
+            //}
 
             product.CreatedAt = DateTime.UtcNow.AddHours(+4);
             product.ProductName = product.ProductName.Trim();
             //product.Price = product.Price;
             //product.DiscountPrice = product.DiscountPrice;
-            productImages.
+
             await _context.Products.AddAsync(product);
-            await _context.ProductImages.AddAsync(productImages);
+            //await _context.ProductImages.AddAsync(productImages);
             await _context.SaveChangesAsync();
 
             TempData["success"] = "Product Is Created";
