@@ -29,7 +29,7 @@ namespace Allup.Models
         [Required]
         [StringLength(maximumLength: 4)]
         public string Seria { get; set; }
-
+        
         [Range(0, 9999)]
         [Column(TypeName = "int")]
         [Required]
