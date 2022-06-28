@@ -11,6 +11,8 @@ using Allup.Models;
 using Allup.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Allup.Extensions;
+//using Allup.DataTransferObjects;
+using Microsoft.AspNetCore.Http;
 
 namespace Allup.Areas.Manage.Controllers
 {
@@ -66,61 +68,155 @@ namespace Allup.Areas.Manage.Controllers
             ViewBag.Categories = await _context.Categories.Where(c => !c.IsDeleted && !c.IsMain).ToListAsync();
 
             if (!ModelState.IsValid) return View();
-            //burdan sonra kechmir niyese 
+
             if (await _context.Products.AnyAsync(p => p.ProductName.ToLower().Trim() == product.ProductName.ToLower().Trim() && !p.IsDeleted))
             {
                 ModelState.AddModelError("Name", $"{product.ProductName} already exists");
                 return View();
             }
+            #region trial
+            // create doljen prinimat productDTO i vmesto product nado pisat productdto
+            //vse shto posle regiona napisano posle togo kak region sozdan
+            //int code = 1;
+            //string brand = _context.Brands.FirstOrDefault(b => b.Id == productdto.BrandId).BrandName;
+            //string category = _context.Categories.FirstOrDefault(c => c.Id == productdto.CategoryId).Name;
 
-            List<ProductImage> photos = null;
+            //Product product = new Product
+            //{
+            //    ProductName = productdto.ProductName,
+            //    Price = productdto.Price,
+            //    DiscountPrice = productdto.DiscountPrice,
+            //    ExTax = productdto.ExTax,
+            //    Seria = brand.Substring(0, 2) + productdto.ProductName.Substring(0, 2),
+            //    Code = code,
+            //    Description = productdto.Description,
+            //    Count = productdto.Count,
+
+            //    BrandId = productdto.BrandId,
+            //    CategoryId = productdto.CategoryId,
+
+            //    MainImage = productdto.Files[0].FileName,
+            //    HoverImage = productdto.Files[1].FileName,
+            //    IsBestSeller = productdto.IsBestSeller,
+            //    IsFeature = productdto.IsFeature
+            //};
+
+            //code++;
+
+            //if (productdto.Files != null)
+            //{
+            //    foreach (var item in productdto.Files)
+            //    {
+            //        if (!item.CheckContentType("image/jpeg"))
+            //        {
+            //            ModelState.AddModelError("File", "You can choose only JPG(JPEG) format!");
+            //            return View();
+            //        }
+
+            //        if (item.CheckFileLength(15000))
+            //        {
+            //            ModelState.AddModelError("File", "File must be 15000kb at most!");
+            //            return View();
+            //        }
+
+            //        ProductImage productImage = new ProductImage
+            //        {
+            //            Image = await FileManager.CreateAsync(item, _env, "assets", "images"),
+            //            ProductId= product.Id
+            //        };
+            //    }
+            //}
+            #endregion
+
+            string brand = _context.Brands.FirstOrDefault(b => b.Id == product.BrandId).BrandName;
+            string category = _context.Categories.FirstOrDefault(c => c.Id == product.CategoryId).Name;
+
+            product.ProductName = product.ProductName.Trim();
+            product.Seria = (brand.Substring(0, 2) + product.ProductName.Substring(0, 2)).ToLower();
+            product.Code = 1;
+            product.IsNewArrival = true;
+            product.CreatedAt = DateTime.UtcNow.AddHours(4);
+
+            await _context.Products.AddAsync(product);
+            await _context.SaveChangesAsync();
+
+            #region foreach photos
+
+            //if (product.Files != null)
+            //{
+            //    foreach (var item in product.Files)
+            //    {
+            //        if (!item.CheckContentType("image/jpeg"))
+            //        {
+            //            ModelState.AddModelError("File", "You can choose only JPG(JPEG) format!");
+            //            return View();
+            //        }
+            //        if (item.CheckFileLength(15000))
+            //        {
+            //            ModelState.AddModelError("File", "File must be 15000kb at most!");
+            //            return View();
+            //        }
+
+            //        ProductImage productImage = new ProductImage
+            //        {
+            //            Image = await FileManager.CreateAsync(item, _env, "assets", "images"),
+            //            ProductId = product.Id
+            //        };
+
+            //        await _context.ProductImages.AddAsync(productImage);
+            //        await _context.SaveChangesAsync();
+            //    }
+            //}
+            #endregion
+
+            #region For photos
 
             if (product.Files != null)
             {
-                foreach (var item in product.Files)
+                for (int i = 0; i < product.Files.Count; i++)
                 {
-                    if (!item.CheckContentType("image/jpeg"))
+                    if (!product.Files[i].CheckContentType("image/jpeg"))
                     {
                         ModelState.AddModelError("File", "You can choose only JPG(JPEG) format!");
                         return View();
                     }
-
-                    if (item.CheckFileLength(15000))
+                    if (product.Files[i].CheckFileLength(15000))
                     {
                         ModelState.AddModelError("File", "File must be 15000kb at most!");
                         return View();
                     }
 
-                    //photos = await product.Files.CreateAsync(_env, "assets", "images");
+                    ProductImage productImage = new ProductImage
+                    {
+                        Image = await FileManager.CreateAsync(product.Files[i], _env, "assets", "images"),
+                        ProductId = product.Id
+                    };
+
+                    if (i == 0)
+                    {
+                        product.MainImage = productImage.Image;
+                    }
+                    if (i == 1)
+                    {
+                        product.HoverImage = productImage.Image;
+                    }
+
+                    _context.Products.Update(product);
+                    await _context.ProductImages.AddAsync(productImage);
+                    await _context.SaveChangesAsync();
                 }
             }
-
-            //product.MainImage = photos[0];
-            //product.HoverImage = photos[1];
-
-            List<ProductImage> productImages = null;
-
-            //for (int i = 2; i <= photos.Count; i++)
-            //{
-            //    productImages.Add(photos[i]);
-            //}
-
-            product.CreatedAt = DateTime.UtcNow.AddHours(+4);
-            product.ProductName = product.ProductName.Trim();
-            //product.Price = product.Price;
-            //product.DiscountPrice = product.DiscountPrice;
-
-            await _context.Products.AddAsync(product);
-            //await _context.ProductImages.AddAsync(productImages);
-            await _context.SaveChangesAsync();
+            #endregion
 
             TempData["success"] = "Product Is Created";
 
             return RedirectToAction("Index");
-
         }
 
-
-
+        [HttpGet]
+        public async Task<IActionResult> Update(int? id) 
+        { 
+            return View();
+        }
     }
 }

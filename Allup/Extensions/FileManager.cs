@@ -42,7 +42,7 @@ namespace Allup.Extensions
 
         }
 
-        //public async static Task<List<string>> CreateAsync(this List<IFormFile> files, IWebHostEnvironment env, params string[] folders)
+        //public async static Task<List<string>> CreateListAsync(this List<IFormFile> files, IWebHostEnvironment env, params string[] folders)
         //{
         //    List<string> photos = null;
 
@@ -71,6 +71,5 @@ namespace Allup.Extensions
 
         //    return photos;
         //}
-
     }
 }

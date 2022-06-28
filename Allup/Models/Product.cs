@@ -27,13 +27,11 @@ namespace Allup.Models
         [Column(TypeName = "money")]
         public double ExTax { get; set; }
 
-        [Required]
         [StringLength(maximumLength: 4)]
         public string Seria { get; set; }
         
         [Range(0, 9999)]
         [Column(TypeName = "int")]
-        [Required]
         public int Code { get; set; }
 
         [StringLength(maximumLength: 1000)]
@@ -70,5 +68,6 @@ namespace Allup.Models
 
         [NotMapped]
         public List<IFormFile> Files { get; set; }
+
     }
 }

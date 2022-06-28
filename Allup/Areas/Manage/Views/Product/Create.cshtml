@@ -1,4 +1,5 @@
-﻿@model Product
+﻿@*@model ProductDTO*@
+@model Product
 
 @{ SelectList selectCategoriesItems = new SelectList(ViewBag.Categories, nameof(Category.Id), nameof(Category.Name));
     SelectList selectBrandsItems = new SelectList(ViewBag.BrandsForProducts, nameof(Brand.Id), nameof(Brand.BrandName)); }
