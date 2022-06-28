@@ -11,6 +11,7 @@ namespace Allup.Models
     public class Product
     {
         public int Id { get; set; }
+
         [Required(ErrorMessage = "The Product Name field is required.")]
         [StringLength(maximumLength: 255)]
         public string ProductName { get; set; }
