@@ -237,7 +237,7 @@ namespace Allup.Areas.Manage.Controllers
 
             if (category == null) return NotFound();
 
-            if (!category.IsMain && await _context.Categories.AnyAsync(c=>c.Id == category.ParentId && c.IsDeleted))
+            if (!category.IsMain && await _context.Categories.AnyAsync(c => c.Id == category.ParentId && c.IsDeleted))
             {
                 return BadRequest();
             }

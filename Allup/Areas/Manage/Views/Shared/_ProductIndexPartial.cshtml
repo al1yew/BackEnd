@@ -24,30 +24,30 @@
         @foreach (Product product in Model)
         {
             no++;
-        <tr>
-            <td class="col-lg-1">@no</td>
-            <td class="col-lg-1">@(product.Seria + product.Code)</td>
-            <td class="col-lg-1">@product.Category</td>
-            <td class="col-lg-1">@product.Brand</td>
-            <td class="col-lg-2">@product.ProductName</td>
-            <td class="col-lg-1">$@product.DiscountPrice</td>
-            <td class="col-lg-1">$@product.Price</td>
-            <td class="col-lg-1">
-                <a class="btn btn-warning" asp-controller="Product" asp-action="Update" asp-area="Manage">Update</a>
-            </td>
-            <td class="col-lg-1">
-                @if (product.IsDeleted)
-                {
-                    <a class="btn btn-primary restoreBtn" asp-area="Manage" asp-controller="Product"
-                       asp-action="Restore" asp-route-id="@product.Id" asp-route-status="@ViewBag.Status">Restore</a>
-                }
-                else
-                {
-                    <a class="btn btn-danger deleteBtn" asp-area="Manage" asp-controller="Product"
-                       asp-action="Delete" asp-route-id="@product.Id" asp-route-status="@ViewBag.Status">Delete</a>
-                }
-            </td>
-        </tr>
+            <tr>
+                <td class="col-lg-1">@no</td>
+                <td class="col-lg-1">@(product.Seria + product.Code)</td>
+                <td class="col-lg-1">@product.Category</td>
+                <td class="col-lg-1">@product.Brand</td>
+                <td class="col-lg-2">@product.ProductName</td>
+                <td class="col-lg-1">$@product.DiscountPrice</td>
+                <td class="col-lg-1">$@product.Price</td>
+                <td class="col-lg-1">
+                    <a class="btn btn-warning" asp-controller="Product" asp-action="Update" asp-area="Manage" asp-route-id="@product.Id">Update</a>
+                </td>
+                <td class="col-lg-1">
+                    @if (product.IsDeleted)
+                    {
+                        <a class="btn btn-primary restoreBtn" asp-area="Manage" asp-controller="Product"
+                           asp-action="Restore" asp-route-id="@product.Id" asp-route-status="@ViewBag.Status">Restore</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-danger deleteBtn" asp-area="Manage" asp-controller="Product"
+                           asp-action="Delete" asp-route-id="@product.Id" asp-route-status="@ViewBag.Status">Delete</a>
+                    }
+                </td>
+            </tr>
         }
     </tbody>
 </table>

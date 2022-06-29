@@ -20,12 +20,13 @@
             </div>
             <div class="mb-3 form-group imagecontainer">
                 <label asp-for="File" class="form-label"></label>
-                <input asp-for="File" class="form-control">
+                <input asp-for="File" accept="image/jpeg" class="form-control">
                 <span class="text-danger" asp-validation-for="File"></span>
             </div>
             <div class="form-group parentcontainer">
                 <label asp-for="ParentId"></label>
                 <select asp-for="ParentId" class="form-control" asp-items="@selectListItems">
+                    <option value="">Select Main Category</option>
                 </select>
                 <span class="text-danger" asp-validation-for="ParentId"></span>
             </div>
