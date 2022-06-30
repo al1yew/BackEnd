@@ -2,7 +2,7 @@
 @inject ILayoutService layoutService
 
 @{ List<BasketViewModel> basketVMs = await layoutService.GetBasket();
-                IDictionary<string, string> settings = await layoutService.GetSetting(); }
+    IDictionary<string, string> settings = await layoutService.GetSetting(); }
 
 <!doctype html>
 <html class="no-js" lang="en">
@@ -140,6 +140,8 @@
     </section>
 
     @*@await Component.InvokeAsync("FeaturesArea", settings)*@
+
+    @*@await Component.InvokeAsync("BrandSlider", sliders)*@
 
     <!--====== Features Banner Part Ends ======-->
     <!--====== Newsletter Part Start ====== -->
