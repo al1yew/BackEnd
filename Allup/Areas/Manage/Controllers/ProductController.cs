@@ -203,11 +203,10 @@ namespace Allup.Areas.Manage.Controllers
 
                 //main image ve hover image silmek lazimdi database den
                 // icaze ermemek ki 2den az shekil olsun 
-                // main ve hoveri deyishmek mecbudi olmasin
+                // main ve hoveri deyishmek mecburi olmasin
                 //3 dene input mentigini gurmag
                 //yoxlanishlar aparmag lazimdi ki update de hamsi mecburidi ya yox,
                 //data annotationsa baxmag, burda update metodda error message elemek
-                //delete product yazmag, shekilini silmemelidi prosto isDeleted true elemeleidi
                 //evvel 10 shekil yuklesem create de sonra update edende 1 dene yuklesem, 10 shekili silir, databaseden, papkadan silir, amma productun 
                 //main image ve hover imagesinnen silmir. onlari da silmek lazimdi burda, ve if qoymaq ki yuklenen shekiller minimum 2 dene olsun, seper
 
@@ -258,5 +257,78 @@ namespace Allup.Areas.Manage.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public async Task<IActionResult> Delete(int? id, int? status, int page)
+        {
+            if (id == null) return BadRequest();
+
+            Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
+
+            if (product == null) return NotFound();
+
+            product.IsDeleted = true;
+            product.DeletedAt = DateTime.UtcNow.AddHours(4);
+
+            await _context.SaveChangesAsync();
+
+            IQueryable<Product> query = _context.Products;
+
+            if (status != null && status > 0)
+            {
+                if (status == 1)
+                {
+                    query = query.Where(p => p.IsDeleted);
+                }
+                else if (status == 2)
+                {
+                    query = query.Where(p => !p.IsDeleted);
+                }
+            }
+
+            ViewBag.Status = status;
+
+            //int itemCount = int.Parse(_context.Settings.FirstOrDefault(s => s.Key == "PageItemsCount").Value);
+
+            int itemCount = 10;
+
+            return PartialView("_ProductIndexPartial", PaginationList<Product>.Create(query, page, itemCount));
+        }
+
+        public async Task<IActionResult> Restore(int? id, int? status, int page)
+        {
+            if (id == null) return BadRequest();
+
+            Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
+
+            if (product == null) return NotFound();
+
+            product.IsDeleted = false;
+            product.DeletedAt = null;
+
+            await _context.SaveChangesAsync();
+
+            IQueryable<Product> query = _context.Products;
+
+            if (status != null && status > 0)
+            {
+                if (status == 1)
+                {
+                    query = query.Where(p => p.IsDeleted);
+                }
+                else if (status == 2)
+                {
+                    query = query.Where(p => !p.IsDeleted);
+                }
+            }
+
+            ViewBag.Status = status;
+
+            //int itemCount = int.Parse(_context.Settings.FirstOrDefault(s => s.Key == "PageItemsCount").Value);
+
+            int itemCount = 10;
+
+            return PartialView("_ProductIndexPartial", PaginationList<Product>.Create(query, page, itemCount));
+        }
+
     }
 }

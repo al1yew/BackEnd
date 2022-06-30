@@ -183,7 +183,6 @@ namespace Allup.Areas.Manage.Controllers
             return RedirectToAction("Index");
         }
 
-
         public async Task<IActionResult> Delete(int? id, int? status, int page)
         {
             if (id == null) return BadRequest();

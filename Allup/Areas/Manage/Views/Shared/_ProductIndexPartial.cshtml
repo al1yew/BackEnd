@@ -15,6 +15,7 @@
             <th>Product Name</th>
             <th>Discount Price</th>
             <th>Real Price</th>
+            <th>Status</th>
             <th>Update</th>
             <th>Clear</th>
         </tr>
@@ -32,6 +33,7 @@
                 <td class="col-lg-2">@product.ProductName</td>
                 <td class="col-lg-1">$@product.DiscountPrice</td>
                 <td class="col-lg-1">$@product.Price</td>
+                <td class="col-lg-1" style="color:@(product.IsDeleted ? "red" : "green")">@(product.IsDeleted ? "Deleted" : "Active")</td>
                 <td class="col-lg-1">
                     <a class="btn btn-warning" asp-controller="Product" asp-action="Update" asp-area="Manage" asp-route-id="@product.Id">Update</a>
                 </td>
