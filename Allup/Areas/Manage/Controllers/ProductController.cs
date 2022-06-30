@@ -75,59 +75,6 @@ namespace Allup.Areas.Manage.Controllers
                 ModelState.AddModelError("Name", $"{product.ProductName} already exists");
                 return View();
             }
-            #region trial
-            // create doljen prinimat productDTO i vmesto product nado pisat productdto
-            //vse shto posle regiona napisano posle togo kak region sozdan
-            //int code = 1;
-            //string brand = _context.Brands.FirstOrDefault(b => b.Id == productdto.BrandId).BrandName;
-            //string category = _context.Categories.FirstOrDefault(c => c.Id == productdto.CategoryId).Name;
-
-            //Product product = new Product
-            //{
-            //    ProductName = productdto.ProductName,
-            //    Price = productdto.Price,
-            //    DiscountPrice = productdto.DiscountPrice,
-            //    ExTax = productdto.ExTax,
-            //    Seria = brand.Substring(0, 2) + productdto.ProductName.Substring(0, 2),
-            //    Code = code,
-            //    Description = productdto.Description,
-            //    Count = productdto.Count,
-
-            //    BrandId = productdto.BrandId,
-            //    CategoryId = productdto.CategoryId,
-
-            //    MainImage = productdto.Files[0].FileName,
-            //    HoverImage = productdto.Files[1].FileName,
-            //    IsBestSeller = productdto.IsBestSeller,
-            //    IsFeature = productdto.IsFeature
-            //};
-
-            //code++;
-
-            //if (productdto.Files != null)
-            //{
-            //    foreach (var item in productdto.Files)
-            //    {
-            //        if (!item.CheckContentType("image/jpeg"))
-            //        {
-            //            ModelState.AddModelError("File", "You can choose only JPG(JPEG) format!");
-            //            return View();
-            //        }
-
-            //        if (item.CheckFileLength(15000))
-            //        {
-            //            ModelState.AddModelError("File", "File must be 15000kb at most!");
-            //            return View();
-            //        }
-
-            //        ProductImage productImage = new ProductImage
-            //        {
-            //            Image = await FileManager.CreateAsync(item, _env, "assets", "images"),
-            //            ProductId= product.Id
-            //        };
-            //    }
-            //}
-            #endregion
 
             string brand = _context.Brands.FirstOrDefault(b => b.Id == product.BrandId).BrandName;
             string category = _context.Categories.FirstOrDefault(c => c.Id == product.CategoryId).Name;
@@ -146,12 +93,12 @@ namespace Allup.Areas.Manage.Controllers
                 {
                     if (!product.Files[i].CheckContentType("image/jpeg"))
                     {
-                        ModelState.AddModelError("File", "You can choose only JPG(JPEG) format!");
+                        ModelState.AddModelError("File", "You can choose only jpeg(jpg) format!");
                         return View();
                     }
                     if (product.Files[i].CheckFileLength(15000))
                     {
-                        ModelState.AddModelError("File", "File must be 15000kb at most!");
+                        ModelState.AddModelError("File", "File must be 15MB at most!");
                         return View();
                     }
 
@@ -178,37 +125,6 @@ namespace Allup.Areas.Manage.Controllers
 
             await _context.Products.AddAsync(product);
             await _context.SaveChangesAsync();
-
-            #region foreach photos
-
-            //if (product.Files != null)
-            //{
-            //    foreach (var item in product.Files)
-            //    {
-            //        if (!item.CheckContentType("image/jpeg"))
-            //        {
-            //            ModelState.AddModelError("File", "You can choose only JPG(JPEG) format!");
-            //            return View();
-            //        }
-            //        if (item.CheckFileLength(15000))
-            //        {
-            //            ModelState.AddModelError("File", "File must be 15000kb at most!");
-            //            return View();
-            //        }
-
-            //        ProductImage productImage = new ProductImage
-            //        {
-            //            Image = await FileManager.CreateAsync(item, _env, "assets", "images"),
-            //            ProductId = product.Id
-            //        };
-
-            //        await _context.ProductImages.AddAsync(productImage);
-            //        await _context.SaveChangesAsync();
-            //    }
-            //}
-            #endregion
-
-            
 
             TempData["success"] = "Product Is Created";
 
@@ -271,8 +187,8 @@ namespace Allup.Areas.Manage.Controllers
             dbProduct.UpdatedAt = DateTime.UtcNow.AddHours(4);
             dbProduct.IsUpdated = true;
 
-            _context.Products.Update(dbProduct);
-            await _context.SaveChangesAsync();
+            //_context.Products.Update(dbProduct);
+            //await _context.SaveChangesAsync();
 
             if (product.Files != null)
             {
@@ -282,8 +198,20 @@ namespace Allup.Areas.Manage.Controllers
                 {
                     FileHelper.DeleteFile(_env, dbProductImages[i].Image, "assets", "images");
                     _context.ProductImages.Remove(dbProductImages[i]);
-                    await _context.SaveChangesAsync();
+                    //await _context.SaveChangesAsync();
                 }
+
+                //main image ve hover image silmek lazimdi database den
+                // icaze ermemek ki 2den az shekil olsun 
+                // main ve hoveri deyishmek mecbudi olmasin
+                //3 dene input mentigini gurmag
+                //yoxlanishlar aparmag lazimdi ki update de hamsi mecburidi ya yox,
+                //data annotationsa baxmag, burda update metodda error message elemek
+                //delete product yazmag, shekilini silmemelidi prosto isDeleted true elemeleidi
+                //evvel 10 shekil yuklesem create de sonra update edende 1 dene yuklesem, 10 shekili silir, databaseden, papkadan silir, amma productun 
+                //main image ve hover imagesinnen silmir. onlari da silmek lazimdi burda, ve if qoymaq ki yuklenen shekiller minimum 2 dene olsun, seper
+
+                List<ProductImage> productImages = new List<ProductImage>();
 
                 for (int i = 0; i < product.Files.Count; i++)
                 {
@@ -314,11 +242,17 @@ namespace Allup.Areas.Manage.Controllers
                         dbProduct.HoverImage = productImage.Image;
                     }
 
-                    _context.Products.Update(dbProduct);
-                    _context.ProductImages.Update(productImage);
-                    await _context.SaveChangesAsync();
+                    productImages.Add(productImage);
+
+                    //_context.Products.Update(dbProduct);
+                    //_context.ProductImages.Update(productImage);
+                    //await _context.SaveChangesAsync();
                 }
+
+                dbProduct.ProductImages = productImages;
             }
+
+            await _context.SaveChangesAsync();
 
             TempData["success"] = "Product Is Updated!";
 
