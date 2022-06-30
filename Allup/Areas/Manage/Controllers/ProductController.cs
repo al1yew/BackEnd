@@ -138,6 +138,44 @@ namespace Allup.Areas.Manage.Controllers
             product.IsNewArrival = true;
             product.CreatedAt = DateTime.UtcNow.AddHours(4);
 
+            if (product.Files != null)
+            {
+                List<ProductImage> productImages = new List<ProductImage>();
+
+                for (int i = 0; i < product.Files.Count; i++)
+                {
+                    if (!product.Files[i].CheckContentType("image/jpeg"))
+                    {
+                        ModelState.AddModelError("File", "You can choose only JPG(JPEG) format!");
+                        return View();
+                    }
+                    if (product.Files[i].CheckFileLength(15000))
+                    {
+                        ModelState.AddModelError("File", "File must be 15000kb at most!");
+                        return View();
+                    }
+
+                    ProductImage productImage = new ProductImage
+                    {
+                        Image = await FileManager.CreateAsync(product.Files[i], _env, "assets", "images"),
+                        ProductId = product.Id
+                    };
+
+                    if (i == 0)
+                    {
+                        product.MainImage = productImage.Image;
+                    }
+                    if (i == 1)
+                    {
+                        product.HoverImage = productImage.Image;
+                    }
+
+                    productImages.Add(productImage);
+                }
+
+                product.ProductImages = productImages;
+            }
+
             await _context.Products.AddAsync(product);
             await _context.SaveChangesAsync();
 
@@ -170,44 +208,7 @@ namespace Allup.Areas.Manage.Controllers
             //}
             #endregion
 
-            #region For photos
-
-            if (product.Files != null)
-            {
-                for (int i = 0; i < product.Files.Count; i++)
-                {
-                    if (!product.Files[i].CheckContentType("image/jpeg"))
-                    {
-                        ModelState.AddModelError("File", "You can choose only JPG(JPEG) format!");
-                        return View();
-                    }
-                    if (product.Files[i].CheckFileLength(15000))
-                    {
-                        ModelState.AddModelError("File", "File must be 15000kb at most!");
-                        return View();
-                    }
-
-                    ProductImage productImage = new ProductImage
-                    {
-                        Image = await FileManager.CreateAsync(product.Files[i], _env, "assets", "images"),
-                        ProductId = product.Id
-                    };
-
-                    if (i == 0)
-                    {
-                        product.MainImage = productImage.Image;
-                    }
-                    if (i == 1)
-                    {
-                        product.HoverImage = productImage.Image;
-                    }
-
-                    _context.Products.Update(product);
-                    await _context.ProductImages.AddAsync(productImage);
-                    await _context.SaveChangesAsync();
-                }
-            }
-            #endregion
+            
 
             TempData["success"] = "Product Is Created";
 

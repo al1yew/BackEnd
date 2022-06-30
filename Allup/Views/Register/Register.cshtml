@@ -1,6 +1,10 @@
-﻿@model List<BrandSlider>
+﻿@* eto kod iz register view indeksa *@
+
+@*@model List<BrandSlider>*@
+@model RegisterVM
+
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Register";
 }
 
 <!--====== Breadcrumb Part Start ======-->
@@ -26,35 +30,31 @@
                 <div class="login-register-wrapper mt-30">
                     <h4 class="allup-title">Creat New Account</h4>
                     <p class="mt-10">Already have an account? <a asp-controller="Login" asp-action="Index">Log in instead!</a></p>
-
-                    <form action="#">
+                    <div class="text text-danger" asp-validation-summary="ModelOnly"></div>
+                    <form method="post">
                         <div class="single-form">
-                            <input type="text" placeholder="First Name">
-                        </div>
-                        <div class="single-form">
-                            <input type="text" placeholder="Last Name">
+                            <input asp-for="Name" placeholder="First Name">
+                            <span class=" text text-danger" asp-validation-for="Name"></span>
                         </div>
                         <div class="single-form">
-                            <input type="email" placeholder="Email Address">
+                            <input asp-for="SurName" placeholder="Last Name">
+                            <span class=" text text-danger" asp-validation-for="SurName"></span>
                         </div>
                         <div class="single-form">
-                            <input type="text" placeholder="Username">
+                            <input asp-for="Email" placeholder="Email Address">
+                            <span class=" text text-danger" asp-validation-for="Email"></span>
                         </div>
                         <div class="single-form">
-                            <input type="password" placeholder="Password">
+                            <input asp-for="UserName" placeholder="Username">
+                            <span class=" text text-danger" asp-validation-for="UserName"></span>
                         </div>
                         <div class="single-form">
-                            <input type="password" placeholder="Confirm Password">
+                            <input asp-for="Password" placeholder="Password">
+                            <span class=" text text-danger" asp-validation-for="Password"></span>
                         </div>
-                        <div class="custom-checkbox mt-30">
-                            <input type="checkbox" id="account-1">
-                            <label for="account-1"></label>
-                            <p>Receive Offers From Our Partners</p>
-                        </div>
-                        <div class="custom-checkbox mt-30">
-                            <input type="checkbox" id="account-2">
-                            <label for="account-2"></label>
-                            <p>Sign Up For Our Newsletter <br> Subscribe To Our Newsletters Now And Stay Up-To-Date With New Collections, The Latest Lookbooks And Exclusive Offers..</p>
+                        <div class="single-form">
+                            <input asp-for="ConfirmPassword" placeholder="Confirm Password">
+                            <span class=" text text-danger" asp-validation-for="ConfirmPassword"></span>
                         </div>
                         <div class="single-form">
                             <button class="main-btn main-btn-2">Register</button>
@@ -67,6 +67,9 @@
 </section>
 
 <!--====== Register Part Ends ======-->
+@*@await Component.InvokeAsync("BrandSlider", Model)*@
 
-@await Component.InvokeAsync("BrandSlider", Model)
 
+@section Script{
+    <partial name="_ValidationPartial">
+}
