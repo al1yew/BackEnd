@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Allup.ViewModels.AccountViewModel
+namespace Allup.ViewModels.RegisterViewModel
 {
     public class RegisterVM
     {
@@ -23,6 +23,7 @@ namespace Allup.ViewModels.AccountViewModel
         public string Email { get; set; }
         [Required]
         [StringLength(255)]
+        [Compare(nameof(ConfirmPassword))]
         [DataType(DataType.Password)]
         public string Password { get; set; }
         [Required]

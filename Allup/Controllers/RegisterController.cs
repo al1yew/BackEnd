@@ -1,6 +1,6 @@
 ﻿using Allup.DAL;
 using Allup.Models;
-using Allup.ViewModels.AccountViewModel;
+using Allup.ViewModels.RegisterViewModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,11 +21,6 @@ namespace Allup.Controllers
             _roleManager = roleManager;
             _userManager = userManager;
         }
-
-        //public async Task<IActionResult> Index()
-        //{
-        //    return View();
-        //}
 
         [HttpGet]
         public async Task<IActionResult> Register()
@@ -51,33 +46,15 @@ namespace Allup.Controllers
                 foreach (IdentityError error in result.Errors)
                 {
                     ModelState.AddModelError("", error.Description);
-                    return View();
                 }
 
-                result = await _userManager.AddToRoleAsync(appUser, "Member");
+                return View();
             }
 
-            if (!result.Succeeded)
-            {
-                foreach (IdentityError error in result.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                    return View();
-                }
+            result = await _userManager.AddToRoleAsync(appUser, "Member");
 
-                result = await _userManager.AddToRoleAsync(appUser, "Member");
-            }
-
-            return Content("okkk");
-
+            return Content("ok");
         }
-
-
-
-
-
-
-
 
 
 
