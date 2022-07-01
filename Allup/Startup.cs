@@ -43,6 +43,8 @@ namespace Allup
                  options.Password.RequireLowercase = true;
                  options.Password.RequireNonAlphanumeric = true;
 
+
+
                  options.Lockout.AllowedForNewUsers = true;
                  options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
                  options.Lockout.MaxFailedAccessAttempts = 5;
@@ -71,6 +73,10 @@ namespace Allup
             app.UseRouting();
 
             app.UseStaticFiles();
+
+            app.UseAuthentication();
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

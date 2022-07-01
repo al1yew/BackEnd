@@ -1,4 +1,6 @@
-﻿@model List<BrandSlider>
+﻿@*@model List<BrandSlider>*@
+@model LoginVM
+
 @{
     ViewData["Title"] = "Index";
 }
@@ -25,15 +27,18 @@
             <div class="col-lg-6">
                 <div class="login-register-wrapper mt-30">
                     <h4 class="allup-title">Login to Your Account</h4>
-                    <form action="#">
+                    <div class="text text-danger" asp-validation-summary="ModelOnly"></div>
+                    <form method="post">
                         <div class="single-form">
-                            <input type="text" placeholder="Username or email *">
+                            <input asp-for="Email" placeholder="Username or email *">
+                            @*<span class=" text text-danger" asp-validation-for="Email"></span>*@
                         </div>
                         <div class="single-form">
-                            <input type="password" placeholder="Password">
+                            <input asp-for="Password" placeholder="Password">
+                            @*<span class=" text text-danger" asp-validation-for="Password"></span>*@
                         </div>
                         <div class="custom-checkbox mt-30">
-                            <input type="checkbox" id="account">
+                            <input type="checkbox" asp-for="RememberMe" id="account">
                             <label for="account"></label>
                             <p>Remember me</p>
                         </div>
@@ -42,7 +47,7 @@
                         </div>
                     </form>
                     <p class="mt-20"><a>Lost your password?</a></p>
-                    <p class="mt-10">No account? <a asp-controller="Register" asp-action="Index">Create one here.</a></p>
+                    <p class="mt-10">No account? <a asp-controller="Register" asp-action="Register">Create one here.</a></p>
                 </div>
             </div>
         </div>
@@ -50,6 +55,9 @@
 </section>
 
 <!--====== Login Part Ends ======-->
+@*@await Component.InvokeAsync("BrandSlider", Model)*@
 
 
-@await Component.InvokeAsync("BrandSlider", Model)
+@section Script{
+    <partial name="_ValidationPartial">
+}
