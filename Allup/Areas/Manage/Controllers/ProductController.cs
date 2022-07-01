@@ -209,6 +209,7 @@ namespace Allup.Areas.Manage.Controllers
                 //data annotationsa baxmag, burda update metodda error message elemek
                 //evvel 10 shekil yuklesem create de sonra update edende 1 dene yuklesem, 10 shekili silir, databaseden, papkadan silir, amma productun 
                 //main image ve hover imagesinnen silmir. onlari da silmek lazimdi burda, ve if qoymaq ki yuklenen shekiller minimum 2 dene olsun, seper
+                // razobratsa s trema inputami i privesti na ekran v view vse fotki update-delayemoqo produkta, s knopkoy X dla udaleniya
 
                 List<ProductImage> productImages = new List<ProductImage>();
 
