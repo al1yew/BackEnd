@@ -1,6 +1,7 @@
 ﻿using Allup.DAL;
 using Allup.Models;
 using Allup.ViewModels.BasketViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Allup.Controllers
 {
+    [Authorize(Roles = "Member,SuperAdmin")]
     public class ProductController : Controller
     {
         private readonly AppDbContext _context;
@@ -19,6 +21,7 @@ namespace Allup.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             List<Product> products = await _context.Products.ToListAsync();

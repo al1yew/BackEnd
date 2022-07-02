@@ -14,18 +14,18 @@
                             <li><a asp-controller="Wishlist" asp-action="Index"><i class="fal fa-heart"></i> Wishlist(0)</a></li>
                             <li>
                                 <div class="dropdown">
-                                    <button type="button" id="setting" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Setting <i class="icon ion-chevron-down"></i></button>
+                                    <button type="button" id="setting" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Account <i class="icon ion-chevron-down"></i></button>
 
                                     <ul class="dropdown-menu" aria-labelledby="setting">
                                         @if (User.Identity.IsAuthenticated)
                                         {
-                                            <li><a asp-controller="Register" asp-action="MyAccount">@User.Identity.Name</a></li>
-                                            <li><a asp-controller="Register" asp-action="Logout">Log Out</a></li>
+                                            <li><a asp-controller="Account" asp-action="MyAccount">@User.Identity.Name</a></li>
+                                            <li><a asp-controller="Account" asp-action="Logout">Log Out</a></li>
                                         }
                                         else
                                         {
-                                            <li><a asp-controller="Register" asp-action="Register">Sign Up</a></li>
-                                            <li><a asp-controller="Register" asp-action="Login">Sign in</a></li>
+                                            <li><a asp-controller="Account" asp-action="Register">Sign Up</a></li>
+                                            <li><a asp-controller="Account" asp-action="Login">Sign in</a></li>
                                         }
                                     </ul>
                                 </div>
@@ -308,8 +308,8 @@
                                             <li><a asp-controller="Compare" asp-action="Index">Compare</a></li>
                                             <li><a asp-controller="Wishlist" asp-action="Index">Wishlist</a></li>
                                             <li><a asp-controller="MyAccount" asp-action="Index">My Account</a></li>
-                                            <li><a asp-controller="Register" asp-action="Login">Login</a></li>
-                                            <li><a asp-controller="Register" asp-action="Register">Register</a></li>
+                                            <li><a asp-controller="Account" asp-action="Login">Login</a></li>
+                                            <li><a asp-controller="Account" asp-action="Register">Register</a></li>
                                         </ul>
                                     </li>
                                     <li id="product" class="header-menu-for-tabmenu product">
@@ -353,13 +353,13 @@
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                 @if (User.Identity.IsAuthenticated)
                                                 {
-                                                    <li><a asp-controller="Register" asp-action="MyAccount">@User.Identity.Name</a></li>
-                                                    <li><a asp-controller="Register" asp-action="Logout">Log Out</a></li>
+                                                    <li><a asp-controller="Account" asp-action="MyAccount">@User.Identity.Name</a></li>
+                                                    <li><a asp-controller="Account" asp-action="Logout">Log Out</a></li>
                                                 }
                                                 else
                                                 {
-                                                    <li><a asp-controller="Register" asp-action="Register">Sign Up</a></li>
-                                                    <li><a asp-controller="Register" asp-action="Login">Sign in</a></li>
+                                                    <li><a asp-controller="Account" asp-action="Register">Sign Up</a></li>
+                                                    <li><a asp-controller="Account" asp-action="Login">Sign in</a></li>
                                                 }
                                             </ul>
                                         </div>
@@ -539,8 +539,8 @@
                                 <li><a asp-controller="Compare" asp-action="Index">Compare</a></li>
                                 <li><a asp-controller="Wishlist" asp-action="Index">Wishlist</a></li>
                                 <li><a asp-controller="MyAccount" asp-action="Index">My Account</a></li>
-                                <li><a asp-controller="Register" asp-action="Login">Login</a></li>
-                                <li><a asp-controller="Register" asp-action="Register">Register</a></li>
+                                <li><a asp-controller="Account" asp-action="Login">Login</a></li>
+                                <li><a asp-controller="Account" asp-action="Register">Register</a></li>
                             </ul>
                         </li>
                         <li class="menu-item-has-children">

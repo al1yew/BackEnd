@@ -62,15 +62,12 @@ namespace Allup.Controllers
 
             result = await _userManager.AddToRoleAsync(appUser, "Member");
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login");
         }
-
 
         [HttpGet]
         public IActionResult Login()
         {
-            //return View(await _context.BrandSliders.ToListAsync());
-
             return View();
         }
 
@@ -83,6 +80,7 @@ namespace Allup.Controllers
             }
 
             AppUser appUser = await _userManager.FindByEmailAsync(loginVM.Email);
+            //mojno eshe po username sdelat shto bi on naxodil ne tolko po emailu no i po userneymu
 
             if (appUser == null)
             {
@@ -92,7 +90,7 @@ namespace Allup.Controllers
 
             if (appUser.IsAdmin)
             {
-                ModelState.AddModelError("", "You cannot sign in!");
+                ModelState.AddModelError("", "Email Or Password Is InCorrect");
                 return View(loginVM);
             }
 
