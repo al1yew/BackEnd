@@ -29,5 +29,7 @@ namespace Allup.DAL
         public DbSet<ProductToColor> ProductToColors { get; set; }
         public DbSet<Size> Sizes { get; set; }
         public DbSet<Color> Colors { get; set; }
+        public DbSet<Testimonial> Testimonials { get; set; }
+        public DbSet<Feature> Features { get; set; }
     }
 }

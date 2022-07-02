@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace Allup.ViewComponents
 {
-    public class BrandSliderViewComponent : ViewComponent
+    public class FeatureViewComponent : ViewComponent
     {
         private readonly AppDbContext _context;
-        public BrandSliderViewComponent(AppDbContext context)
+        public FeatureViewComponent(AppDbContext context)
         {
             _context = context;
         }
-        public async Task<IViewComponentResult> InvokeAsync(List<BrandSlider> brandSliders)
+        public async Task<IViewComponentResult> InvokeAsync(List<Feature> features)
         {
-            return View(await Task.FromResult(brandSliders));
+            return View(await Task.FromResult(features));
         }
     }
 }

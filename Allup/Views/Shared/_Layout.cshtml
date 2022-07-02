@@ -2,7 +2,11 @@
 @inject ILayoutService layoutService
 
 @{ List<BasketViewModel> basketVMs = await layoutService.GetBasket();
-    IDictionary<string, string> settings = await layoutService.GetSetting(); }
+    IDictionary<string, string> settings = await layoutService.GetSetting();
+    List<BrandSlider> brandSliders = await layoutService.GetBrandSlider();
+    List<Testimonial> testimonials = await layoutService.GetTestimonial();
+    List<Feature> features = await layoutService.GetFeature();
+}
 
 <!doctype html>
 <html class="no-js" lang="en">
@@ -65,7 +69,6 @@
     </style>
 
 </head>
-
 <body>
 
     <!--====== PRELOADER PART START ======-->
@@ -85,65 +88,21 @@
 
     @RenderBody()
 
+    <!--====== BrandSlider Part Start ======-->
+
+    @await Component.InvokeAsync("BrandSlider", brandSliders)
+
+    <!--====== BrandSlider Part End ======-->
     <!--====== Features Banner Part Start ======-->
 
-    <section class="features-banner-area pt-80 pb-100">
-        <div class="container-fluid custom-container">
-            <div class="features-banner-wrapper d-flex flex-wrap">
-                <div class="single-features-banner d-flex">
-                    <div class="banner-icon">
-                        <img src="~/assets/images/banner-icon/icon1.png" alt="Icon">
-                    </div>
-                    <div class="banner-content media-body">
-                        <h3 class="banner-title">Free Shipping</h3>
-                        <p>Free shipping on all US order</p>
-                    </div>
-                </div> <!-- single features banner -->
-                <div class="single-features-banner d-flex">
-                    <div class="banner-icon">
-                        <img src="~/assets/images/banner-icon/icon2.png" alt="Icon">
-                    </div>
-                    <div class="banner-content media-body">
-                        <h3 class="banner-title">Support 24/7</h3>
-                        <p>Contact us 24 hours a day</p>
-                    </div>
-                </div> <!-- single features banner -->
-                <div class="single-features-banner d-flex">
-                    <div class="banner-icon">
-                        <img src="~/assets/images/banner-icon/icon3.png" alt="Icon">
-                    </div>
-                    <div class="banner-content media-body">
-                        <h3 class="banner-title">100% Money Back</h3>
-                        <p>You have 30 days to Return</p>
-                    </div>
-                </div> <!-- single features banner -->
-                <div class="single-features-banner d-flex">
-                    <div class="banner-icon">
-                        <img src="~/assets/images/banner-icon/icon4.png" alt="Icon">
-                    </div>
-                    <div class="banner-content media-body">
-                        <h3 class="banner-title">90 Days Return</h3>
-                        <p>If goods have problems</p>
-                    </div>
-                </div> <!-- single features banner -->
-                <div class="single-features-banner d-flex">
-                    <div class="banner-icon">
-                        <img src="~/assets/images/banner-icon/icon5.png" alt="Icon">
-                    </div>
-                    <div class="banner-content media-body">
-                        <h3 class="banner-title">Payment Secure</h3>
-                        <p>We ensure secure payment</p>
-                    </div>
-                </div> <!-- single features banner -->
-            </div> <!-- features banner wrapper -->
-        </div> <!-- container -->
-    </section>
+    @await Component.InvokeAsync("Feature", features)
 
-    @*@await Component.InvokeAsync("FeaturesArea", settings)*@
+    <!--====== Features Banner Part End ======-->
+    <!--====== Testimonial Part Start ======-->
 
-    @*@await Component.InvokeAsync("BrandSlider", sliders)*@
+    @await Component.InvokeAsync("Testimonial", testimonials)
 
-    <!--====== Features Banner Part Ends ======-->
+    <!--====== Testimonial Part Ends ======-->
     <!--====== Newsletter Part Start ====== -->
 
     @await Component.InvokeAsync("NewsLetter", settings)

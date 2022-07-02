@@ -1,6 +1,6 @@
 ﻿using Allup.DAL;
 using Allup.Models;
-using Allup.ViewModels.RegisterViewModel;
+using Allup.ViewModels.AccountViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,13 +13,13 @@ using System.Threading.Tasks;
 namespace Allup.Controllers
 {
     //[Authorize(Roles = "Member")]
-    public class RegisterController : Controller
+    public class AccountController : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
 
-        public RegisterController(RoleManager<IdentityRole> roleManager, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public AccountController(RoleManager<IdentityRole> roleManager, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _roleManager = roleManager;
             _userManager = userManager;

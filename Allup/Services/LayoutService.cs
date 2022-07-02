@@ -57,5 +57,26 @@ namespace Allup.Services
 
             return settings;
         }
+
+        public async Task<List<BrandSlider>> GetBrandSlider()
+        {
+            List<BrandSlider> brandSliders = await _context.BrandSliders.ToListAsync();
+
+            return brandSliders;
+        }
+
+        public async Task<List<Testimonial>> GetTestimonial()
+        {
+            List<Testimonial> testimonials = await _context.Testimonials.ToListAsync();
+
+            return testimonials;
+        }
+
+        public async Task<List<Feature>> GetFeature()
+        {
+            List<Feature> features = await _context.Features.ToListAsync();
+
+            return features;
+        }
     }
 }

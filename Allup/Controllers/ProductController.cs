@@ -1,7 +1,6 @@
 ﻿using Allup.DAL;
 using Allup.Models;
 using Allup.ViewModels.BasketViewModels;
-using Allup.ViewModels.ProductViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -22,13 +21,9 @@ namespace Allup.Controllers
 
         public async Task<IActionResult> Index()
         {
-            ProductViewModel productViewModel = new ProductViewModel
-            {
-                Products = await _context.Products.ToListAsync(),
-                BrandSliders = await _context.BrandSliders.ToListAsync()
-            };
+            List<Product> products = await _context.Products.ToListAsync();
 
-            return View(productViewModel);
+            return View(products);
         }
 
         public async Task<IActionResult> Detail(int? id)
@@ -49,13 +44,7 @@ namespace Allup.Controllers
                 return NotFound();
             }
 
-            ProductDetailViewModel productViewModel = new ProductDetailViewModel
-            {
-                Product = product,
-                BrandSliders = await _context.BrandSliders.ToListAsync()
-            };
-
-            return View(productViewModel);
+            return View(product);
         }
 
         public async Task<IActionResult> DetailModal(int? id)

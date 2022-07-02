@@ -1,0 +1,25 @@
+﻿@model List<Testimonial>
+
+<section class="testimonial-area bg_cover pt-100 pb-100" style="background-image: url(/assets/images/bg_testimonial.jpg);">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10">
+                <div class="testimonial-active">
+                    @foreach (Testimonial testimonial in Model)
+                    {
+                        <div class="single-testimonial d-sm-flex">
+                            <div class="testimonial-author col-lg-3">
+                                <img class="img-fluid" src="~/assets/images/@testimonial.Photo" alt="author">
+                            </div>
+                            <div class="testimonial-content media-body col-lg-9">
+                                <p>@testimonial.Text</p>
+                                <h4 class="author-name">@testimonial.Name</h4>
+                                <span class="designation">@testimonial.Email</span>
+                            </div>
+                        </div> <!-- single testimonial -->
+                    }
+                </div> <!-- testimonial Active -->
+            </div>
+        </div> <!-- row -->
+    </div> <!-- container -->
+</section>

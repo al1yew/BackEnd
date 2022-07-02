@@ -1,0 +1,21 @@
+﻿@model List<Feature>
+
+<section class="features-banner-area pt-80 pb-100">
+    <div class="container-fluid custom-container">
+        <div class="features-banner-wrapper d-flex flex-wrap">
+            @foreach (Feature item in Model)
+            {
+                <div class="single-features-banner d-flex">
+                    <div class="banner-icon">
+                        <img src="~/assets/images/banner-icon/@item.Icon" alt="Icon">
+                    </div>
+                    <div class="banner-content media-body">
+                        <h3 class="banner-title">@item.HeadText</h3>
+                        <p>@item.Text</p>
+                    </div>
+                </div> <!-- single features banner -->
+            }
+        </div> <!-- features banner wrapper -->
+    </div> <!-- container -->
+</section>
+

@@ -1,4 +1,5 @@
-﻿@model ProductDetailViewModel
+﻿@model Product
+
 @{
     ViewData["Title"] = "Detail";
 }
@@ -26,7 +27,7 @@
             <div class="col-lg-6">
                 <div class="single-product-image mt-30">
                     <div class="product-single-image">
-                        @foreach (ProductImage productImage in Model.Product.ProductImages)
+                        @foreach (ProductImage productImage in Model.ProductImages)
                         {
                             <div class="single-image">
                                 <img src="~/assets/images/@productImage.Image" alt="">
@@ -35,7 +36,7 @@
                     </div>
                     <div class="product-single-thumb-image">
                         <ul class="product-single-thumb">
-                            @foreach (ProductImage productImage in Model.Product.ProductImages)
+                            @foreach (ProductImage productImage in Model.ProductImages)
                             {
                                 <li><img src="~/assets/images/@productImage.Image" alt="product"></li>
                             }
@@ -48,13 +49,13 @@
                     <div class="tags d-flex">
                         <span class="tag-title">Tags:</span>
                         <ul class="tag-list media-body">
-                            @foreach (ProductToTag productTag in Model.Product.ProductToTags)
+                            @foreach (ProductToTag productTag in Model.ProductToTags)
                             {
                                 <li><a>@productTag.Tag.TagName</a></li>
                             }
                         </ul>
                     </div>
-                    <h2 class="product-title">@Model.Product.ProductName</h2>
+                    <h2 class="product-title">@Model.ProductName</h2>
                     <div class="review-rating d-flex flex-wrap">
                         <ul class="rating">
                             <li class="rating-on"><i class="fas fa-star"></i></li>
@@ -69,35 +70,35 @@
                         </ul>
                     </div>
                     <div class="product-price">
-                        @if (Model.Product.DiscountPrice > 0)
+                        @if (Model.DiscountPrice > 0)
                         {
-                            <span class="price-sale">€@Model.Product.DiscountPrice</span>
-                            <span class="regular-price">€@Model.Product.Price</span>
+                            <span class="price-sale">€@Model.DiscountPrice</span>
+                            <span class="regular-price">€@Model.Price</span>
                         }
                         else
                         {
-                            <span class="price-sale">€@Model.Product.Price</span>
+                            <span class="price-sale">€@Model.Price</span>
                         }
                     </div>
                     <div class="product-basic-info">
                         <div class="single-info">
                             <span class="title">Ex Tax :</span>
-                            <span class="value">€@Model.Product.ExTax</span>
+                            <span class="value">€@Model.ExTax</span>
                         </div>
                         <div class="single-info">
                             <span class="title">Brand :</span>
-                            <span class="value"><a>@Model.Product.Brand</a></span>
+                            <span class="value"><a>@Model.Brand</a></span>
                         </div>
                         <div class="single-info">
                             <span class="title"> Product Code :</span>
-                            <span class="value">@(Model.Product.Seria + Model.Product.Code)</span>
+                            <span class="value">@(Model.Seria + Model.Code)</span>
                         </div>
                         <div class="single-info">
-                            <span class="title @(Model.Product.Count > 0 ?"text-success":"text-danger")"> Availability :</span>
-                            <span class="value">@(Model.Product.Count > 0 ? "In Stock" : "Out Of Stock") </span>
+                            <span class="title @(Model.Count > 0 ?"text-success":"text-danger")"> Availability :</span>
+                            <span class="value">@(Model.Count > 0 ? "In Stock" : "Out Of Stock") </span>
                         </div>
                     </div>
-                    <p>@Html.Raw(Model.Product.Description)</p>
+                    <p>@Html.Raw(Model.Description)</p>
 
                     <div class="product-size-color-quantity">
                         <div class="product-quantity mt-25">
@@ -772,4 +773,3 @@
 
 <!--====== Product Part Ends ======-->
 
-@await Component.InvokeAsync("BrandSlider", Model.BrandSliders)

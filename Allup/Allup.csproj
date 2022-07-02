@@ -13,6 +13,8 @@
     <Compile Remove="Migrations\20220622090306_AddedBrandSliderTable.Designer.cs" />
     <Compile Remove="Migrations\20220628092647_UpdatedProductsTableAddedRequired.cs" />
     <Compile Remove="Migrations\20220628092647_UpdatedProductsTableAddedRequired.Designer.cs" />
+    <Compile Remove="Migrations\20220702111732_AddedTestimonialTableAndFeaturesTable.cs" />
+    <Compile Remove="Migrations\20220702111732_AddedTestimonialTableAndFeaturesTable.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
