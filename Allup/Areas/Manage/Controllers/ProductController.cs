@@ -13,10 +13,12 @@ using Microsoft.AspNetCore.Hosting;
 using Allup.Extensions;
 //using Allup.DataTransferObjects;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Allup.Areas.Manage.Controllers
 {
     [Area("Manage")]
+    [Authorize(Roles = "SuperAdmin, Admin")]
     public class ProductController : Controller
     {
         private readonly IWebHostEnvironment _env;
