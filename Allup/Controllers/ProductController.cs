@@ -29,12 +29,10 @@ namespace Allup.Controllers
             return View(products);
         }
 
+        [Authorize(Roles = "Member")]
         public async Task<IActionResult> Detail(int? id)
         {
-            if (id == null)
-            {
-                return BadRequest();
-            }
+            if (id == null) return BadRequest();
 
             Product product = await _context.Products
                 .Include(p => p.ProductToTags).ThenInclude(pt => pt.Tag)
@@ -42,20 +40,14 @@ namespace Allup.Controllers
                 .Include(p => p.Brand)
                 .FirstOrDefaultAsync(p => p.Id == id);
 
-            if (product == null)
-            {
-                return NotFound();
-            }
+            if (product == null) return NotFound();
 
             return View(product);
         }
 
         public async Task<IActionResult> DetailModal(int? id)
         {
-            if (id == null)
-            {
-                return BadRequest();
-            }
+            if (id == null) return BadRequest();
 
             Product product = await _context.Products
                 .Include(p => p.ProductToTags).ThenInclude(pt => pt.Tag)
@@ -63,10 +55,7 @@ namespace Allup.Controllers
                 .Include(p => p.Brand)
                 .FirstOrDefaultAsync(p => p.Id == id);
 
-            if (product == null)
-            {
-                return NotFound();
-            }
+            if (product == null) return NotFound();
 
             return PartialView("_ProductModalPartial", product);
         }

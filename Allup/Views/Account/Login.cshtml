@@ -28,15 +28,14 @@
                     <div class="text text-danger" asp-validation-summary="ModelOnly"></div>
                     <form method="post">
                         <div class="single-form">
-                            <input asp-for="Email" placeholder="Username or email *">
+                            <input asp-for="Email" placeholder="Email">
                         </div>
                         <div class="single-form">
                             <input asp-for="Password" placeholder="Password">
                         </div>
                         <div class="custom-checkbox mt-30">
-                            <input type="checkbox" asp-for="RememberMe" id="account">
-                            <label for="account"></label>
-                            <p>Remember me</p>
+                            <input asp-for="RememberMe">
+                            <label asp-for="RememberMe">Remember me</label>
                         </div>
                         <div class="single-form">
                             <button class="main-btn main-btn-2">Login</button>

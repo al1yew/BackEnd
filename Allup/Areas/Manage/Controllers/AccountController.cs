@@ -31,12 +31,9 @@ namespace Allup.Areas.Manage.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM loginVM)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(loginVM);
-            }
+            if (!ModelState.IsValid) return View(loginVM);
 
-            AppUser appUser = await _userManager.Users.FirstOrDefaultAsync(u => u.NormalizedEmail == loginVM.Email.Trim().ToUpperInvariant());
+            AppUser appUser = await _userManager.Users.FirstOrDefaultAsync(u => u.NormalizedEmail == loginVM.Email.Trim().ToUpperInvariant() && u.IsAdmin);
 
             if (appUser == null)
             {
@@ -48,7 +45,7 @@ namespace Allup.Areas.Manage.Controllers
 
             if (signInResult.IsLockedOut)
             {
-                ModelState.AddModelError("", "Your account is blocked. Wait 10 minutes to login again!");
+                ModelState.AddModelError("", $"Your account is blocked. Wait {((appUser.LockoutEnd.Value - DateTime.UtcNow).TotalMinutes).ToString("0")} minutes to login again!");
                 return View(loginVM);
             }
 
@@ -59,7 +56,6 @@ namespace Allup.Areas.Manage.Controllers
             }
 
             return RedirectToAction("Index", "Home", new { area = "Manage" });
-
         }
     }
 }

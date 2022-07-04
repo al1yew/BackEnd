@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 
 namespace Allup.Controllers
 {
-    //[Authorize(Roles = "Member")]
     public class AccountController : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;
@@ -27,7 +26,7 @@ namespace Allup.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Register()
+        public IActionResult Register()
         {
             return View();
         }
@@ -35,10 +34,7 @@ namespace Allup.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterVM registerVM)
         {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
+            if (!ModelState.IsValid) return View();
 
             AppUser appUser = new AppUser
             {
@@ -74,10 +70,7 @@ namespace Allup.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM loginVM)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(loginVM);
-            }
+            if (!ModelState.IsValid) return View();
 
             AppUser appUser = await _userManager.FindByEmailAsync(loginVM.Email);
             //mojno eshe po username sdelat shto bi on naxodil ne tolko po emailu no i po userneymu
@@ -111,8 +104,6 @@ namespace Allup.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-
-
 
         #region Created Roles
 
@@ -148,6 +139,5 @@ namespace Allup.Controllers
         //    return Content("Super admin est ");
         //}
         #endregion
-
     }
 }

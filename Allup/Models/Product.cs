@@ -45,9 +45,6 @@ namespace Allup.Models
         [StringLength(maximumLength: 255)]
         public string HoverImage { get; set; }
 
-        public Brand Brand { get; set; }
-        public Nullable<int> BrandId { get; set; }
-
         public bool IsNewArrival { get; set; }
         public bool IsBestSeller { get; set; }
         public bool IsFeature { get; set; }
@@ -56,6 +53,9 @@ namespace Allup.Models
         public IEnumerable<ProductToSize> ProductToSizes { get; set; }
         public IEnumerable<ProductToTag> ProductToTags { get; set; }
         public IEnumerable<ProductImage> ProductImages { get; set; }
+
+        public Brand Brand { get; set; }
+        public Nullable<int> BrandId { get; set; }
 
         public Category Category { get; set; }
         public Nullable<int> CategoryId { get; set; }
@@ -66,8 +66,15 @@ namespace Allup.Models
         public bool IsUpdated { get; set; }
         public Nullable<DateTime> UpdatedAt { get; set; }
 
+        //[NotMapped]
+        //public List<IFormFile> Files { get; set; }
+
         [NotMapped]
-        public List<IFormFile> Files { get; set; }
+        public IFormFile MainFile { get; set; }
+        [NotMapped]
+        public IFormFile HoveFile { get; set; }
+        [NotMapped]
+        public IEnumerable<IFormFile> Files { get; set; }
 
     }
 }
