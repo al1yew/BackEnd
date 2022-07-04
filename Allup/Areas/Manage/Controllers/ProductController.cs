@@ -31,7 +31,7 @@ namespace Allup.Areas.Manage.Controllers
 
         public IActionResult Index(int? status, int page = 1)
         {
-            IQueryable<Product> query = _context.Products;
+            IQueryable<Product> query = _context.Products.Include(p => p.Category).Include(p => p.Brand);
 
             if (status != null && status > 0)
             {
@@ -53,19 +53,382 @@ namespace Allup.Areas.Manage.Controllers
             return View(PaginationList<Product>.Create(query, page, itemCount));
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            ViewBag.BrandsForProducts = await _context.Brands.Where(b => !b.IsDeleted).ToListAsync();
+            ViewBag.Categories = await _context.Categories.Where(c => !c.IsDeleted && !c.IsMain).ToListAsync();
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Product product)
+        {
+            ViewBag.BrandsForProducts = await _context.Brands.Where(b => !b.IsDeleted).ToListAsync();
+            ViewBag.Categories = await _context.Categories.Where(c => !c.IsDeleted && !c.IsMain).ToListAsync();
+
+            if (!ModelState.IsValid) return View();
+
+            if (await _context.Products.AnyAsync(p => p.ProductName.ToLower().Trim() == product.ProductName.ToLower().Trim() && !p.IsDeleted))
+            {
+                ModelState.AddModelError("ProductName", $"{product.ProductName} already exists");
+                return View();
+            }
+
+            if (!await _context.Brands.AnyAsync(b => !b.IsDeleted && b.Id == product.BrandId))
+            {
+                ModelState.AddModelError("BrandId", "Select brand");
+                return View();
+            }
+
+            if (product.CategoryId == null && !await _context.Categories.AnyAsync(c => !c.IsDeleted && !c.IsMain && c.Id == product.CategoryId))
+            {
+                ModelState.AddModelError("CategoryId", "Select category");
+                return View();
+            }
+
+            if (product.Files.Count() > 5)
+            {
+                ModelState.AddModelError("Files", "You can select maximum 5 images");
+                return View();
+            }
+
+            if (product.MainFile != null)
+            {
+                if (!product.MainFile.CheckContentType("image/jpeg")
+                    && !product.MainFile.CheckContentType("image/jpg")
+                    && !product.MainFile.CheckContentType("image/png")
+                    && !product.MainFile.CheckContentType("image/gif"))
+                {
+                    ModelState.AddModelError("MainFile", "Main image must be jpg(jpeg) format");
+                    return View();
+                }
+
+                if (product.MainFile.CheckFileLength(15000))
+                {
+                    ModelState.AddModelError("MainFile", "Main image size must be 15MB");
+                    return View();
+                }
+
+                product.MainImage = await product.MainFile.CreateAsync(_env, "assets", "images");
+            }
+            else
+            {
+                ModelState.AddModelError("MainFile", "Main image is required");
+                return View();
+            }
+
+            if (product.HoveredFile != null)
+            {
+                if (!product.MainFile.CheckContentType("image/jpeg")
+                    && !product.MainFile.CheckContentType("image/jpg")
+                    && !product.MainFile.CheckContentType("image/png")
+                    && !product.MainFile.CheckContentType("image/gif"))
+                {
+                    ModelState.AddModelError("MainFile", "Main image must be jpg(jpeg) format");
+                    return View();
+                }
+
+                if (product.HoveredFile.CheckFileLength(15000))
+                {
+                    ModelState.AddModelError("MainFile", "Main image size must be 15MB");
+                    return View();
+                }
+
+                product.HoverImage = await product.HoveredFile.CreateAsync(_env, "assets", "images");
+            }
+            else
+            {
+                ModelState.AddModelError("HoveredFile", "Hovered image is required");
+                return View();
+            }
+
+            if (product.Files != null && product.Files.Count() > 0)
+            {
+                List<ProductImage> productImages = new List<ProductImage>();
+
+                foreach (IFormFile file in product.Files)
+                {
+                    if (!file.CheckContentType("image/jpeg")
+                    && !file.CheckContentType("image/jpg")
+                    && !file.CheckContentType("image/png")
+                    && !file.CheckContentType("image/gif"))
+                    {
+                        ModelState.AddModelError("MainFile", "Main image must be jpg(jpeg) format");
+                        return View();
+                    }
+
+                    if (file.CheckFileLength(15000))
+                    {
+                        ModelState.AddModelError("MainFile", "Main image size must be 15MB");
+                        return View();
+                    }
+
+                    ProductImage productImage = new ProductImage
+                    {
+                        Image = await file.CreateAsync(_env, "assets", "images")
+                    };
+
+                    productImages.Add(productImage);
+                }
+
+                product.ProductImages = productImages;
+            }
+
+            string seria = (_context.Brands.FirstOrDefault(b => b.Id == product.BrandId).BrandName.Substring(0, 2) + product.ProductName.Trim().Substring(0, 2)).ToLower();
+            int code = _context.Products.OrderByDescending(p => p.Id).FirstOrDefault(p => p.Seria == seria) != null ? _context.Products.OrderByDescending(p => p.Id).FirstOrDefault(p => p.Seria == seria).Code += 1 : 1;
+
+            product.Code = code;
+            product.Seria = seria;
+            product.ProductName = product.ProductName.Trim();
+
+            await _context.Products.AddAsync(product);
+            await _context.SaveChangesAsync();
+
+            TempData["success"] = "Product Is Created!";
+
+            return RedirectToAction("Index");
+        }
 
 
+        [HttpGet]
+        public async Task<IActionResult> Update(int? id)
+        {
+            if (id == null) return BadRequest();
 
+            Product product = await _context.Products.Include(p => p.ProductImages).FirstOrDefaultAsync(c => !c.IsDeleted && c.Id == id);
+
+            if (product == null) return NotFound();
+
+            ViewBag.BrandsForProducts = await _context.Brands.Where(b => !b.IsDeleted).ToListAsync();
+            ViewBag.Categories = await _context.Categories.Where(c => !c.IsDeleted && !c.IsMain).ToListAsync();
+
+            return View(product);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(int? id, Product product)
+        {
+            ViewBag.BrandsForProducts = await _context.Brands.Where(b => !b.IsDeleted).ToListAsync();
+            ViewBag.Categories = await _context.Categories.Where(c => !c.IsDeleted && !c.IsMain).ToListAsync();
+
+            if (!ModelState.IsValid) return View();
+
+            if (id == null) return BadRequest();
+
+            if (id != product.Id) return BadRequest();
+
+            Product dbProduct = await _context.Products.Include(p => p.ProductImages).FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
+
+            if (dbProduct == null) return NotFound();
+
+            if (await _context.Products.AnyAsync(p => p.ProductName.ToLower().Trim() == product.ProductName.ToLower().Trim() && !p.IsDeleted))
+            {
+                ModelState.AddModelError("ProductName", $"{product.ProductName} already exists");
+                return View();
+            }
+
+            if (!await _context.Brands.AnyAsync(b => !b.IsDeleted && b.Id == product.BrandId))
+            {
+                ModelState.AddModelError("BrandId", "Select brand");
+                return View();
+            }
+
+            if (product.CategoryId == null && !await _context.Categories.AnyAsync(c => !c.IsDeleted && !c.IsMain && c.Id == product.CategoryId))
+            {
+                ModelState.AddModelError("CategoryId", "Select category");
+                return View();
+            }
+
+            int canSelectCount = 5 - dbProduct.ProductImages.Count();
+
+            if (product.Files != null && canSelectCount < product.Files.Count())
+            {
+                ModelState.AddModelError("Files", $"You can select {canSelectCount} items");
+                return View();
+            }
+
+            if (product.MainFile != null)
+            {
+                if (!product.MainFile.CheckContentType("image/jpeg")
+                    && !product.MainFile.CheckContentType("image/jpg")
+                    && !product.MainFile.CheckContentType("image/png")
+                    && !product.MainFile.CheckContentType("image/gif"))
+                {
+                    ModelState.AddModelError("MainFile", "Main image must be jpg(jpeg) format");
+                    return View();
+                }
+
+                if (product.MainFile.CheckFileLength(15000))
+                {
+                    ModelState.AddModelError("MainFile", "Main image size must be 15MB");
+                    return View();
+                }
+
+                FileHelper.DeleteFile(_env, dbProduct.MainImage, "assets", "images");
+
+                dbProduct.MainImage = await product.MainFile.CreateAsync(_env, "assets", "images");
+            }
+
+            if (product.HoveredFile != null)
+            {
+                if (!product.MainFile.CheckContentType("image/jpeg")
+                    && !product.MainFile.CheckContentType("image/jpg")
+                    && !product.MainFile.CheckContentType("image/png")
+                    && !product.MainFile.CheckContentType("image/gif"))
+                {
+                    ModelState.AddModelError("HoveredFile", "Hovered image must be jpg(jpeg) format");
+                    return View();
+                }
+
+                if (product.HoveredFile.CheckFileLength(15000))
+                {
+                    ModelState.AddModelError("HoveredFile", "Hovered image size must be 15MB");
+                    return View();
+                }
+
+                FileHelper.DeleteFile(_env, dbProduct.HoverImage, "assets", "images");
+
+                dbProduct.HoverImage = await product.HoveredFile.CreateAsync(_env, "assets", "images");
+            }
+
+            if (product.Files != null && product.Files.Count() > 0)
+            {
+                List<ProductImage> productImages = new List<ProductImage>();
+
+                foreach (IFormFile file in product.Files)
+                {
+                    if (!file.CheckContentType("image/jpeg")
+                    && !file.CheckContentType("image/jpg")
+                    && !file.CheckContentType("image/png")
+                    && !file.CheckContentType("image/gif"))
+                    {
+                        ModelState.AddModelError("Files", "Images must be image format");
+                        return View();
+                    }
+
+                    if (product.HoveredFile.CheckFileLength(15000))
+                    {
+                        ModelState.AddModelError("Files", "Each image's size must be 15MB");
+                        return View();
+                    }
+
+                    ProductImage productImage = new ProductImage
+                    {
+                        Image = await file.CreateAsync(_env, "assets", "images")
+                    };
+
+                    productImages.Add(productImage);
+                }
+
+                dbProduct.ProductImages.AddRange(productImages);
+            }
+
+            product.ProductName = product.ProductName.Trim();
+
+            await _context.SaveChangesAsync();
+
+            TempData["success"] = "Product Is Updated!";
+
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Delete(int? id, int? status, int page)
+        {
+            if (id == null) return BadRequest();
+
+            Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
+
+            if (product == null) return NotFound();
+
+            product.IsDeleted = true;
+            product.DeletedAt = DateTime.UtcNow.AddHours(4);
+
+            await _context.SaveChangesAsync();
+
+            IQueryable<Product> query = _context.Products.Include(p => p.Category).Include(p => p.Brand);
+
+            if (status != null && status > 0)
+            {
+                if (status == 1)
+                {
+                    query = query.Where(p => p.IsDeleted);
+                }
+                else if (status == 2)
+                {
+                    query = query.Where(p => !p.IsDeleted);
+                }
+            }
+
+            ViewBag.Status = status;
+
+            //int itemCount = int.Parse(_context.Settings.FirstOrDefault(s => s.Key == "PageItemsCount").Value);
+
+            int itemCount = 10;
+
+            return PartialView("_ProductIndexPartial", PaginationList<Product>.Create(query, page, itemCount));
+        }
+
+        public async Task<IActionResult> Restore(int? id, int? status, int page)
+        {
+            if (id == null) return BadRequest();
+
+            Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
+
+            if (product == null) return NotFound();
+
+            product.IsDeleted = false;
+            product.DeletedAt = null;
+
+            await _context.SaveChangesAsync();
+
+            IQueryable<Product> query = _context.Products.Include(p => p.Category).Include(p => p.Brand);
+
+            if (status != null && status > 0)
+            {
+                if (status == 1)
+                {
+                    query = query.Where(p => p.IsDeleted);
+                }
+                else if (status == 2)
+                {
+                    query = query.Where(p => !p.IsDeleted);
+                }
+            }
+
+            ViewBag.Status = status;
+
+            //int itemCount = int.Parse(_context.Settings.FirstOrDefault(s => s.Key == "PageItemsCount").Value);
+
+            int itemCount = 10;
+
+            return PartialView("_ProductIndexPartial", PaginationList<Product>.Create(query, page, itemCount));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteImage(int? id)
+        {
+            ViewBag.BrandsForProducts = await _context.Brands.Where(b => !b.IsDeleted).ToListAsync();
+            ViewBag.Categories = await _context.Categories.Where(c => !c.IsDeleted && !c.IsMain).ToListAsync();
+
+            if (id == null) return BadRequest();
+
+            ProductImage productImage = await _context.ProductImages.FirstOrDefaultAsync(p => p.Id == id);
+
+            if (productImage == null) return NotFound();
+
+            Product product = await _context.Products.Include(p => p.ProductImages).FirstOrDefaultAsync(p => p.Id == productImage.ProductId);
+
+            _context.ProductImages.Remove(productImage);
+            await _context.SaveChangesAsync();
+
+            FileHelper.DeleteFile(_env, productImage.Image, "assets", "images");
+
+            return PartialView("_ProductImagePartial", product.ProductImages);
+        }
 
         #region my Code
-
-        //[HttpGet]
-        //public async Task<IActionResult> Create()
-        //{
-        //    ViewBag.BrandsForProducts = await _context.Brands.Where(b => !b.IsDeleted).ToListAsync();
-        //    ViewBag.Categories = await _context.Categories.Where(c => !c.IsDeleted && !c.IsMain).ToListAsync();
-        //    return View();
-        //}
 
         //[HttpPost]
         //[ValidateAntiForgeryToken]
@@ -146,21 +509,6 @@ namespace Allup.Areas.Manage.Controllers
         //    TempData["success"] = "Product Is Created";
 
         //    return RedirectToAction("Index");
-        //}
-
-        //[HttpGet]
-        //public async Task<IActionResult> Update(int? id)
-        //{
-        //    if (id == null) return BadRequest();
-
-        //    Product product = await _context.Products.FirstOrDefaultAsync(c => !c.IsDeleted && c.Id == id);
-
-        //    if (product == null) return NotFound();
-
-        //    ViewBag.BrandsForProducts = await _context.Brands.Where(b => !b.IsDeleted).ToListAsync();
-        //    ViewBag.Categories = await _context.Categories.Where(c => !c.IsDeleted && !c.IsMain).ToListAsync();
-
-        //    return View(product);
         //}
 
         //[HttpPost]
@@ -274,78 +622,6 @@ namespace Allup.Areas.Manage.Controllers
         //    TempData["success"] = "Product Is Updated!";
 
         //    return RedirectToAction("Index");
-        //}
-
-        //public async Task<IActionResult> Delete(int? id, int? status, int page)
-        //{
-        //    if (id == null) return BadRequest();
-
-        //    Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
-
-        //    if (product == null) return NotFound();
-
-        //    product.IsDeleted = true;
-        //    product.DeletedAt = DateTime.UtcNow.AddHours(4);
-
-        //    await _context.SaveChangesAsync();
-
-        //    IQueryable<Product> query = _context.Products;
-
-        //    if (status != null && status > 0)
-        //    {
-        //        if (status == 1)
-        //        {
-        //            query = query.Where(p => p.IsDeleted);
-        //        }
-        //        else if (status == 2)
-        //        {
-        //            query = query.Where(p => !p.IsDeleted);
-        //        }
-        //    }
-
-        //    ViewBag.Status = status;
-
-        //    //int itemCount = int.Parse(_context.Settings.FirstOrDefault(s => s.Key == "PageItemsCount").Value);
-
-        //    int itemCount = 10;
-
-        //    return PartialView("_ProductIndexPartial", PaginationList<Product>.Create(query, page, itemCount));
-        //}
-
-        //public async Task<IActionResult> Restore(int? id, int? status, int page)
-        //{
-        //    if (id == null) return BadRequest();
-
-        //    Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
-
-        //    if (product == null) return NotFound();
-
-        //    product.IsDeleted = false;
-        //    product.DeletedAt = null;
-
-        //    await _context.SaveChangesAsync();
-
-        //    IQueryable<Product> query = _context.Products;
-
-        //    if (status != null && status > 0)
-        //    {
-        //        if (status == 1)
-        //        {
-        //            query = query.Where(p => p.IsDeleted);
-        //        }
-        //        else if (status == 2)
-        //        {
-        //            query = query.Where(p => !p.IsDeleted);
-        //        }
-        //    }
-
-        //    ViewBag.Status = status;
-
-        //    //int itemCount = int.Parse(_context.Settings.FirstOrDefault(s => s.Key == "PageItemsCount").Value);
-
-        //    int itemCount = 10;
-
-        //    return PartialView("_ProductIndexPartial", PaginationList<Product>.Create(query, page, itemCount));
         //}
 
         #endregion

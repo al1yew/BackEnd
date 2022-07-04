@@ -9,6 +9,7 @@
         <tr>
             <th>№</th>
             <th>Product Code</th>
+            <th>Product image</th>
             <th>Product Category</th>
             <th>Product's Brand</th>
             <th>Product Name</th>
@@ -16,7 +17,7 @@
             <th>Real Price</th>
             <th>Status</th>
             <th>Update</th>
-            <th>Clear</th>
+            <th>Clear/Restore</th>
         </tr>
     </thead>
 
@@ -27,9 +28,10 @@
             <tr>
                 <td class="col-lg-1">@no</td>
                 <td class="col-lg-1">@(product.Seria + product.Code)</td>
-                <td class="col-lg-1">@product.Category</td>
-                <td class="col-lg-1">@product.Brand</td>
-                <td class="col-lg-2">@product.ProductName</td>
+                <td class="col-lg-1"><img src="~/assets/images/@product.MainImage" class="img-fluid" /></td>
+                <td class="col-lg-1">@product.Category.Name</td>
+                <td class="col-lg-1">@product.Brand.BrandName</td>
+                <td class="col-lg-2"><a asp-controller="Product" asp-action="Detail" asp-route-id="@product.Id" asp-area="Manage">@product.ProductName</a></td>
                 <td class="col-lg-1">$@product.DiscountPrice</td>
                 <td class="col-lg-1">$@product.Price</td>
                 <td class="col-lg-1" style="color:@(product.IsDeleted ? "red" : "green")">@(product.IsDeleted ? "Deleted" : "Active")</td>

@@ -78,6 +78,7 @@ namespace Allup.Areas.Manage.Controllers
             //string emailConfirm = await _userManager.GenerateEmailConfirmationTokenAsync(appUser);
 
             IdentityResult identityResult = await _userManager.ResetPasswordAsync(appUser, token, resetPasswordVM.Password);
+            //IdentityResult identityResult = await _userManager.ChangeEmailAsync(appUser, token, resetPasswordVM.Password);
 
             if (!identityResult.Succeeded)
             {
@@ -88,7 +89,7 @@ namespace Allup.Areas.Manage.Controllers
 
                 return View();
             }
-
+            //mojet bit ponadobitsa sdes toje polucit status i page v skobkax kak v Index metode
             return RedirectToAction("Index");
         }
     }

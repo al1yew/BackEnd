@@ -31,7 +31,6 @@ namespace Allup.Models
         public string Seria { get; set; }
         
         [Range(0, 9999)]
-        [Column(TypeName = "int")]
         public int Code { get; set; }
 
         [StringLength(maximumLength: 1000)]
@@ -52,7 +51,7 @@ namespace Allup.Models
         public IEnumerable<ProductToColor> ProductToColors { get; set; }
         public IEnumerable<ProductToSize> ProductToSizes { get; set; }
         public IEnumerable<ProductToTag> ProductToTags { get; set; }
-        public IEnumerable<ProductImage> ProductImages { get; set; }
+        public List<ProductImage> ProductImages { get; set; }
 
         public Brand Brand { get; set; }
         public Nullable<int> BrandId { get; set; }
@@ -72,9 +71,9 @@ namespace Allup.Models
         [NotMapped]
         public IFormFile MainFile { get; set; }
         [NotMapped]
-        public IFormFile HoveFile { get; set; }
+        public IFormFile HoveredFile { get; set; }
         [NotMapped]
+        [Required]
         public IEnumerable<IFormFile> Files { get; set; }
-
     }
 }

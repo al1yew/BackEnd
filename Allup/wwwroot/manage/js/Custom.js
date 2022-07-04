@@ -71,6 +71,19 @@
         })
     })
 
+
+    $(document).on('click', '.deleteproductimage', function (e) {
+        e.preventDefault();
+
+        fetch($(this).attr('href'))
+            .then(res => res.text())
+            .then(data => {
+                $('.productimages').html(data);
+            })
+    });
+
+
+
     if ($('.isMaininput').is(":checked")) {
         $('.imagecontainer').removeClass('d-none');
         $('.parentcontainer').addClass('d-none');
