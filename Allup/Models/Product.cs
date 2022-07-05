@@ -65,15 +65,12 @@ namespace Allup.Models
         public bool IsUpdated { get; set; }
         public Nullable<DateTime> UpdatedAt { get; set; }
 
-        //[NotMapped]
-        //public List<IFormFile> Files { get; set; }
 
         [NotMapped]
         public IFormFile MainFile { get; set; }
         [NotMapped]
         public IFormFile HoveredFile { get; set; }
         [NotMapped]
-        [Required]
         public IEnumerable<IFormFile> Files { get; set; }
     }
 }

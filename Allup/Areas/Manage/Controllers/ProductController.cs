@@ -88,7 +88,7 @@ namespace Allup.Areas.Manage.Controllers
                 return View();
             }
 
-            if (product.Files.Count() > 5)
+            if (product.Files != null && product.Files.Count() > 5)
             {
                 ModelState.AddModelError("Files", "You can select maximum 5 images");
                 return View();
@@ -223,22 +223,16 @@ namespace Allup.Areas.Manage.Controllers
 
             if (dbProduct == null) return NotFound();
 
-            if (await _context.Products.AnyAsync(p => p.ProductName.ToLower().Trim() == product.ProductName.ToLower().Trim() && !p.IsDeleted))
-            {
-                ModelState.AddModelError("ProductName", $"{product.ProductName} already exists");
-                return View();
-            }
-
             if (!await _context.Brands.AnyAsync(b => !b.IsDeleted && b.Id == product.BrandId))
             {
                 ModelState.AddModelError("BrandId", "Select brand");
-                return View();
+                return View(product);
             }
 
             if (product.CategoryId == null && !await _context.Categories.AnyAsync(c => !c.IsDeleted && !c.IsMain && c.Id == product.CategoryId))
             {
                 ModelState.AddModelError("CategoryId", "Select category");
-                return View();
+                return View(product);
             }
 
             int canSelectCount = 5 - dbProduct.ProductImages.Count();
@@ -246,7 +240,7 @@ namespace Allup.Areas.Manage.Controllers
             if (product.Files != null && canSelectCount < product.Files.Count())
             {
                 ModelState.AddModelError("Files", $"You can select {canSelectCount} items");
-                return View();
+                return View(product);
             }
 
             if (product.MainFile != null)
@@ -257,13 +251,13 @@ namespace Allup.Areas.Manage.Controllers
                     && !product.MainFile.CheckContentType("image/gif"))
                 {
                     ModelState.AddModelError("MainFile", "Main image must be jpg(jpeg) format");
-                    return View();
+                    return View(product);
                 }
 
                 if (product.MainFile.CheckFileLength(15000))
                 {
                     ModelState.AddModelError("MainFile", "Main image size must be 15MB");
-                    return View();
+                    return View(product);
                 }
 
                 FileHelper.DeleteFile(_env, dbProduct.MainImage, "assets", "images");
@@ -279,13 +273,13 @@ namespace Allup.Areas.Manage.Controllers
                     && !product.MainFile.CheckContentType("image/gif"))
                 {
                     ModelState.AddModelError("HoveredFile", "Hovered image must be jpg(jpeg) format");
-                    return View();
+                    return View(product);
                 }
 
                 if (product.HoveredFile.CheckFileLength(15000))
                 {
                     ModelState.AddModelError("HoveredFile", "Hovered image size must be 15MB");
-                    return View();
+                    return View(product);
                 }
 
                 FileHelper.DeleteFile(_env, dbProduct.HoverImage, "assets", "images");
@@ -305,13 +299,13 @@ namespace Allup.Areas.Manage.Controllers
                     && !file.CheckContentType("image/gif"))
                     {
                         ModelState.AddModelError("Files", "Images must be image format");
-                        return View();
+                        return View(product);
                     }
 
                     if (product.HoveredFile.CheckFileLength(15000))
                     {
                         ModelState.AddModelError("Files", "Each image's size must be 15MB");
-                        return View();
+                        return View(product);
                     }
 
                     ProductImage productImage = new ProductImage
@@ -325,7 +319,7 @@ namespace Allup.Areas.Manage.Controllers
                 dbProduct.ProductImages.AddRange(productImages);
             }
 
-            product.ProductName = product.ProductName.Trim();
+            dbProduct.ProductName = product.ProductName.Trim();
 
             await _context.SaveChangesAsync();
 
