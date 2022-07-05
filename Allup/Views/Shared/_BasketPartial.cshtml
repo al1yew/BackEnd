@@ -1,7 +1,7 @@
 ﻿@model List<BasketViewModel>
 
 <div class="cart-btn webelement">
-    <a>
+    <a asp-controller="Basket" asp-action="Index">
         <i class="icon ion-bag"></i>
         <span class="text">Cart :</span>
         <span class="total">$@(Model.Sum(b => b.Count * b.Price) + Model.Sum(b => b.ExTax * b.Count))</span>

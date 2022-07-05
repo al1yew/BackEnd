@@ -36,7 +36,14 @@
                 <td class="col-lg-1">$@product.Price</td>
                 <td class="col-lg-1" style="color:@(product.IsDeleted ? "red" : "green")">@(product.IsDeleted ? "Deleted" : "Active")</td>
                 <td class="col-lg-1">
-                    <a class="btn btn-warning" asp-controller="Product" asp-action="Update" asp-area="Manage" asp-route-id="@product.Id">Update</a>
+                    @if (product.IsDeleted == false)
+                    {
+                        <a class="btn btn-warning" asp-controller="Product" asp-action="Update" asp-area="Manage" asp-route-id="@product.Id">Update</a>
+                    }
+                    else
+                    {
+                        <p class="test text-danger" style="font-size:14px;">Restore for Update!</p>
+                    }
                 </td>
                 <td class="col-lg-1">
                     @if (product.IsDeleted)

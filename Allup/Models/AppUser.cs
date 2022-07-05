@@ -15,10 +15,9 @@ namespace Allup.Models
         public string Surname { get; set; }
         public bool IsAdmin { get; set; }
         public bool IsDeleted { get; set; }
-        public bool IsUpdated { get; set; }
         public Nullable<DateTime> CreatedAt { get; set; }
         public Nullable<DateTime> DeletedAt { get; set; }
         public Nullable<DateTime> UpdatedAt { get; set; }
-
+        public List<Basket> Baskets { get; set; }
     }
 }

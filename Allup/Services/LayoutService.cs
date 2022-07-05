@@ -3,6 +3,7 @@ using Allup.Interfaces;
 using Allup.Models;
 using Allup.ViewModels.BasketViewModels;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
@@ -16,11 +17,13 @@ namespace Allup.Services
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly AppDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
 
-        public LayoutService(IHttpContextAccessor httpContextAccessor, AppDbContext context)
+        public LayoutService(IHttpContextAccessor httpContextAccessor, AppDbContext context, UserManager<AppUser> userManager)
         {
             _httpContextAccessor = httpContextAccessor;
             _context = context;
+            _userManager = userManager;
         }
 
         public async Task<List<BasketViewModel>> GetBasket()
@@ -36,6 +39,32 @@ namespace Allup.Services
             else
             {
                 basketVMs = new List<BasketViewModel>();
+            }
+
+            if (_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+            {
+                AppUser appUser = await _userManager.Users.Include(u => u.Baskets).FirstOrDefaultAsync(u => u.UserName == _httpContextAccessor.HttpContext.User.Identity.Name);
+
+                if (appUser.Baskets != null && appUser.Baskets.Count() > 0)
+                {
+                    foreach (var item in appUser.Baskets)
+                    {
+                        if (!basketVMs.Any(b => b.ProductId == item.ProductId))
+                        {
+                            BasketViewModel basketVM = new BasketViewModel
+                            {
+                                ProductId = item.ProductId,
+                                Count = item.Count
+                            };
+
+                            basketVMs.Add(basketVM);
+                        }
+                    }
+
+                    basket = JsonConvert.SerializeObject(basketVMs);
+
+                    _httpContextAccessor.HttpContext.Response.Cookies.Append("basket", basket);
+                }
             }
 
             foreach (BasketViewModel basketVM in basketVMs)

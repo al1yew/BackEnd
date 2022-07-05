@@ -4,14 +4,16 @@ using Allup.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Allup.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220705160948_AddedBasketTable")]
+    partial class AddedBasketTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,6 +50,9 @@ namespace Allup.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsUpdated")
                         .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")
@@ -682,7 +687,7 @@ namespace Allup.Migrations
             modelBuilder.Entity("Allup.Models.Basket", b =>
                 {
                     b.HasOne("Allup.Models.AppUser", "AppUser")
-                        .WithMany("Baskets")
+                        .WithMany()
                         .HasForeignKey("AppUserId");
 
                     b.HasOne("Allup.Models.Product", "Product")

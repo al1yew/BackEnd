@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Allup.Controllers
 {
-    [Authorize(Roles = "Member,SuperAdmin")]
+    //[Authorize(Roles = "Member,SuperAdmin")]
     public class ProductController : Controller
     {
         private readonly AppDbContext _context;

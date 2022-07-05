@@ -29,7 +29,7 @@ namespace Allup.Models
 
         [StringLength(maximumLength: 4)]
         public string Seria { get; set; }
-        
+
         [Range(0, 9999)]
         public int Code { get; set; }
 
@@ -52,6 +52,7 @@ namespace Allup.Models
         public IEnumerable<ProductToSize> ProductToSizes { get; set; }
         public IEnumerable<ProductToTag> ProductToTags { get; set; }
         public List<ProductImage> ProductImages { get; set; }
+        public IEnumerable<Basket> Baskets { get; set; }
 
         public Brand Brand { get; set; }
         public Nullable<int> BrandId { get; set; }

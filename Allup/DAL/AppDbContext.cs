@@ -31,5 +31,6 @@ namespace Allup.DAL
         public DbSet<Color> Colors { get; set; }
         public DbSet<Testimonial> Testimonials { get; set; }
         public DbSet<Feature> Features { get; set; }
+        public DbSet<Basket> Baskets { get; set; }
     }
 }

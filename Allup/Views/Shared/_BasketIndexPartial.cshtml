@@ -1,0 +1,104 @@
+﻿@model List<BasketViewModel>
+
+<div class="col-xl-8">
+    <div class="shopping-cart mt-25">
+        <h4 class="allup-title">Shopping Cart</h4>
+        <div class="shopping-cart-table table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="image">Image</th>
+                        <th class="product">Product</th>
+                        <th class="price">Price</th>
+                        <th class="quantity">Quantity</th>
+                        <th class="total">Total</th>
+                        <th class="delete">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (BasketViewModel basketVM in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div class="product-image ">
+                                    <img style="width:100px" src="~/assets/images/@basketVM.Image" alt="cart">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="product-title">
+                                    <h4 class="title"><a asp-controller="Product" asp-action="Detail" asp-route-id="@basketVM.ProductId">@basketVM.Name</a></h4>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="product-price">
+                                    <span class="price">€@basketVM.Price.ToString("F2")</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="product-quantity">
+                                    <div class="quantity mt-15 d-flex">
+                                        <a class="subCount btn" asp-controller="Basket" asp-action="UpdateCount" asp-route-id="@basketVM.ProductId"><i class="fal fa-minus"></i></a>
+                                        <input type="text" value="@basketVM.Count" />
+                                        <a class="addCount btn" asp-controller="Basket" asp-action="UpdateCount" asp-route-id="@basketVM.ProductId"><i class="fal fa-plus"></i></a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="product-total">
+                                    <span class="total-amount">€@(basketVM.Count * basketVM.Price)</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="product-delete">
+                                    <a class="deletefromcartbtn" asp-controller="Basket" asp-action="DeleteFromCart" asp-route-id="@basketVM.ProductId"><i class="fal fa-trash-alt"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="col-xl-4">
+    <div class="row">
+        <div class="col-xl-12 col-md-6">
+            <div class="cart-coupon mt-30">
+                <h5 class="title">Discount Coupon Code</h5>
+                <form action="#">
+                    <div class="single-form coupon-form d-flex flex-wrap">
+                        <input type="text" placeholder="Coupon Code">
+                        <button class="main-btn">Apply Coupon</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-xl-12 col-md-6">
+            <div class="cart-total mt-30">
+                <div class="sub-total">
+                    <div class="single-total">
+                        <span class="cart-value">Subtotal</span>
+                        <span class="cart-amount">€@(Model.Sum(b=>b.Count * b.Price) + Model.Sum(b=>b.Count * b.ExTax))</span>
+                    </div>
+                    <div class="single-total">
+                        <span class="cart-value">Shipping Cost</span>
+                        <span class="cart-amount">€3.90</span>
+                    </div>
+                </div>
+                <div class="total">
+                    <div class="single-total">
+                        <span class="cart-value">Total (tax excl.)</span>
+                        <span class="cart-amount">€22.80</span>
+                    </div>
+                    <div class="single-total">
+                        <span class="cart-value">Taxes</span>
+                        <span class="cart-amount">€0.00</span>
+                    </div>
+                </div>
+                <div class="cart-total-btn text-right">
+                    <a class="main-btn" href="#">Proceed to Checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

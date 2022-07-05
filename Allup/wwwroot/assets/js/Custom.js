@@ -81,10 +81,6 @@ $(document).ready(function () {
     })
 
 
-    //$('.addtobasket').click(function (e) {
-
-    //})
-
     $(document).on('click', '.deletefrombasket', function (e) {
         e.preventDefault();
         let url = $(this).attr('href');
@@ -96,22 +92,58 @@ $(document).ready(function () {
             })
     })
 
+
+    $(document).on('click', '.subCount', function (e) {
+        e.preventDefault();
+        let inputCount = $(this).next().val();
+
+        if (inputCount >= 2) {
+            inputCount--;
+            $(this).next().val(inputCount);
+            let url = $(this).attr('href') + '/?count=' + inputCount;
+            console.log('sub');
+            fetch(url)
+                .then(res => res.text())
+                .then(data => {
+                    $('.basketindexcontainer').html(data);
+                });
+        }
+    })
+
+
+    $(document).on('click', '.addCount', function (e) {
+        e.preventDefault();
+        let inputCount = $(this).prev().val();
+
+        if (inputCount > 0) {
+            inputCount++;
+        } else {
+            inputCount = 1;
+        }
+
+        $(this).prev().val(inputCount);
+
+        let url = $(this).attr('href') + '/?count=' + inputCount;
+        console.log('add');
+        fetch(url)
+            .then(res => res.text())
+            .then(data => {
+                $('.basketindexcontainer').html(data);
+            });
+    })
+
+
+    $(document).on('click', '.deletefromcartbtn', function (e) {
+        e.preventDefault();
+
+        fetch($(this).attr('href'))
+            .then(res => res.text())
+            .then(data => {
+                $('.basketindexcontainer').html(data);
+            })
+    })
+
     //-------------------- Tabmenu in homepage
-
-    //let path = window.location.pathname
-    //path = path.split('/')
-    //let links = $('.header-menu-for-tabmenu')
-
-    //for (let i of links) {
-    //    console.log(links.attr('class'))
-
-    //    if (links.attr('id').toLowerCase() == path[1].toLowerCase()) {
-    //        links[i].classList.add('active')
-    //    }
-    //    else {
-    //        links[i].classList.remove('active')
-    //    }
-    //}
 
     let path = window.location.pathname
     path = path.split('/')
@@ -125,7 +157,5 @@ $(document).ready(function () {
             links[i].classList.remove('active')
         }
     }
-
-
 })
 

@@ -1,0 +1,31 @@
+﻿@model List<BasketViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!--====== Breadcrumb Part Start ======-->
+
+<div class="breadcrumb-area">
+    <div class="container-fluid custom-container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="breadcrumb-item active">Cart</li>
+            </ol>
+        </nav>
+    </div> <!-- container -->
+</div>
+
+<!--====== Breadcrumb Part Ends ======-->
+<!--====== Cart Part Start ======-->
+
+<section class="cart-page pt-10">
+    <div class="container-fluid custom-container">
+        <div class="row basketindexcontainer">
+            @await Html.PartialAsync("_BasketIndexPartial", Model)
+        </div>
+    </div>
+</section>
+
+<!--====== Cart Part Ends ======-->

@@ -1,10 +1,12 @@
 ﻿using Allup.DAL;
 using Allup.Models;
 using Allup.ViewModels.AccountViewModels;
+using Allup.ViewModels.BasketViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,12 +19,17 @@ namespace Allup.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly AppDbContext _context;
 
-        public AccountController(RoleManager<IdentityRole> roleManager, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public AccountController(RoleManager<IdentityRole> roleManager,
+            UserManager<AppUser> userManager,
+            SignInManager<AppUser> signInManager,
+            AppDbContext context)
         {
             _roleManager = roleManager;
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
         }
 
         [HttpGet]
@@ -94,6 +101,80 @@ namespace Allup.Controllers
             }
 
             await _signInManager.SignInAsync(appUser, loginVM.RememberMe);
+
+            string basketCookie = HttpContext.Request.Cookies["basket"];
+
+            if (!string.IsNullOrWhiteSpace(basketCookie))
+            {
+                List<BasketViewModel> BasketViewModels = JsonConvert.DeserializeObject<List<BasketViewModel>>(basketCookie);
+
+                List<Basket> baskets = new List<Basket>();
+
+                foreach (BasketViewModel BasketViewModel in BasketViewModels)
+                {
+                    if (appUser.Baskets != null && appUser.Baskets.Count() > 0)
+                    {
+                        Basket existedBasket = appUser.Baskets.FirstOrDefault(b => b.ProductId != BasketViewModel.ProductId);
+
+                        if (existedBasket == null)
+                        {
+                            Basket basket = new Basket
+                            {
+                                AppUserId = appUser.Id,
+                                ProductId = BasketViewModel.ProductId,
+                                Count = BasketViewModel.Count
+                            };
+
+                            baskets.Add(basket);
+                        }
+                        else
+                        {
+                            existedBasket.Count += BasketViewModel.Count;
+                            BasketViewModel.Count = existedBasket.Count;
+                        }
+                    }
+                    else
+                    {
+                        Basket basket = new Basket
+                        {
+                            AppUserId = appUser.Id,
+                            ProductId = BasketViewModel.ProductId,
+                            Count = BasketViewModel.Count
+                        };
+
+                        baskets.Add(basket);
+                    }
+                }
+
+                basketCookie = JsonConvert.SerializeObject(BasketViewModels);
+
+                HttpContext.Response.Cookies.Append("basket", basketCookie);
+
+                await _context.Baskets.AddRangeAsync(baskets);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                if (appUser.Baskets != null && appUser.Baskets.Count() > 0)
+                {
+                    List<BasketViewModel> BasketViewModels = new List<BasketViewModel>();
+
+                    foreach (Basket basket in appUser.Baskets)
+                    {
+                        BasketViewModel BasketViewModel = new BasketViewModel
+                        {
+                            ProductId = basket.ProductId,
+                            Count = basket.Count
+                        };
+
+                        BasketViewModels.Add(BasketViewModel);
+                    }
+
+                    basketCookie = JsonConvert.SerializeObject(BasketViewModels);
+
+                    HttpContext.Response.Cookies.Append("basket", basketCookie);
+                }
+            }
 
             return RedirectToAction("Index", "Home");
         }

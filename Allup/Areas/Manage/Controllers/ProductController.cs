@@ -29,7 +29,7 @@ namespace Allup.Areas.Manage.Controllers
             _env = env;
         }
 
-        public IActionResult Index(int? status, int page = 1)
+        public IActionResult Index(int? status, int select, int page = 1)
         {
             IQueryable<Product> query = _context.Products.Include(p => p.Category).Include(p => p.Brand);
 
@@ -45,12 +45,16 @@ namespace Allup.Areas.Manage.Controllers
                 }
             }
 
-            //int itemCount = int.Parse(_context.Settings.FirstOrDefault(s => s.Key == "PageItemsCount").Value);
-            int itemCount = 10;
+            if (select <= 0)
+            {
+                select = 5;
+            }
+
+            ViewBag.Select = select;
 
             ViewBag.Status = status;
 
-            return View(PaginationList<Product>.Create(query, page, itemCount));
+            return View(PaginationList<Product>.Create(query, page, select));
         }
 
         [HttpGet]
