@@ -97,15 +97,22 @@ $(document).ready(function () {
         e.preventDefault();
         let inputCount = $(this).next().val();
 
-        if (inputCount >= 2) {
+        if (inputCount >= 1) {
             inputCount--;
             $(this).next().val(inputCount);
             let url = $(this).attr('href') + '/?count=' + inputCount;
             console.log('sub');
+
             fetch(url)
                 .then(res => res.text())
                 .then(data => {
                     $('.basketindexcontainer').html(data);
+
+                    fetch('/basket/getbasket')
+                        .then(res => res.text())
+                        .then(data => {
+                            $('.header-cart').html(data);
+                        });
                 });
         }
     })
@@ -129,6 +136,12 @@ $(document).ready(function () {
             .then(res => res.text())
             .then(data => {
                 $('.basketindexcontainer').html(data);
+
+                fetch('/basket/getbasket')
+                    .then(res => res.text())
+                    .then(data => {
+                        $('.header-cart').html(data);
+                    });
             });
     })
 
@@ -140,6 +153,12 @@ $(document).ready(function () {
             .then(res => res.text())
             .then(data => {
                 $('.basketindexcontainer').html(data);
+
+                fetch('/basket/getbasket')
+                    .then(res => res.text())
+                    .then(data => {
+                        $('.header-cart').html(data);
+                    });
             })
     })
 
@@ -156,6 +175,30 @@ $(document).ready(function () {
         } else {
             links[i].classList.remove('active')
         }
+    }
+
+    //-------------------- Toastr
+
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+
+    if ($('#successInput') != null) {
+        toastr["success"]($('#successInput').val(), $('#successInput').val().split(' ')[0])
     }
 })
 

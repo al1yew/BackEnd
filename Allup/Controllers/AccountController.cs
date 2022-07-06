@@ -79,7 +79,7 @@ namespace Allup.Controllers
         {
             if (!ModelState.IsValid) return View();
 
-            AppUser appUser = await _userManager.FindByEmailAsync(loginVM.Email);
+            AppUser appUser = await _userManager.Users.Include(u => u.Baskets).FirstOrDefaultAsync(u => u.NormalizedEmail == loginVM.Email.Trim().ToUpperInvariant() && !u.IsAdmin && !u.IsDeleted);
             //mojno eshe po username sdelat shto bi on naxodil ne tolko po emailu no i po userneymu
 
             if (appUser == null)
@@ -185,6 +185,58 @@ namespace Allup.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        public async Task<IActionResult> Profile()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                AppUser appUser = await _userManager.Users.FirstOrDefaultAsync(u => !u.IsAdmin && u.UserName == User.Identity.Name && !u.IsDeleted);
+
+                if (appUser == null) return NotFound();
+
+                ProfileVM profileVM = new ProfileVM
+                {
+                    Name = appUser.Name,
+                    SurName = appUser.Surname,
+                    UserName = appUser.UserName,
+                    Email = appUser.Email
+                };
+
+                return View(profileVM);
+            }
+
+            return RedirectToAction("Login");
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         #region Created Roles
 

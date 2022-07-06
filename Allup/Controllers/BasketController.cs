@@ -221,5 +221,49 @@ namespace Allup.Controllers
 
             return basketVms;
         }
+
+        public async Task<IActionResult> GetBasket()
+        {
+            string basket = HttpContext.Request.Cookies["basket"];
+
+            List<BasketViewModel> basketVMs = null;
+
+            if (!string.IsNullOrWhiteSpace(basket))
+            {
+                basketVMs = JsonConvert.DeserializeObject<List<BasketViewModel>>(basket);
+            }
+            else
+            {
+                basketVMs = new List<BasketViewModel>();
+            }
+
+            if (User.Identity.IsAuthenticated)
+            {
+                AppUser appUser = await _userManager.Users.Include(u => u.Baskets).FirstOrDefaultAsync(u => u.UserName == User.Identity.Name);
+
+                if (appUser.Baskets != null && appUser.Baskets.Count() > 0)
+                {
+                    foreach (var item in appUser.Baskets)
+                    {
+                        if (!basketVMs.Any(b => b.ProductId == item.ProductId))
+                        {
+                            BasketViewModel basketVM = new BasketViewModel
+                            {
+                                ProductId = item.ProductId,
+                                Count = item.Count
+                            };
+
+                            basketVMs.Add(basketVM);
+                        }
+                    }
+
+                    basket = JsonConvert.SerializeObject(basketVMs);
+
+                    Response.Cookies.Append("basket", basket);
+                }
+            }
+
+            return PartialView("_BasketPartial", await _getBasketItemAsync(basketVMs));
+        }
     }
 }
