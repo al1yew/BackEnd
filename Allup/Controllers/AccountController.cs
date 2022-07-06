@@ -186,11 +186,12 @@ namespace Allup.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [Authorize(Roles = "Member")]
         public async Task<IActionResult> Profile()
         {
             if (User.Identity.IsAuthenticated)
             {
-                AppUser appUser = await _userManager.Users.FirstOrDefaultAsync(u => !u.IsAdmin && u.UserName == User.Identity.Name && !u.IsDeleted);
+                AppUser appUser = await _userManager.FindByNameAsync(User.Identity.Name);
 
                 if (appUser == null) return NotFound();
 
@@ -198,34 +199,74 @@ namespace Allup.Controllers
                 {
                     Name = appUser.Name,
                     SurName = appUser.Surname,
-                    UserName = appUser.UserName,
-                    Email = appUser.Email
+                    Email = appUser.Email,
+                    UserName = appUser.UserName
                 };
 
                 return View(profileVM);
             }
 
-            return RedirectToAction("Login");
+            return RedirectToAction("login");
         }
 
+        [Authorize(Roles = "Member")]
+        [HttpPost]
+        public async Task<IActionResult> Update(ProfileVM profileVM)
+        {
+            if (!ModelState.IsValid) return View("Profile", profileVM);
 
+            AppUser dbAppUser = await _userManager.FindByNameAsync(User.Identity.Name);
 
+            if (dbAppUser.NormalizedUserName != profileVM.UserName.Trim().ToUpperInvariant() ||
+                dbAppUser.Name.ToUpperInvariant() != profileVM.Name.Trim().ToUpperInvariant() ||
+                dbAppUser.Surname.ToUpperInvariant() != profileVM.SurName.Trim().ToUpperInvariant() ||
+                dbAppUser.NormalizedEmail != profileVM.Email.Trim().ToUpperInvariant())
+            {
+                dbAppUser.Name = profileVM.Name;
+                dbAppUser.Surname = profileVM.SurName;
+                dbAppUser.Email = profileVM.Email;
+                dbAppUser.UserName = profileVM.UserName;
 
+                IdentityResult identityResult = await _userManager.UpdateAsync(dbAppUser);
 
+                if (!identityResult.Succeeded)
+                {
+                    foreach (var item in identityResult.Errors)
+                    {
+                        ModelState.AddModelError("", item.Description);
+                    }
 
+                    return View("Profile", profileVM);
+                }
 
+                TempData["success"] = "Account is updated!";
+            }
 
+            if (profileVM.CurrentPassword != null && profileVM.NewPassword != null)
+            {
+                if (await _userManager.CheckPasswordAsync(dbAppUser, profileVM.CurrentPassword) && profileVM.CurrentPassword == profileVM.NewPassword)
+                {
+                    ModelState.AddModelError("", "New password cannot be as same as current!");
+                    return View("Profile", profileVM);
+                }
 
+                IdentityResult identityResult = await _userManager.ChangePasswordAsync(dbAppUser, profileVM.CurrentPassword, profileVM.NewPassword);
 
+                if (!identityResult.Succeeded)
+                {
+                    foreach (var item in identityResult.Errors)
+                    {
+                        ModelState.AddModelError("", item.Description);
+                    }
 
+                    return View("Profile", profileVM);
+                }
 
+                TempData["success"] = "Account is Updated";
+            }
 
-
-
-
-
-
-
+            return RedirectToAction("Profile");
+        }
 
 
 

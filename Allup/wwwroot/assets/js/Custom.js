@@ -197,7 +197,7 @@ $(document).ready(function () {
         "hideMethod": "fadeOut"
     }
 
-    if ($('#successInput') != null) {
+    if ($('#successInput').val().length) {
         toastr["success"]($('#successInput').val(), $('#successInput').val().split(' ')[0])
     }
 })

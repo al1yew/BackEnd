@@ -37,6 +37,7 @@
     <link rel="stylesheet" href="~/assets/css/plugins/animate.css">
     <link rel="stylesheet" href="~/assets/css/plugins/jquery-ui.min.css">
     <link rel="stylesheet" href="~/assets/css/plugins/default.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
 
     <!--====== Main Style CSS ======-->
     <link rel="stylesheet" href="~/assets/css/style.css">
@@ -70,6 +71,11 @@
 
 </head>
 <body>
+
+    @if (TempData["success"] != null)
+    {
+        <input type="hidden" id="successInput" value="@TempData["success"]" />
+    }
 
     <!--====== PRELOADER PART START ======-->
     @*<div id="preloader">
@@ -141,7 +147,7 @@
     <script src="~/assets/js/plugins/slick.min.js"></script>
     <script src="~/assets/js/plugins/jquery.countdown.min.js"></script>
     <script src="~/assets/js/plugins/jquery-ui.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <!--Moy javascript dla modal-->
     <script src="~/assets/js/Custom.js" asp-append-version="true"></script>
     @RenderSection("Script", false)

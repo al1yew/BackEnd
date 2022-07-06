@@ -53,6 +53,7 @@ namespace Allup.Models
         public IEnumerable<ProductToTag> ProductToTags { get; set; }
         public List<ProductImage> ProductImages { get; set; }
         public IEnumerable<Basket> Baskets { get; set; }
+        public IEnumerable<OrderItem> OrderItems { get; set; }
 
         public Brand Brand { get; set; }
         public Nullable<int> BrandId { get; set; }

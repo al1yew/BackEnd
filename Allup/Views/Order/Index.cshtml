@@ -1,0 +1,60 @@
+﻿@model OrderVM
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!--====== Breadcrumb Part Start ======-->
+
+<div class="breadcrumb-area">
+    <div class="container-fluid custom-container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="breadcrumb-item active">Checkout</li>
+            </ol>
+        </nav>
+    </div> <!-- container -->
+</div>
+
+<!--====== Breadcrumb Part Ends ======-->
+<!--====== Checkout Part Start ======-->
+
+<section class="checkout-area pt-10">
+    <div class="container-fluid custom-container">
+        <div class="row">
+            <div class="col-xl-8 col-lg-7">
+                <div class="checkout-form">
+                    @await Html.PartialAsync("_OrderFormPartial", Model.Order)
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-5">
+                <div class="checkout-total-wrapper mt-30">
+                    <h4 class="allup-title">Cart Total</h4>
+                    <div class="checkout-total mt-30">
+                        <h4 class="title">Product  <span>Total</span></h4>
+                        <ul>
+                            @foreach (var item in Model.Baskets)
+                            {
+                                <li>
+                                    <p class="total-value">@item.Product.ProductName X @item.Count</p>
+                                    <p class="total-amount">€@(((item.Product.DiscountPrice > 0 ? item.Product.DiscountPrice * item.Count : item.Product.Price * item.Count)+(item.Product.ExTax*item.Count)).ToString("F2"))</p>
+                                </li>
+                            }
+                        </ul>
+                        <div class="checkout-total-sub">
+                            <p class="total-value">Sub Total</p>
+                            <p class="total-amount">€@((Model.Baskets.Sum(b=>b.Product.DiscountPrice > 0 ? b.Product.DiscountPrice * b.Count : b.Product.Price * b.Count)+Model.Baskets.Sum(b=>b.Product.ExTax * b.Count)).ToString("F2"))</p>
+                        </div>
+                        <h4 class="title mt-15">Product  <span>€@((Model.Baskets.Sum(b=>b.Product.DiscountPrice > 0 ? b.Product.DiscountPrice * b.Count : b.Product.Price * b.Count)+Model.Baskets.Sum(b=>b.Product.ExTax * b.Count)).ToString("F2"))</span></h4>
+                    </div>
+                </div>
+                <div class="checkout-btn">
+                    <button type="submit" form="orderform" class="main-btn main-btn-2" href="#">Place Order</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--====== Checkout Part Ends ======-->

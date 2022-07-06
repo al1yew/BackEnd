@@ -96,9 +96,15 @@
                     </div>
                 </div>
                 <div class="cart-total-btn text-right">
-                    <a class="main-btn" href="#">Proceed to Checkout</a>
+                    <a class="main-btn" asp-controller="Order" asp-action="Index">Proceed to Checkout</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+@section Script
+{
+    <partial name="_ValidationPartial">
+}

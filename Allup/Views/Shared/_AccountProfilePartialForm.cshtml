@@ -1,0 +1,58 @@
+﻿@model ProfileVM
+<div class="text text-danger" asp-validation-summary="ModelOnly"></div>
+<form method="post" asp-controller="Account" asp-action="Update">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="single-form">
+                <input asp-for="Name" placeholder="First Name">
+                <span class="text text-danger" asp-validation-for="Name"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="single-form">
+                <input asp-for="SurName" placeholder="Last Name">
+                <span class="text text-danger" asp-validation-for="SurName"></span>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="single-form">
+                <input asp-for="UserName" placeholder="User Name">
+                <span class="text text-danger" asp-validation-for="UserName"></span>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="single-form">
+                <input asp-for="Email" placeholder="Email address">
+                <span class="text text-danger" asp-validation-for="Email"></span>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="single-form">
+                <h5 class="title">Password change</h5>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="single-form">
+                <input asp-for="CurrentPassword" placeholder="Current Password">
+                <span class="text text-danger" asp-validation-for="CurrentPassword"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="single-form">
+                <input asp-for="NewPassword" placeholder="New Password">
+                <span class="text text-danger" asp-validation-for="NewPassword"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="single-form">
+                <input asp-for="ConfirmPasword" placeholder="Confirm Password">
+                <span class="text text-danger" asp-validation-for="ConfirmPasword"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="single-form">
+                <button class="main-btn main-btn-2" type="submit">Save Change</button>
+            </div>
+        </div>
+    </div>
+</form>
