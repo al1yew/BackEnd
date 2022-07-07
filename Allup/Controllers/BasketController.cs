@@ -140,6 +140,22 @@ namespace Allup.Controllers
 
                 basketVM.Count = count <= 0 ? 1 : count;
 
+                if (User.Identity.IsAuthenticated)
+                {
+                    AppUser appUser = await _userManager.Users.Include(u => u.Baskets).FirstOrDefaultAsync(u => u.UserName == User.Identity.Name);
+
+                    if (appUser.Baskets != null && appUser.Baskets.Count() > 0)
+                    {
+                        Basket dbBasket = appUser.Baskets.FirstOrDefault(b => b.ProductId == id);
+
+                        if (dbBasket != null)
+                        {
+                            dbBasket.Count = basketVM.Count;
+                            await _context.SaveChangesAsync();
+                        }
+                    }
+                }
+
                 basket = JsonConvert.SerializeObject(basketVMs);
 
                 HttpContext.Response.Cookies.Append("basket", basket);
@@ -168,11 +184,28 @@ namespace Allup.Controllers
 
             if (basketVM == null) return NotFound();
 
+            if (User.Identity.IsAuthenticated)
+            {
+                AppUser appUser = await _userManager.Users.Include(u => u.Baskets).FirstOrDefaultAsync(u => u.UserName == User.Identity.Name);
+
+                if (appUser.Baskets != null && appUser.Baskets.Count() > 0)
+                {
+                    Basket dbBasket = appUser.Baskets.FirstOrDefault(b => b.ProductId == id);
+
+                    if (dbBasket != null)
+                    {
+                        appUser.Baskets.Remove(dbBasket);
+                        _context.Baskets.Remove(dbBasket);
+                        await _context.SaveChangesAsync();
+                    }
+                }
+            }
+
             basketVMs.Remove(basketVM);
 
             basket = JsonConvert.SerializeObject(basketVMs);
 
-            HttpContext.Response.Cookies.Append("basket", basket);
+            Response.Cookies.Append("basket", basket);
 
             return PartialView("_BasketIndexPartial", await _getBasketItemAsync(basketVMs));
         }
@@ -187,19 +220,36 @@ namespace Allup.Controllers
 
             if (string.IsNullOrWhiteSpace(basket)) return BadRequest();
 
-            List<BasketViewModel> BasketVMs = JsonConvert.DeserializeObject<List<BasketViewModel>>(basket);
+            List<BasketViewModel> basketVMs = JsonConvert.DeserializeObject<List<BasketViewModel>>(basket);
 
-            BasketViewModel basketVM = BasketVMs.Find(b => b.ProductId == id);
+            BasketViewModel basketVM = basketVMs.Find(b => b.ProductId == id);
 
             if (basketVM == null) return NotFound();
 
-            BasketVMs.Remove(basketVM);
+            if (User.Identity.IsAuthenticated)
+            {
+                AppUser appUser = await _userManager.Users.Include(u => u.Baskets).FirstOrDefaultAsync(u => u.UserName == User.Identity.Name);
 
-            basket = JsonConvert.SerializeObject(BasketVMs);
+                if (appUser.Baskets != null && appUser.Baskets.Count() > 0)
+                {
+                    Basket dbBasket = appUser.Baskets.FirstOrDefault(b => b.ProductId == id);
 
-            HttpContext.Response.Cookies.Append("basket", basket);
+                    if (dbBasket != null)
+                    {
+                        appUser.Baskets.Remove(dbBasket);
+                        _context.Baskets.Remove(dbBasket);
+                        await _context.SaveChangesAsync();
+                    }
+                }
+            }
 
-            return PartialView("_BasketPartial", await _getBasketItemAsync(BasketVMs));
+            basketVMs.Remove(basketVM);
+
+            basket = JsonConvert.SerializeObject(basketVMs);
+
+            Response.Cookies.Append("basket", basket);
+
+            return PartialView("_BasketPartial", await _getBasketItemAsync(basketVMs));
         }
 
         private async Task<List<BasketViewModel>> _getBasketItemAsync(List<BasketViewModel> basketVms)

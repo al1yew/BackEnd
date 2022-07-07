@@ -77,6 +77,12 @@ $(document).ready(function () {
             .then(res => res.text())
             .then(data => {
                 $(".header-cart").html(data);
+
+                //fetch(/Basket/GetBasket)
+                //    .then(res => res.text())
+                //    .then(data => {
+                //        $('.basketindexcontainer').html(data);
+                //    });
             })
     })
 
@@ -89,6 +95,12 @@ $(document).ready(function () {
             .then(res => res.text())
             .then(data => {
                 $(".header-cart").html(data);
+
+                //fetch(/Basket/GetBasket)
+                //    .then(res => res.text())
+                //    .then(data => {
+                //        $('.basketindexcontainer').html(data);
+                //    });
             })
     })
 
