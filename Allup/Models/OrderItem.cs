@@ -12,7 +12,6 @@ namespace Allup.Models
         public int Count { get; set; }
         public double TotalPrice { get; set; }
 
-
         public Product Product { get; set; }
         public int ProductId { get; set; }
         public Order Order { get; set; }

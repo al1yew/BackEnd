@@ -8,16 +8,12 @@
         <span class="count">@Model.Count</span>
     </a>
 </div>
-
 <a class="mobileelement">
     <i class="fal fa-shopping-cart"></i>
     <span>@Model.Count</span>
 </a>
-
 <div class="mini-cart">
-
     <ul class="cart-items">
-
         @foreach (BasketViewModel basketViewModel in Model)
         {
             <li>
@@ -34,7 +30,6 @@
                 </div>
             </li>
         }
-
     </ul>
     <div class="price_content">
         <div class="cart-subtotals">
@@ -53,7 +48,7 @@
         </div>
     </div> <!-- price content -->
     <div class="checkout text-center">
-        <a asp-controller="Checkout" asp-action="Index" class="main-btn">Checkout</a>
+        <a asp-controller="Order" asp-action="Index" class="main-btn">Checkout</a>
     </div>
 
 </div> <!-- mini cart -->

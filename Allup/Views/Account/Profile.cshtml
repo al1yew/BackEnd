@@ -32,12 +32,6 @@
                             <a id="pills-order-tab" data-toggle="pill" href="#pills-order" role="tab" aria-controls="pills-order" aria-selected="false"><i class="far fa-shopping-cart"></i> Orders</a>
                         </li>
                         <li>
-                            <a id="pills-payment-tab" data-toggle="pill" href="#pills-payment" role="tab" aria-controls="pills-payment" aria-selected="false"><i class="fal fa-credit-card"></i> Payment Methods</a>
-                        </li>
-                        <li>
-                            <a id="pills-address-tab" data-toggle="pill" href="#pills-address" role="tab" aria-controls="pills-address" aria-selected="false"><i class="far fa-map-marker-alt"></i> Addresses</a>
-                        </li>
-                        <li>
                             <a asp-controller="Account" asp-action="Logout"><i class="far fa-sign-out-alt"></i> Logout</a>
                         </li>
                     </ul>
@@ -49,7 +43,7 @@
                         <div class="my-account-details account-wrapper">
                             <h4 class="account-title">Account Details</h4>
                             <div class="account-details">
-                                @await Html.PartialAsync("_AccountProfilePartialForm", Model)
+                                @await Html.PartialAsync("_AccountProfilePartialForm", Model.ProfileVM)
                             </div>
                         </div>
                     </div>
