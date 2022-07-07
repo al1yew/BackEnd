@@ -1,8 +1,8 @@
-﻿@model ProfileVM
+﻿@model MemberVM
 @{
     ViewData["Title"] = "Profile";
+    int no = 0;
 }
-
 <!--====== Breadcrumb Part Start ======-->
 
 <div class="breadcrumb-area">
@@ -58,61 +58,61 @@
                         <div class="my-account-order account-wrapper">
                             <h4 class="account-title">Orders</h4>
                             <div class="account-table text-center mt-30 table-responsive">
-                                <table class="table">
+                                <table class="table table-condensed" style="border-collapse:collapse;">
                                     <thead>
                                         <tr>
-                                            <th class="no">No</th>
-                                            <th class="name">Name</th>
-                                            <th class="date">Date</th>
-                                            <th class="status">Status</th>
-                                            <th class="total">Total</th>
-                                            <th class="action">Action</th>
+                                            <th>#</th>
+                                            <th>Name</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                            <th>Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mostarizing Oil</td>
-                                            <td>Aug 22, 2020</td>
-                                            <td>Pending</td>
-                                            <td>$100</td>
-                                            <td><a>View</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Katopeno Altuni</td>
-                                            <td>July 22, 2020</td>
-                                            <td>Approved</td>
-                                            <td>$45</td>
-                                            <td><a>View</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Murikhete Paris</td>
-                                            <td>June 22, 2020</td>
-                                            <td>On Hold</td>
-                                            <td>$99</td>
-                                            <td><a>View</a></td>
-                                        </tr>
+                                        @foreach (Order order in Model.Orders)
+                                        {
+                                            no++;
+                                            int itemNo = 0;
+                                            <tr data-toggle="collapse" data-target="#demo@(order.Id)" class="accordion-toggle">
+                                                <td>@no</td>
+                                                <td>@order.Name @order.SurName</td>
+                                                <td>@order.CreatedAt?.ToString("dd-MM-yyyy")</td>
+                                                <td @*class="text-success"*@>@order.OrderStatus</td>
+                                                <td @*class="text-error"*@>@order.TotalPrice</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="6" class="hiddenRow">
+                                                    <div class="accordian-body collapse" id="demo@(order.Id)">
+                                                        <table class="table table-condensed" style="border-collapse:collapse;">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>#</th>
+                                                                    <th>Product Name</th>
+                                                                    <th>Product Price</th>
+                                                                    <th>Product Count</th>
+                                                                    <th>Product totalPrice</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach (OrderItem orderItem in order.OrderItems)
+                                                                {
+                                                                    itemNo++;
+                                                                    <tr>
+                                                                        <td>@itemNo</td>
+                                                                        <td>@orderItem.Product.ProductName</td>
+                                                                        <td>@orderItem.Price</td>
+                                                                        <td>@orderItem.Count</td>
+                                                                        <td>@orderItem.TotalPrice</td>
+                                                                    </tr>
+                                                                }
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
                                     </tbody>
                                 </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="pills-payment" role="tabpanel" aria-labelledby="pills-payment-tab">
-                        <div class="my-account-payment account-wrapper">
-                            <h4 class="account-title">Payment Method</h4>
-                            <p class="mt-30">You Can't Saved Your Payment Method yet.</p>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="pills-address" role="tabpanel" aria-labelledby="pills-address-tab">
-                        <div class="my-account-address account-wrapper">
-                            <h4 class="account-title">Payment Method</h4>
-                            <div class="account-address mt-30">
-                                <h6 class="name">Alex Tuntuni</h6>
-                                <p>1355 Market St, Suite 900 <br> San Francisco, CA 94103</p>
-                                <p>Mobile: (123) 456-7890</p>
-                                <a class="main-btn main-btn-2"><i class="far fa-edit"></i> Edit Address</a>
                             </div>
                         </div>
                     </div>

@@ -1,71 +1,70 @@
 ﻿@model Order
 
-
-    <form method="post" id="orderform" asp-controller="Order" asp-action="CheckOut">
-        <div class="billing-address mt-30">
-            <h4 class="allup-title">Billing Address</h4>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="single-form">
-                        <label>First Name*</label>
-                        <input asp-for="Name" placeholder="First Name">
-                    </div>
+<form method="post" id="orderform" asp-controller="Order" asp-action="CheckOut">
+    <div class="billing-address mt-30">
+        <h4 class="allup-title">Billing Address</h4>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="single-form">
+                    <label>First Name*</label>
+                    <input asp-for="Name" placeholder="First Name">
                 </div>
-                <div class="col-md-6">
-                    <div class="single-form">
-                        <label>Last  Name*</label>
-                        <input asp-for="SurName" placeholder="Last Name">
-                    </div>
+            </div>
+            <div class="col-md-6">
+                <div class="single-form">
+                    <label>Last  Name*</label>
+                    <input asp-for="SurName" placeholder="Last Name">
                 </div>
-                <div class="col-md-6">
-                    <div class="single-form">
-                        <label>Email Address*</label>
-                        <input asp-for="Email" placeholder="Email Address">
-                    </div>
+            </div>
+            <div class="col-md-6">
+                <div class="single-form">
+                    <label>Email Address*</label>
+                    <input asp-for="Email" placeholder="Email Address">
                 </div>
-                <div class="col-md-6">
-                    <div class="single-form">
-                        <label>Phone no*</label>
-                        <input asp-for="Phone" placeholder="Phone number">
-                    </div>
+            </div>
+            <div class="col-md-6">
+                <div class="single-form">
+                    <label>Phone no*</label>
+                    <input asp-for="Phone" placeholder="Phone no">
                 </div>
-                <div class="col-md-12">
-                    <div class="single-form">
-                        <label>Company Name</label>
-                        <input asp-for="CompanyName" placeholder="Company Name">
-                    </div>
+            </div>
+            <div class="col-md-12">
+                <div class="single-form">
+                    <label>Company Name</label>
+                    <input asp-for="CompanyName" placeholder="Company Name">
                 </div>
-                <div class="col-md-12">
-                    <div class="single-form">
-                        <label>Address</label>
-                        <input asp-for="Address1" placeholder="Address Line 1">
-                        <input asp-for="Address2" placeholder="Address Line 2">
-                    </div>
+            </div>
+            <div class="col-md-12">
+                <div class="single-form">
+                    <label>Address</label>
+                    <input asp-for="Address1" placeholder="Address Line 1">
+                    <input asp-for="Address2" placeholder="Address Line 2">
                 </div>
-                <div class="col-md-12">
-                    <div class="single-form">
-                        <label>Country Name</label>
-                        <input asp-for="Country" placeholder="Country Name">
-                    </div>
+            </div>
+            <div class="col-md-12">
+                <div class="single-form">
+                    <label>Country Name</label>
+                    <input asp-for="Country" placeholder="Country Name">
                 </div>
-                <div class="col-md-6">
-                    <div class="single-form">
-                        <label>Town/City*</label>
-                        <input asp-for="TownCity" placeholder="Town/City">
-                    </div>
+            </div>
+            <div class="col-md-6">
+                <div class="single-form">
+                    <label>Town/City*</label>
+                    <input asp-for="TownCity" placeholder="Town/City">
                 </div>
-                <div class="col-md-6">
-                    <div class="single-form">
-                        <label>State*</label>
-                        <input asp-for="State" placeholder="State">
-                    </div>
+            </div>
+            <div class="col-md-6">
+                <div class="single-form">
+                    <label>State*</label>
+                    <input asp-for="State" placeholder="State">
                 </div>
-                <div class="col-md-6">
-                    <div class="single-form">
-                        <label>Zip Code*</label>
-                        <input asp-for="ZipCode" placeholder="Zip Code">
-                    </div>
+            </div>
+            <div class="col-md-6">
+                <div class="single-form">
+                    <label>Zip Code*</label>
+                    <input asp-for="ZipCode" placeholder="Zip Code">
                 </div>
             </div>
         </div>
-    </form>
+    </div>
+</form>

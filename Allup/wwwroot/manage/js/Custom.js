@@ -1,4 +1,6 @@
-﻿$(document).ready(function () {
+﻿
+
+$(document).ready(function () {
     $(document).on('click', '.deleteBtn', function (e) {
         e.preventDefault();
 
@@ -102,6 +104,46 @@
             $('.parentcontainer').removeClass('d-none');
         }
     })
+
+
+    $(document).on('click', '.Updatebtn', function (e) {
+        e.preventDefault();
+        console.log("test");
+        $(this).parent().addClass('d-none');
+        $(this).parent().next().removeClass('d-none');
+    })
+
+    $(document).on('click', '.settingUpdatebtn', function (e) {
+        e.preventDefault();
+
+        let url = $('.updateForm').attr('action');
+
+        let key = $(this).prev().attr('name');
+        let value = $(this).prev().val();
+        console.log(key)
+        console.log(value)
+
+        let bodyObj = {
+            key: key,
+            value: value
+        }
+
+        fetch(url, {
+            method: 'Post',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(bodyObj)
+        })
+            .then(res => res.text())
+            .then(data => {
+                $('.settingContainer').html(data)
+            })
+    })
+
+
+
 
     toastr.options = {
         "closeButton": true,

@@ -27,6 +27,7 @@ namespace Allup.Models
         public string State { get; set; }
         public string ZipCode { get; set; }
         public OrderStatus OrderStatus { get; set; }
+        public string Comment { get; set; }
 
         public AppUser AppUser { get; set; }
         public IEnumerable<OrderItem> OrderItems { get; set; }

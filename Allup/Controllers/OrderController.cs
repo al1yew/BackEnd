@@ -77,7 +77,7 @@ namespace Allup.Controllers
             await _context.Orders.AddAsync(order);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("index", "home");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

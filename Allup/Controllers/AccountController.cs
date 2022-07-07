@@ -1,5 +1,6 @@
 ﻿using Allup.DAL;
 using Allup.Models;
+using Allup.ViewModels;
 using Allup.ViewModels.AccountViewModels;
 using Allup.ViewModels.BasketViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -189,24 +190,27 @@ namespace Allup.Controllers
         [Authorize(Roles = "Member")]
         public async Task<IActionResult> Profile()
         {
-            if (User.Identity.IsAuthenticated)
+            AppUser appUser = await _userManager.Users
+               .Include(u => u.Orders).ThenInclude(o => o.OrderItems).ThenInclude(oi => oi.Product)
+               .FirstOrDefaultAsync(u => u.UserName == User.Identity.Name);
+
+            if (appUser == null) return NotFound();
+
+            ProfileVM profileVM = new ProfileVM
             {
-                AppUser appUser = await _userManager.FindByNameAsync(User.Identity.Name);
+                Name = appUser.Name,
+                SurName = appUser.Surname,
+                Email = appUser.Email,
+                UserName = appUser.UserName
+            };
 
-                if (appUser == null) return NotFound();
+            MemberVM memberVM = new MemberVM
+            {
+                ProfileVM = profileVM,
+                Orders = appUser.Orders
+            };
 
-                ProfileVM profileVM = new ProfileVM
-                {
-                    Name = appUser.Name,
-                    SurName = appUser.Surname,
-                    Email = appUser.Email,
-                    UserName = appUser.UserName
-                };
-
-                return View(profileVM);
-            }
-
-            return RedirectToAction("login");
+            return View(memberVM);
         }
 
         [Authorize(Roles = "Member")]

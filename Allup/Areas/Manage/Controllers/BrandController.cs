@@ -22,7 +22,7 @@ namespace Allup.Areas.Manage.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(int? status, int page = 1)
+        public IActionResult Index(int? status, int page = 1)
         {
             IQueryable<Brand> query = _context.Brands;
 
@@ -55,10 +55,7 @@ namespace Allup.Areas.Manage.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Brand brand)
         {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
+            if (!ModelState.IsValid) return View();
 
             if (await _context.Brands.AnyAsync(b => b.BrandName.ToLower().Trim() == brand.BrandName.ToLower().Trim() && !b.IsDeleted))
             {
@@ -145,9 +142,11 @@ namespace Allup.Areas.Manage.Controllers
                 }
             }
 
+            int itemCount = int.Parse(_context.Settings.FirstOrDefault(s => s.Key == "PageItemsCount").Value);
+
             ViewBag.Status = status;
 
-            return PartialView("_BrandIndexPartial", await query.ToListAsync());
+            return PartialView("_BrandIndexPartial", PaginationList<Brand>.Create(query, page, itemCount));
         }
 
         public async Task<IActionResult> Restore(int? id, int? status, int page)
