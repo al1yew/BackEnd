@@ -306,7 +306,7 @@ namespace Allup.Areas.Manage.Controllers
                         return View(product);
                     }
 
-                    if (product.HoveredFile.CheckFileLength(15000))
+                    if (file.CheckFileLength(15000))
                     {
                         ModelState.AddModelError("Files", "Each image's size must be 15MB");
                         return View(product);
