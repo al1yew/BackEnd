@@ -2,6 +2,7 @@
 using Allup.Models;
 using Allup.ViewModels.BasketViewModels;
 using Allup.ViewModels.HomeViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -14,10 +15,12 @@ namespace Allup.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly UserManager<AppUser> _userManager;
         private readonly AppDbContext _context;
-        public HomeController(AppDbContext context)
+        public HomeController(AppDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
         public async Task<IActionResult> Index()
         {
@@ -33,6 +36,13 @@ namespace Allup.Controllers
             };
 
             return View(homeViewModel);
+        }
+
+        public async Task<IActionResult> Chat()
+        {
+            List<AppUser> appUsers = await _userManager.Users.Where(u => !u.IsAdmin).ToListAsync();
+
+            return View(appUsers);
         }
     }
 }

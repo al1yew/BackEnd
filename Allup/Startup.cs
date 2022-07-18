@@ -1,4 +1,5 @@
 using Allup.DAL;
+using Allup.Hubs;
 using Allup.Interfaces;
 using Allup.Models;
 using Allup.Services;
@@ -31,6 +32,8 @@ namespace Allup
             {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
+
+            services.AddSignalR();
 
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
 
@@ -82,6 +85,7 @@ namespace Allup
                 //nado ego napisat do defaulta
                 endpoints.MapControllerRoute("default", "{controller=home}/{action=index}/{id?}");
 
+                endpoints.MapHub<Chat>("/chat");
             });
         }
     }
