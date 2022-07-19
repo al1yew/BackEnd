@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Allup.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220706192003_AdedORderAndOrderItemTAble")]
-    partial class AdedORderAndOrderItemTAble
+    [Migration("20220719163727_UpdatedAppUserTable_AddedConnectionId")]
+    partial class UpdatedAppUserTable_AddedConnectionId
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,6 +31,12 @@ namespace Allup.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ConnectedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ConnectionId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("CreatedAt")
@@ -279,6 +285,9 @@ namespace Allup.Migrations
                     b.Property<string>("AppUserId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CompanyName")
                         .HasColumnType("nvarchar(max)");
 
@@ -341,9 +350,6 @@ namespace Allup.Migrations
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
-                    b.Property<int>("MyProperty")
-                        .HasColumnType("int");
-
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
@@ -352,6 +358,9 @@ namespace Allup.Migrations
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
+
+                    b.Property<double>("TotalPrice")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 

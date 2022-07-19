@@ -31,6 +31,12 @@ namespace Allup.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("ConnectedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ConnectionId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -259,6 +265,37 @@ namespace Allup.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Features");
+                });
+
+            modelBuilder.Entity("Allup.Models.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ReceiverId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("SenderId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("Allup.Models.Order", b =>
@@ -799,6 +836,17 @@ namespace Allup.Migrations
                     b.HasOne("Allup.Models.Category", "Parent")
                         .WithMany("Children")
                         .HasForeignKey("ParentId");
+                });
+
+            modelBuilder.Entity("Allup.Models.Message", b =>
+                {
+                    b.HasOne("Allup.Models.AppUser", "Receiver")
+                        .WithMany()
+                        .HasForeignKey("ReceiverId");
+
+                    b.HasOne("Allup.Models.AppUser", "Sender")
+                        .WithMany()
+                        .HasForeignKey("SenderId");
                 });
 
             modelBuilder.Entity("Allup.Models.Order", b =>

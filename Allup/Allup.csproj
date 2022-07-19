@@ -5,19 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20220608180430_AddedTagTable.cs" />
-    <Compile Remove="Migrations\20220608180430_AddedTagTable.Designer.cs" />
-    <Compile Remove="Migrations\20220608180822_UpdatedTagTable.cs" />
-    <Compile Remove="Migrations\20220608180822_UpdatedTagTable.Designer.cs" />
-    <Compile Remove="Migrations\20220622090306_AddedBrandSliderTable.cs" />
-    <Compile Remove="Migrations\20220622090306_AddedBrandSliderTable.Designer.cs" />
-    <Compile Remove="Migrations\20220628092647_UpdatedProductsTableAddedRequired.cs" />
-    <Compile Remove="Migrations\20220628092647_UpdatedProductsTableAddedRequired.Designer.cs" />
-    <Compile Remove="Migrations\20220702111732_AddedTestimonialTableAndFeaturesTable.cs" />
-    <Compile Remove="Migrations\20220702111732_AddedTestimonialTableAndFeaturesTable.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.25" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.25" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.25" />

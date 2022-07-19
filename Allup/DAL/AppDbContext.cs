@@ -34,5 +34,6 @@ namespace Allup.DAL
         public DbSet<Basket> Baskets { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Message> Messages { get; set; }
     }
 }

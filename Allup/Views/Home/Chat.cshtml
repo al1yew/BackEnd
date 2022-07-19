@@ -1,11 +1,37 @@
 ﻿@model List<AppUser>
-
 @{
     ViewData["Title"] = "Chat";
 }
 
 <h1>Chat</h1>
-<p>Users</p>
+<h2>Users</h2>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4">
+            <ul class=" list-group">
+                @foreach (AppUser appUser in Model)
+                {
+                    <li id="@appUser.Id" data-userName="@appUser.Name @appUser.Surname" class="userItem list-group-item">@appUser.Name @appUser.Surname <span style="width:10px; height:10px" class=" @(appUser.ConnectionId != null?"bg-success":"bg-secondary")  rounded-circle"></span></li>
+                }
+            </ul>
+        </div>
+        <div class="col-lg-8">
+            <div>
+                <h3 class="sender"></h3>
+            </div>
+            <div class="messageContainer">
+                <ul class="list-group msgContainer">
 
+                </ul>
+            </div>
+            <form>
+                <input type="hidden" name="userId" id="userId" value="" />
+                <input type="text" name="message" id="message" value="" />
+                <button id="sendmessage">send</button>
+            </form>
+        </div>
+    </div>
+</div>
 
- 
+@section Script{
+}

@@ -1,9 +1,11 @@
 ﻿using Allup.DAL;
 using Allup.Enums;
+using Allup.Hubs;
 using Allup.Models;
 using Allup.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,10 +20,12 @@ namespace Allup.Areas.Manage.Controllers
     public class OrderController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IHubContext<Chat> _hubContext;
 
-        public OrderController(AppDbContext context)
+        public OrderController(AppDbContext context, IHubContext<Chat> hubContext = null)
         {
             _context = context;
+            _hubContext = hubContext;
         }
 
         public IActionResult Index(int? status, int page = 1)
@@ -63,7 +67,7 @@ namespace Allup.Areas.Manage.Controllers
         {
             if (id == null) return BadRequest();
 
-            Order order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == id);
+            Order order = await _context.Orders.Include(o => o.AppUser).FirstOrDefaultAsync(o => o.Id == id);
 
             if (order == null) return NotFound();
 
@@ -72,6 +76,11 @@ namespace Allup.Areas.Manage.Controllers
             order.Comment = Comment;
 
             await _context.SaveChangesAsync();
+
+            if (order.AppUser.ConnectionId != null && orderstatus == OrderStatus.Accepted)
+            {
+                await _hubContext.Clients.Client(order.AppUser.ConnectionId).SendAsync("orderaccepted");
+            }
 
             return RedirectToAction("index");
         }

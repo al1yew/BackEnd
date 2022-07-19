@@ -20,5 +20,8 @@ namespace Allup.Models
         public Nullable<DateTime> UpdatedAt { get; set; }
         public List<Basket> Baskets { get; set; }
         public IEnumerable<Order> Orders { get; set; }
+        public string ConnectionId { get; set; }
+        public Nullable<DateTime> ConnectedAt { get; set; }
+
     }
 }

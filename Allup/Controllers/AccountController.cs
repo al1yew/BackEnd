@@ -310,7 +310,7 @@ namespace Allup.Controllers
 
         //    appUser.IsAdmin = true;
 
-        //    await _userManager.CreateAsync(appUser, "SuperAdmin@12345");
+        //    await _userManager.CreateAsync(appUser, "Admin@123");
 
         //    await _userManager.AddToRoleAsync(appUser, "SuperAdmin");
 

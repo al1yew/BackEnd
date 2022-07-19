@@ -1,0 +1,6 @@
+﻿@model List<Message>
+
+@foreach (Message message in Model)
+{
+    <li class="list-group-item">@message.Text</li>
+}

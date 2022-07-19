@@ -150,6 +150,7 @@
     <!--====== Vendors js ======-->
     <script src="~/assets/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="~/assets/js/vendor/modernizr-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
 
     <!--====== Plugins js ======-->
     <script src="~/assets/js/plugins/popper.min.js"></script>
@@ -160,14 +161,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <!--Moy javascript dla modal-->
     <script src="~/assets/js/Custom.js" asp-append-version="true"></script>
-    @RenderSection("Script", false)
 
     <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
     <!-- <script src="~/assets/js/plugins.min.js"></script> -->
     <!--====== Main Activation js ======-->
-    <script src="~/assets/js/main.js"></script>
     <script src="~/assets/js/dist/browser/signalr.min.js"></script>
-    <script src="~/assets/js/realtime.js"></script>
+    <script src="~/assets/js/main.js"></script>
+    <script src="~/assets/js/realtime.js" asp-append-version="true"></script>
+
+    @RenderSection("Script", false)
 
 </body>
 <!-- Mirrored from demo.hasthemes.com/allup/allup/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Sep 2020 10:47:16 GMT -->

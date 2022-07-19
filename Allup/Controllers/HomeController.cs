@@ -2,6 +2,7 @@
 using Allup.Models;
 using Allup.ViewModels.BasketViewModels;
 using Allup.ViewModels.HomeViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -38,11 +39,22 @@ namespace Allup.Controllers
             return View(homeViewModel);
         }
 
+        [Authorize(Roles = "Member")]
         public async Task<IActionResult> Chat()
         {
-            List<AppUser> appUsers = await _userManager.Users.Where(u => !u.IsAdmin).ToListAsync();
+            List<AppUser> appUsers = await _userManager.Users.Where(u => !u.IsAdmin && u.UserName != User.Identity.Name).ToListAsync();
 
             return View(appUsers);
+        }
+
+        [Authorize(Roles = "Member")]
+        public async Task<IActionResult> GetMessages(string userId)
+        {
+            AppUser appUser = await _userManager.FindByNameAsync(User.Identity.Name);
+
+            List<Message> messages = await _context.Messages.Where(m => (m.SenderId == appUser.Id || m.ReceiverId == appUser.Id) && (m.ReceiverId == userId || m.SenderId == userId)).OrderBy(m => m.CreatedAt).ToListAsync();
+
+            return PartialView("_MessageListPartial", messages);
         }
     }
 }
