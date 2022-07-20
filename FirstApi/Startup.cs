@@ -24,6 +24,14 @@ namespace FirstApi
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(option =>
+            {
+                option.AddPolicy(name: "FirstApiCode", policy =>
+                {
+                    policy.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin();
+                });
+            });
+
             services.AddControllers().AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
@@ -43,6 +51,8 @@ namespace FirstApi
             }
 
             app.UseRouting();
+
+            app.UseCors("FirstApiCode");
 
             app.UseEndpoints(endpoints =>
             {
