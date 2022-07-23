@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FirstApi.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220720172835_AddedCategoryTable")]
-    partial class AddedCategoryTable
+    [Migration("20220723092150_AddedCategoryTable_WithConstraints")]
+    partial class AddedCategoryTable_WithConstraints
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,38 @@ namespace FirstApi.Data.Migrations
                 .HasAnnotation("ProductVersion", "3.1.27")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("FirstApi.Data.Entities.Brand", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsUpdated")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(255)")
+                        .HasMaxLength(255);
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Brand");
+                });
 
             modelBuilder.Entity("FirstApi.Data.Entities.Category", b =>
                 {
@@ -35,7 +67,8 @@ namespace FirstApi.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar")
+                        .HasMaxLength(500);
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -47,7 +80,9 @@ namespace FirstApi.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar")
+                        .HasMaxLength(255);
 
                     b.Property<int?>("ParentId")
                         .HasColumnType("int");

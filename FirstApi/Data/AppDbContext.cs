@@ -1,4 +1,5 @@
-﻿using FirstApi.Data.Entities;
+﻿using FirstApi.Data.Configurations;
+using FirstApi.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,5 +17,13 @@ namespace FirstApi.Data
         }
 
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Brand> Brands { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

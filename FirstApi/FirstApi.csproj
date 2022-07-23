@@ -5,6 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\20220720172835_AddedCategoryTable.cs" />
+    <Compile Remove="Data\Migrations\20220720172835_AddedCategoryTable.Designer.cs" />
+    <Compile Remove="Data\Migrations\20220723091251_AddedCategoryTable_WithConstraints.cs" />
+    <Compile Remove="Data\Migrations\20220723091251_AddedCategoryTable_WithConstraints.Designer.cs" />
+    <Compile Remove="Data\Migrations\20220723091509_AddedCategoryTable_WithConstraints.cs" />
+    <Compile Remove="Data\Migrations\20220723091509_AddedCategoryTable_WithConstraints.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.27" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.27" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.27" />

@@ -3,10 +3,28 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FirstApi.Data.Migrations
 {
-    public partial class AddedCategoryTable : Migration
+    public partial class AddedCategoryTable_WithConstraints : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Brand",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedAt = table.Column<DateTime>(nullable: true),
+                    UpdatedAt = table.Column<DateTime>(nullable: true),
+                    IsUpdated = table.Column<bool>(nullable: false),
+                    DeletedAt = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    Name = table.Column<string>(maxLength: 255, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Brand", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
@@ -18,10 +36,10 @@ namespace FirstApi.Data.Migrations
                     IsUpdated = table.Column<bool>(nullable: false),
                     DeletedAt = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(type: "nvarchar", maxLength: 255, nullable: false),
                     IsMain = table.Column<bool>(nullable: false),
                     ParentId = table.Column<int>(nullable: true),
-                    Image = table.Column<string>(nullable: true)
+                    Image = table.Column<string>(type: "nvarchar", maxLength: 500, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -42,6 +60,9 @@ namespace FirstApi.Data.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Brand");
+
             migrationBuilder.DropTable(
                 name: "Categories");
         }
