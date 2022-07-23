@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FirstApi.Data.Entities;
+using FirstApi.DTOs.BrandDTOs;
 using FirstApi.DTOs.CategoryDTOs;
 using System;
 using System.Collections.Generic;
@@ -12,29 +13,28 @@ namespace FirstApi.Mappings
     {
         public MappingProfile()
         {
+            //--------------------------Categories
+
             CreateMap<CategoryPostDto, Category>()
                 .ForMember(des => des.Name, src => src.MapFrom(x => x.Name.Trim()))
-                //.ForMember(des => des.Image, src => src.MapFrom(x => x.Image))
-                //.ForMember(des => des.ParentId, src => src.MapFrom(x => x.ParentId))
-                //.ForMember(des => des.IsMain, src => src.MapFrom(x => x.IsMain))
                 .ForMember(des => des.CreatedAt, src => src.MapFrom(x => DateTime.UtcNow.AddHours(4)));
-            //bildiyimiz category category = new category mentigidir, onu burda edirik, ve burda da ? operator ishlede
-            //bilerik, ve burda da datetime veririk, null veririk, string ve saire sheyler vere bilerik
 
             CreateMap<Category, CategoryGetDto>();
-            //    .ForMember(des => des.Name, src => src.MapFrom(x => x.Name.Trim()))
-            //    .ForMember(des => des.Image, src => src.MapFrom(x => x.Image))
-            //    .ForMember(des => des.ParentId, src => src.MapFrom(x => x.ParentId))
-            //    .ForMember(des => des.IsMain, src => src.MapFrom(x => x.IsMain));
-
-            //bulari elememek de olar cunki adlari eynidi, muelimde prop adlari ferqli idi,
-            //yani prosto controllerde _mapper yazib source ve destination qeyd edirik, burda da neyi neye cevirir onu
-            //amma .formember leri de yazsag hecne deyishmir.
 
             CreateMap<Category, CategoryListDto>();
-
+            //perviy eto source, vtoroy eto destination
             CreateMap<Category, CategoryGetDto>()
                 .ForMember(des => des.ParentCategory, src => src.MapFrom(x => x.IsMain ? null : x.Parent.Name));
+            //bunu ozumcun yoxladim amma bunsuz da olar, yuxarida bele create map var onsuzda, misalcun brandda bunu yazmiram
+
+            //--------------------------Brands
+
+            CreateMap<Brand, BrandListDto>();
+
+            CreateMap<Brand, BrandGetDto>();
+
+            CreateMap<BrandPostDto, Brand>();
+
         }
     }
 }

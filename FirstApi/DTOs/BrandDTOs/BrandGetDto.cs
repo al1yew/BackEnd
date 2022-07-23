@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FirstApi.Data.Entities
+namespace FirstApi.DTOs.BrandDTOs
 {
-    public class Brand : BaseEntity
+    public class BrandGetDto
     {
+        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

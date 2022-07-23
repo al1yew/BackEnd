@@ -14,9 +14,6 @@ namespace FirstApi.Data.Configurations
         {
             builder.Property(x => x.Name).IsRequired(true).HasMaxLength(255);
             builder.Property(x => x.Image).HasMaxLength(500);
-
-            //builder.HasOne(x => x.Parent).WithMany(x => x.Children);
-            //migration ozu relationu set edir. Id kimi
         }
     }
 }

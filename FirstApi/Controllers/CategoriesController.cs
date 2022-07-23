@@ -65,25 +65,6 @@ namespace FirstApi.Controllers
             return Ok(categoryListDtos);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Post(CategoryPostDto categoryPostDto)
-        {
-            if (categoryPostDto == null) return BadRequest();
-
-            if (categoryPostDto.ParentId != null && !await _context.Categories.AnyAsync(c => c.Id == categoryPostDto.ParentId && c.IsMain)) return BadRequest("Main category is incorrect!");
-
-            if (await _context.Categories.AnyAsync(c => c.Name.ToLower() == categoryPostDto.Name.Trim().ToLower())) return Conflict($"{categoryPostDto.Name} Already exists!");
-
-            Category category = _mapper.Map<Category>(categoryPostDto);
-
-            await _context.Categories.AddAsync(category);
-            await _context.SaveChangesAsync();
-
-            CategoryGetDto categoryGetDto = _mapper.Map<CategoryGetDto>(category);
-
-            return StatusCode(200, categoryGetDto);
-        }
-
         [HttpGet]
         [Route("{id?}")]
         public async Task<IActionResult> Get(int? id)
@@ -124,11 +105,30 @@ namespace FirstApi.Controllers
             return Ok(categoryGetDto);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Post(CategoryPostDto categoryPostDto)
+        {
+            if (categoryPostDto == null) return BadRequest();
+
+            if (categoryPostDto.ParentId != null && !await _context.Categories.AnyAsync(c => c.Id == categoryPostDto.ParentId && c.IsMain)) return BadRequest("Main category is incorrect!");
+
+            if (await _context.Categories.AnyAsync(c => c.Name.ToLower() == categoryPostDto.Name.Trim().ToLower())) return Conflict($"{categoryPostDto.Name} Already exists!");
+
+            Category category = _mapper.Map<Category>(categoryPostDto);
+
+            await _context.Categories.AddAsync(category);
+            await _context.SaveChangesAsync();
+
+            CategoryGetDto categoryGetDto = _mapper.Map<CategoryGetDto>(category);
+
+            return StatusCode(200, categoryGetDto);
+        }
+
         [HttpPut]
         [Route("{id?}")]
         public async Task<IActionResult> Put(int? id, CategoryPutDto categoryPutDto)
         {
-            if (id == null) return BadRequest("Id is required");
+            //if (id == null) return BadRequest("Id is required");
 
             if (categoryPutDto.Id != id) return BadRequest("Id is not matching to category's Id!");
 
@@ -180,9 +180,10 @@ namespace FirstApi.Controllers
             return Content("Deleted");
         }
 
-        [HttpOptions]
-        [Route("{id?}")]
-        public async Task<IActionResult> Restore(int? id)
+        //restore
+        [HttpPut]
+        [Route("restore/{id?}")]
+        public async Task<IActionResult> Put(int? id)
         {
             if (id == null) return BadRequest("Id is required");
 
@@ -193,7 +194,7 @@ namespace FirstApi.Controllers
             if (dbCategory.IsMain && dbCategory.Children != null)
             {
                 List<Category> children = await _context.Categories.Where(c => c.ParentId == id).ToListAsync();
-                //ushaglari varsa onlari da silmek lazimdi, bunu daha qisa yazmaq lazimdi amma oxunaqli olsun
+                //ushaglari varsa onlari da restore etmek lazimdi, bunu daha qisa yazmaq lazimdi amma oxunaqli olsun
                 foreach (var item in children)
                 {
                     item.IsDeleted = false;
