@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FluentValidation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,5 +12,34 @@ namespace FirstApi.DTOs.CategoryDTOs
         public string Image { get; set; }
         public bool IsMain { get; set; }
         public Nullable<int> ParentId { get; set; }
+    }
+
+    public class CategoryPostDtoValidator : AbstractValidator<CategoryPostDto>
+    {
+        public CategoryPostDtoValidator()
+        {
+            RuleFor(x => x.Name).MaximumLength(255).WithMessage("Name must be max 255 characters!")
+                .NotEmpty().WithMessage("Must be filled!");
+
+            RuleFor(x => x.Image).MaximumLength(500).WithMessage("Image must be max 500 characters!");
+
+            RuleFor(x => x).Custom((x, context) =>
+            {
+                if (x.IsMain)
+                {
+                    if (x.Image == null)
+                    {
+                        context.AddFailure(" Image is required for main category!");
+                    }
+                }
+                else
+                {
+                    if (x.ParentId == null)
+                    {
+                        context.AddFailure("Main category is required");
+                    }
+                }
+            });
+        }
     }
 }

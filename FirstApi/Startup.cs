@@ -1,4 +1,7 @@
 using FirstApi.Data;
+using FirstApi.DTOs.CategoryDTOs;
+using FirstApi.Mappings;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -35,11 +38,16 @@ namespace FirstApi
             services.AddControllers().AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-            });
+            }).AddFluentValidation(options => options.RegisterValidatorsFromAssemblyContaining<CategoryPostDtoValidator>());
 
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("Default"));
+            });
+
+            services.AddAutoMapper(options =>
+            {
+                options.AddProfile(new MappingProfile());
             });
         }
 

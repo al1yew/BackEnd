@@ -1,6 +1,8 @@
-﻿using FirstApi.Data;
+﻿using AutoMapper;
+using FirstApi.Data;
 using FirstApi.Data.Entities;
 using FirstApi.DTOs.CategoryDTOs;
+using FirstApi.Mappings;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,18 +18,17 @@ namespace FirstApi.Controllers
     public class CategoriesController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IMapper _mapper;
 
-        public CategoriesController(AppDbContext context)
+        public CategoriesController(AppDbContext context, IMapper mapper = null)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            //hamsini get edirik, id qebul etmir, list sheklinde qaytaririq
-
-
             #region dede boba
             //----------------------------------dede boba metod
             //List<Category> categories = await _context.Categories.Where(c => !c.IsDeleted).ToListAsync();
@@ -48,16 +49,18 @@ namespace FirstApi.Controllers
 
             #region Dede boba amma biraz rahat
             //-------------------------------dede boba amma uje rahat versiya
-            List<CategoryListDto> categoryListDtos = await _context.Categories
-                .Where(c => !c.IsDeleted)
-                .Select(x => new CategoryListDto
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    ParentCategory = x.IsMain ? null : x.Parent.Name
-                })
-                .ToListAsync();
+            //List<CategoryListDto> categoryListDtos = await _context.Categories
+            //    .Where(c => !c.IsDeleted)
+            //    .Select(x => new CategoryListDto
+            //    {
+            //        Id = x.Id,
+            //        Name = x.Name,
+            //        ParentCategory = x.IsMain ? null : x.Parent.Name
+            //    })
+            //    .ToListAsync();
             #endregion
+
+            List<CategoryListDto> categoryListDtos = _mapper.Map<List<CategoryListDto>>(await _context.Categories.Where(c => !c.IsDeleted).ToListAsync());
 
             return Ok(categoryListDtos);
         }
@@ -65,47 +68,18 @@ namespace FirstApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(CategoryPostDto categoryPostDto)
         {
-            //bu createdir, hesab etki mvc de get etdik, view gaytardig, sonra inputlari doldurdug,
-            //create buttonu basdig, geldi posta. Eyni mentignen postu yazmaliyig, bize kategoriya gelir ve biz onu yoxlayib est edirik
-
             if (categoryPostDto == null) return BadRequest();
+
+            if (categoryPostDto.ParentId != null && !await _context.Categories.AnyAsync(c => c.Id == categoryPostDto.ParentId && c.IsMain)) return BadRequest("Main category is incorrect!");
 
             if (await _context.Categories.AnyAsync(c => c.Name.ToLower() == categoryPostDto.Name.Trim().ToLower())) return Conflict($"{categoryPostDto.Name} Already exists!");
 
-            if (categoryPostDto.IsMain)
-            {
-                if (categoryPostDto.Image == null) return BadRequest("Image is required!");
-            }
-            else
-            {
-                if (categoryPostDto.ParentId == null) return BadRequest("You must choose Main category!");
-
-                if (!await _context.Categories.AnyAsync(c => c.Id == categoryPostDto.ParentId && c.IsMain)) return BadRequest("Main category is incorrect!");
-            }
-
-            categoryPostDto.Name = categoryPostDto.Name.Trim();
-
-            Category category = new Category
-            {
-                Name = categoryPostDto.Name,
-                Image = categoryPostDto.Image,
-                ParentId = categoryPostDto.ParentId,
-                IsMain = categoryPostDto.IsMain,
-                CreatedAt = DateTime.UtcNow.AddHours(4)
-            };
+            Category category = _mapper.Map<Category>(categoryPostDto);
 
             await _context.Categories.AddAsync(category);
             await _context.SaveChangesAsync();
 
-            CategoryGetDto categoryGetDto = new CategoryGetDto
-            {
-                Id = category.Id,
-                Name = category.Name,
-                Image = category.Image,
-                ParentId = category.ParentId,
-                IsMain = category.IsMain,
-                ParentCategory = category.IsMain ? null : category.Parent.Name
-            };
+            CategoryGetDto categoryGetDto = _mapper.Map<CategoryGetDto>(category);
 
             return StatusCode(200, categoryGetDto);
         }
@@ -114,21 +88,20 @@ namespace FirstApi.Controllers
         [Route("{id?}")]
         public async Task<IActionResult> Get(int? id)
         {
-            //burda uje id lazimdi, cunki bilmeliyik, hansi kategoriyani gormek isteyirik!!!
-            //id nin null olmagini yoxlamirig, cunki null gelse, yuxaridaki Gete gedecek, cunki orda id yoxdu, ozu basha dushur!
-
-            CategoryGetDto categoryGetDto = await _context.Categories
-                .Where(c => c.Id == id)
-                .Select(x => new CategoryGetDto
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    ParentId = x.ParentId,
-                    ParentCategory = x.IsMain ? null : x.Parent.Name,
-                    Image = x.Image,
-                    IsMain = x.IsMain
-                })
-                .FirstOrDefaultAsync();
+            #region dede boba biraz rahat
+            //CategoryGetDto categoryGetDto = await _context.Categories
+            //               .Where(c => c.Id == id)
+            //               .Select(x => new CategoryGetDto
+            //               {
+            //                   Id = x.Id,
+            //                   Name = x.Name,
+            //                   ParentId = x.ParentId,
+            //                   ParentCategory = x.IsMain ? null : x.Parent.Name,
+            //                   Image = x.Image,
+            //                   IsMain = x.IsMain
+            //               })
+            //               .FirstOrDefaultAsync();
+            #endregion
 
             #region dede boba
             //Category category = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
@@ -146,6 +119,8 @@ namespace FirstApi.Controllers
             //};
             #endregion
 
+            CategoryGetDto categoryGetDto = _mapper.Map<CategoryGetDto>(await _context.Categories.FirstOrDefaultAsync(c => c.Id == id));
+
             return Ok(categoryGetDto);
         }
 
@@ -161,20 +136,9 @@ namespace FirstApi.Controllers
 
             if (dbCategory == null) return NotFound("Id is wrong!");
 
+            if (categoryPutDto.ParentId != null && !await _context.Categories.AnyAsync(c => c.Id == categoryPutDto.ParentId && c.IsMain)) return BadRequest("Main category is incorrect!");
+
             //useri yoxladig, kechirik dbya
-
-            if (categoryPutDto.IsMain)
-            {
-                if (categoryPutDto.Image == null) return BadRequest("Image is required!");
-            }
-            else
-            {
-                if (categoryPutDto.ParentId == null) return BadRequest("You must choose Main category!");
-
-                if (id == categoryPutDto.ParentId) return BadRequest("Id is the same as id of main category!");
-
-                if (!await _context.Categories.AnyAsync(c => c.Id == categoryPutDto.ParentId && c.Id != id && c.IsMain)) return BadRequest("Main category is incorrect!");
-            }
 
             dbCategory.Name = categoryPutDto.Name.Trim();
             dbCategory.ParentId = categoryPutDto.ParentId;
