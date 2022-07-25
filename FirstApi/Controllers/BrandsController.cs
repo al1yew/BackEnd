@@ -18,7 +18,7 @@ namespace FirstApi.Controllers
         private readonly AppDbContext _context;
         private readonly IMapper _mapper;
 
-        public BrandsController(IMapper mapper, AppDbContext context = null)
+        public BrandsController(IMapper mapper, AppDbContext context)
         {
             _mapper = mapper;
             _context = context;
@@ -108,7 +108,7 @@ namespace FirstApi.Controllers
         public async Task<IActionResult> Put(int? id)
         {
             if (id == null) return BadRequest("Id is required!");
-            
+
             Brand dbBrand = await _context.Brands.Where(b => b.IsDeleted).FirstOrDefaultAsync(b => b.Id == id);
 
             if (dbBrand == null) return NotFound("Brand is not found!");

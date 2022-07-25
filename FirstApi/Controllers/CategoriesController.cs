@@ -3,6 +3,7 @@ using FirstApi.Data;
 using FirstApi.Data.Entities;
 using FirstApi.DTOs.CategoryDTOs;
 using FirstApi.Mappings;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,14 +14,15 @@ using System.Threading.Tasks;
 
 namespace FirstApi.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("/api/[controller]")]
+    [Authorize(Roles = "SuperAdmin")]
     public class CategoriesController : ControllerBase
     {
         private readonly AppDbContext _context;
         private readonly IMapper _mapper;
 
-        public CategoriesController(AppDbContext context, IMapper mapper = null)
+        public CategoriesController(AppDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
