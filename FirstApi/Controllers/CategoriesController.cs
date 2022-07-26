@@ -2,6 +2,7 @@
 using FirstApi.Data;
 using FirstApi.Data.Entities;
 using FirstApi.DTOs.CategoryDTOs;
+using FirstApi.Interfaces;
 using FirstApi.Mappings;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -14,6 +15,9 @@ using System.Threading.Tasks;
 
 namespace FirstApi.Controllers
 {
+    /// <summary>
+    /// Categories Controlelr
+    /// </summary>
     [ApiController]
     [Route("/api/[controller]")]
     [Authorize(Roles = "SuperAdmin")]
@@ -21,13 +25,24 @@ namespace FirstApi.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IMapper _mapper;
-
-        public CategoriesController(AppDbContext context, IMapper mapper)
+        private readonly IJWTManager _jWTManager;
+        /// <summary>
+        /// Constructor of Category controller
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="mapper"></param>
+        /// <param name="jWTManager"></param>
+        public CategoriesController(AppDbContext context, IMapper mapper, IJWTManager jWTManager)
         {
             _context = context;
             _mapper = mapper;
+            _jWTManager = jWTManager;
         }
 
+        /// <summary>
+        /// Get Categories as list
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -67,6 +82,11 @@ namespace FirstApi.Controllers
             return Ok(categoryListDtos);
         }
 
+        /// <summary>
+        /// Get category by posting id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("{id?}")]
         public async Task<IActionResult> Get(int? id)
@@ -107,9 +127,31 @@ namespace FirstApi.Controllers
             return Ok(categoryGetDto);
         }
 
+        /// <summary>
+        /// Create category
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// 
+        ///     Get api/categories
+        ///     {        
+        ///       "name": "New category",
+        ///       "parentId": "0",
+        ///       "isMain": "true",
+        ///       "image": "itisphoto.jpg"        
+        ///     }
+        /// </remarks>
+        /// <param name="categoryPostDto"></param>
+        /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Post(CategoryPostDto categoryPostDto)
+        public async Task<IActionResult> Post([FromForm] CategoryPostDto categoryPostDto)
         {
+            string token = Request.Headers["Authorization"].ToString().Split(" ")[1];
+            //bele tokeni goture bilirik request gelende
+
+            string userName = _jWTManager.GetUserNameByToken(token);
+            //bu da bize username gaytarir serviceden
+
             if (categoryPostDto == null) return BadRequest();
 
             if (categoryPostDto.ParentId != null && !await _context.Categories.AnyAsync(c => c.Id == categoryPostDto.ParentId && c.IsMain)) return BadRequest("Main category is incorrect!");
@@ -126,6 +168,12 @@ namespace FirstApi.Controllers
             return StatusCode(200, categoryGetDto);
         }
 
+        /// <summary>
+        /// Update Category
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="categoryPutDto"></param>
+        /// <returns>Returns updated Category with changed udatedAt and isUpdated properties </returns>
         [HttpPut]
         [Route("{id?}")]
         public async Task<IActionResult> Put(int? id, CategoryPutDto categoryPutDto)
@@ -153,6 +201,11 @@ namespace FirstApi.Controllers
             return Content("Updated");
         }
 
+        /// <summary>
+        /// Delete Category
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Returns Category with isDeleted property being true</returns>
         [HttpDelete]
         [Route("{id?}")]
         public async Task<IActionResult> Delete(int? id)
@@ -182,6 +235,11 @@ namespace FirstApi.Controllers
             return Content("Deleted");
         }
 
+        /// <summary>
+        /// Restore category
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Returns Category with isDeleted property being false</returns>
         //restore
         [HttpPut]
         [Route("restore/{id?}")]

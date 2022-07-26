@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FirstApi</name>
+    </assembly>
+    <members>
+        <member name="T:FirstApi.Controllers.CategoriesController">
+            <summary>
+            Categories Controlelr
+            </summary>
+        </member>
+        <member name="M:FirstApi.Controllers.CategoriesController.#ctor(FirstApi.Data.AppDbContext,AutoMapper.IMapper,FirstApi.Interfaces.IJWTManager)">
+            <summary>
+            Constructor of Category controller
+            </summary>
+            <param name="context"></param>
+            <param name="mapper"></param>
+            <param name="jWTManager"></param>
+        </member>
+        <member name="M:FirstApi.Controllers.CategoriesController.Get">
+            <summary>
+            Get Categories as list
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FirstApi.Controllers.CategoriesController.Get(System.Nullable{System.Int32})">
+            <summary>
+            Get category by posting id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstApi.Controllers.CategoriesController.Post(FirstApi.DTOs.CategoryDTOs.CategoryPostDto)">
+            <summary>
+            Create category
+            </summary>
+            <remarks>
+            Sample request:
+            
+                Get api/categories
+                {        
+                  "name": "New category",
+                  "parentId": "0",
+                  "isMain": "true",
+                  "image": "itisphoto.jpg"        
+                }
+            </remarks>
+            <param name="categoryPostDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstApi.Controllers.CategoriesController.Put(System.Nullable{System.Int32},FirstApi.DTOs.CategoryDTOs.CategoryPutDto)">
+            <summary>
+            Update Category
+            </summary>
+            <param name="id"></param>
+            <param name="categoryPutDto"></param>
+            <returns>Returns updated Category with changed udatedAt and isUpdated properties </returns>
+        </member>
+        <member name="M:FirstApi.Controllers.CategoriesController.Delete(System.Nullable{System.Int32})">
+            <summary>
+            Delete Category
+            </summary>
+            <param name="id"></param>
+            <returns>Returns Category with isDeleted property being true</returns>
+        </member>
+        <member name="M:FirstApi.Controllers.CategoriesController.Put(System.Nullable{System.Int32})">
+            <summary>
+            Restore category
+            </summary>
+            <param name="id"></param>
+            <returns>Returns Category with isDeleted property being false</returns>
+        </member>
+        <member name="T:FirstApi.DTOs.CategoryDTOs.CategoryPostDto">
+            <summary>
+            to create category
+            </summary>
+        </member>
+    </members>
+</doc>

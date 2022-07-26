@@ -63,7 +63,8 @@ namespace FirstApi.Services
 
             List<Claim> deClaims = DejwtSecurityToken.Claims.ToList();
 
-            return deClaims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value;
+            return deClaims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value;
+            //role de goturmek olur, id de goturmek olur
         }
     }
 }

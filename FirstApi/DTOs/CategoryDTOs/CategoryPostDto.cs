@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,10 +7,13 @@ using System.Threading.Tasks;
 
 namespace FirstApi.DTOs.CategoryDTOs
 {
+    /// <summary>
+    /// to create category
+    /// </summary>
     public class CategoryPostDto
     {
         public string Name { get; set; }
-        public string Image { get; set; }
+        public IFormFile Image { get; set; }
         public bool IsMain { get; set; }
         public Nullable<int> ParentId { get; set; }
     }
@@ -21,7 +25,7 @@ namespace FirstApi.DTOs.CategoryDTOs
             RuleFor(x => x.Name).MaximumLength(255).WithMessage("Name must be max 255 characters!")
                 .NotEmpty().WithMessage("Must be filled!");
 
-            RuleFor(x => x.Image).MaximumLength(500).WithMessage("Image must be max 500 characters!");
+            RuleFor(x => x.Image.FileName).MaximumLength(500).WithMessage("Image must be max 500 characters!");
 
             RuleFor(x => x).Custom((x, context) =>
             {
