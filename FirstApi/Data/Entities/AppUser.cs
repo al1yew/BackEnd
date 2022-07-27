@@ -10,6 +10,10 @@ namespace FirstApi.Data.Entities
     {
         public string Name { get; set; }
         public string SurName { get; set; }
-        public string Phone { get; set; }
+        public bool IsAdmin { get; set; }
+        public bool IsDeleted { get; set; }
+        public Nullable<DateTime> CreatedAt { get; set; }
+        public Nullable<DateTime> DeletedAt { get; set; }
+        public Nullable<DateTime> UpdatedAt { get; set; }
     }
 }

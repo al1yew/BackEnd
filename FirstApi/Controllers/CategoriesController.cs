@@ -26,12 +26,6 @@ namespace FirstApi.Controllers
         private readonly AppDbContext _context;
         private readonly IMapper _mapper;
         private readonly IJWTManager _jWTManager;
-        /// <summary>
-        /// Constructor of Category controller
-        /// </summary>
-        /// <param name="context"></param>
-        /// <param name="mapper"></param>
-        /// <param name="jWTManager"></param>
         public CategoriesController(AppDbContext context, IMapper mapper, IJWTManager jWTManager)
         {
             _context = context;
@@ -46,37 +40,6 @@ namespace FirstApi.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            #region dede boba
-            //----------------------------------dede boba metod
-            //List<Category> categories = await _context.Categories.Where(c => !c.IsDeleted).ToListAsync();
-            //List<CategoryListDto> categoryListDtos = new List<CategoryListDto>();
-
-            //foreach (Category item in categories)
-            //{
-            //    CategoryListDto categoryListDto = new CategoryListDto
-            //    {
-            //        Id = item.Id,
-            //        Name = item.Name,
-            //        ParentCategory = item.IsMain ? null : item.Parent.Name
-            //    };
-
-            //    categoryListDtos.Add(categoryListDto);
-            //}
-            #endregion
-
-            #region Dede boba amma biraz rahat
-            //-------------------------------dede boba amma uje rahat versiya
-            //List<CategoryListDto> categoryListDtos = await _context.Categories
-            //    .Where(c => !c.IsDeleted)
-            //    .Select(x => new CategoryListDto
-            //    {
-            //        Id = x.Id,
-            //        Name = x.Name,
-            //        ParentCategory = x.IsMain ? null : x.Parent.Name
-            //    })
-            //    .ToListAsync();
-            #endregion
-
             List<CategoryListDto> categoryListDtos = _mapper.Map<List<CategoryListDto>>(await _context.Categories.Where(c => !c.IsDeleted).ToListAsync());
 
             return Ok(categoryListDtos);
@@ -91,37 +54,6 @@ namespace FirstApi.Controllers
         [Route("{id?}")]
         public async Task<IActionResult> Get(int? id)
         {
-            #region dede boba biraz rahat
-            //CategoryGetDto categoryGetDto = await _context.Categories
-            //               .Where(c => c.Id == id)
-            //               .Select(x => new CategoryGetDto
-            //               {
-            //                   Id = x.Id,
-            //                   Name = x.Name,
-            //                   ParentId = x.ParentId,
-            //                   ParentCategory = x.IsMain ? null : x.Parent.Name,
-            //                   Image = x.Image,
-            //                   IsMain = x.IsMain
-            //               })
-            //               .FirstOrDefaultAsync();
-            #endregion
-
-            #region dede boba
-            //Category category = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
-            //biz indi .net i aldadacayig
-
-            //yuxaridaki var deye biz bunu etmirik daha, bir bir menimsedmirik
-            //CategoryGetDto categoryGetDto = new CategoryGetDto
-            //{
-            //    Id = category.Id,
-            //    Name = category.Name,
-            //    ParentId = category.ParentId,
-            //    ParentCategory = category.IsMain ? null : category.Parent.Name,
-            //    Image = category.Image,
-            //    IsMain = category.IsMain
-            //};
-            #endregion
-
             CategoryGetDto categoryGetDto = _mapper.Map<CategoryGetDto>(await _context.Categories.FirstOrDefaultAsync(c => c.Id == id));
 
             return Ok(categoryGetDto);
@@ -178,8 +110,6 @@ namespace FirstApi.Controllers
         [Route("{id?}")]
         public async Task<IActionResult> Put(int? id, CategoryPutDto categoryPutDto)
         {
-            //if (id == null) return BadRequest("Id is required");
-
             if (categoryPutDto.Id != id) return BadRequest("Id is not matching to category's Id!");
 
             Category dbCategory = await _context.Categories.FirstOrDefaultAsync(c => !c.IsDeleted && c.Id == id);
@@ -187,8 +117,6 @@ namespace FirstApi.Controllers
             if (dbCategory == null) return NotFound("Id is wrong!");
 
             if (categoryPutDto.ParentId != null && !await _context.Categories.AnyAsync(c => c.Id == categoryPutDto.ParentId && c.IsMain)) return BadRequest("Main category is incorrect!");
-
-            //useri yoxladig, kechirik dbya
 
             dbCategory.Name = categoryPutDto.Name.Trim();
             dbCategory.ParentId = categoryPutDto.ParentId;
@@ -240,7 +168,6 @@ namespace FirstApi.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Returns Category with isDeleted property being false</returns>
-        //restore
         [HttpPut]
         [Route("restore/{id?}")]
         public async Task<IActionResult> Put(int? id)

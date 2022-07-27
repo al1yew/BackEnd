@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FirstApi.Data.Entities;
+using FirstApi.DTOs.AccountDTOs;
 using FirstApi.DTOs.BrandDTOs;
 using FirstApi.DTOs.CategoryDTOs;
 using System;
@@ -34,6 +35,15 @@ namespace FirstApi.Mappings
             CreateMap<Brand, BrandGetDto>();
 
             CreateMap<BrandPostDto, Brand>();
+
+
+            //-------------------------- AppUser
+
+            CreateMap<RegisterDto, AppUser>()
+                .ForMember(des => des.CreatedAt, src => src.MapFrom(x => DateTime.UtcNow.AddHours(4)))
+                .ForMember(des => des.Name, src => src.MapFrom(x => x.Name.Trim()))
+                .ForMember(des => des.SurName, src => src.MapFrom(x => x.SurName.Trim()))
+                .ForMember(des => des.IsAdmin, src => src.MapFrom(x => false));
 
         }
     }

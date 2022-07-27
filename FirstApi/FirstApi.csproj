@@ -15,6 +15,8 @@
     <Compile Remove="Data\Migrations\20220723091251_AddedCategoryTable_WithConstraints.Designer.cs" />
     <Compile Remove="Data\Migrations\20220723091509_AddedCategoryTable_WithConstraints.cs" />
     <Compile Remove="Data\Migrations\20220723091509_AddedCategoryTable_WithConstraints.Designer.cs" />
+    <Compile Remove="Data\Migrations\20220727153145_UpdatedUserTable.cs" />
+    <Compile Remove="Data\Migrations\20220727153145_UpdatedUserTable.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

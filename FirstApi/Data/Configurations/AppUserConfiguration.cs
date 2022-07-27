@@ -14,6 +14,8 @@ namespace FirstApi.Data.Configurations
         {
             builder.Property(x => x.Name).HasMaxLength(255);
             builder.Property(x => x.SurName).HasMaxLength(255);
+            builder.Property(x => x.UserName).HasMaxLength(255);
+            builder.Property(x => x.Email).HasMaxLength(255);
         }
     }
 }

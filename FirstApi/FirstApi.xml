@@ -9,14 +9,6 @@
             Categories Controlelr
             </summary>
         </member>
-        <member name="M:FirstApi.Controllers.CategoriesController.#ctor(FirstApi.Data.AppDbContext,AutoMapper.IMapper,FirstApi.Interfaces.IJWTManager)">
-            <summary>
-            Constructor of Category controller
-            </summary>
-            <param name="context"></param>
-            <param name="mapper"></param>
-            <param name="jWTManager"></param>
-        </member>
         <member name="M:FirstApi.Controllers.CategoriesController.Get">
             <summary>
             Get Categories as list
@@ -69,6 +61,16 @@
             </summary>
             <param name="id"></param>
             <returns>Returns Category with isDeleted property being false</returns>
+        </member>
+        <member name="T:FirstApi.DTOs.AccountDTOs.LoginDto">
+            <summary>
+            to register
+            </summary>
+        </member>
+        <member name="T:FirstApi.DTOs.AccountDTOs.RegisterDto">
+            <summary>
+            to register
+            </summary>
         </member>
         <member name="T:FirstApi.DTOs.CategoryDTOs.CategoryPostDto">
             <summary>
